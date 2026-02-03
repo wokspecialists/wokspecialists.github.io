@@ -47,8 +47,17 @@ body {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 600;
   font-size: 1rem;
+}
+
+.wok-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .nav {
@@ -155,6 +164,18 @@ body {
   font-size: 0.9rem;
 }
 
+/* Project Logo */
+
+.project-logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* Buttons */
+
 .btn.small {
   display: inline-block;
   margin-top: 0.75rem;
@@ -164,6 +185,17 @@ body {
   border-radius: 999px;
   font-size: 0.8rem;
   text-decoration: none;
+}
+
+/* Contact Link */
+
+.contact-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
 }
 
 /* Footer */
