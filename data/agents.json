@@ -35,23 +35,23 @@
   {
     "agentId": "agent-0004",
     "name": "Agent 0004",
-    "description": "Reserved for higher concurrency deployments.",
+    "description": "Deployable Agent for expanding concurrent sessions.",
     "capabilities": ["playback", "queue", "search", "filters", "autoleave"],
     "inviteUrl": null,
     "clientId": "CLIENT_ID_AGENT_0004",
     "permissions": "36700160",
     "tags": ["agent", "voice", "scale"],
-    "status": "coming-soon"
+    "status": "available"
   },
   {
     "agentId": "agent-0005",
     "name": "Agent 0005",
-    "description": "Reserved for higher concurrency deployments.",
+    "description": "Deployable Agent for expanding concurrent sessions.",
     "capabilities": ["playback", "queue", "search", "filters", "autoleave"],
     "inviteUrl": null,
     "clientId": "CLIENT_ID_AGENT_0005",
     "permissions": "36700160",
     "tags": ["agent", "voice", "scale"],
-    "status": "coming-soon"
+    "status": "available"
   }
 ]

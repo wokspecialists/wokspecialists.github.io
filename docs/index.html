@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Docs — Wok Specialists</title>
+  <meta name="description" content="Chopsticks docs: quickstart, multi-channel explanation, FAQ, troubleshooting." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div data-mount="header"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1 class="h1">Docs</h1>
+      <p class="p dim">Quickstart, operating model, and troubleshooting for Chopsticks + Agents.</p>
+    </section>
+
+    <section class="section card" id="quickstart">
+      <h2 class="h2">Quickstart</h2>
+      <ol class="caps">
+        <li>Invite the main bot to your server.</li>
+        <li>Invite N Agents. N equals the number of simultaneous voice channels you want.</li>
+        <li>Run Lavalink and confirm host/port/password match your config.</li>
+        <li>Start the main bot and Agent runners. Confirm logs show Agents connected.</li>
+        <li>Join a voice channel, run play/queue commands, and validate audio output.</li>
+      </ol>
+    </section>
+
+    <section class="section card" id="multichannel">
+      <h2 class="h2">How multi-channel works</h2>
+      <p class="p dim">
+        Each Agent is an independent bot user. In one server, one Agent can hold one voice connection at a time.
+        If two voice channels need different audio simultaneously, deploy at least two Agents.
+        More Agents equals more independent sessions pulled from the Agent pool.
+      </p>
+      <div class="hr"></div>
+      <div class="label">Example</div>
+      <p class="p dim">
+        Channel A: Agent 0001 plays Track A for Group A<br/>
+        Channel B: Agent 0002 plays Track B for Group B
+      </p>
+    </section>
+
+    <section class="section card" id="setup">
+      <h2 class="h2">Setup</h2>
+      <ul class="caps">
+        <li>Invite main bot + invite N Agents.</li>
+        <li>Run Lavalink. Confirm password/host/port match your environment.</li>
+        <li>Set tokens for Agents and confirm they connect.</li>
+        <li>Start bot and runners. Validate control messaging is live.</li>
+      </ul>
+    </section>
+
+    <section class="section card" id="troubleshooting">
+      <h2 class="h2">Troubleshooting</h2>
+
+      <h3 class="h3">No audio</h3>
+      <ul class="caps">
+        <li>Confirm Lavalink is running and reachable.</li>
+        <li>Confirm host/port/password are correct.</li>
+        <li>Confirm your source/plugin setup matches your providers.</li>
+        <li>After Discord voice changes, re-test playback paths.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h3 class="h3">Agents offline</h3>
+      <ul class="caps">
+        <li>Confirm each Agent token is correct.</li>
+        <li>Confirm runner connectivity and control link is up.</li>
+        <li>Check logs for auth failures, reconnect loops, or rate limits.</li>
+      </ul>
+
+      <div class="hr"></div>
+
+      <h3 class="h3">Skip/stop behavior</h3>
+      <ul class="caps">
+        <li>Grace timing prevents thrash on rapid stop/skip.</li>
+        <li>If behavior feels delayed, check grace duration and queue rules.</li>
+      </ul>
+    </section>
+  </main>
+
+  <div data-mount="footer"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

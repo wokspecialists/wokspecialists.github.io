@@ -4,11 +4,11 @@ const SITE = {
   name: "Wok Specialists",
   nav: [
     { href: "/", label: "Home" },
-    { href: "/chopsticks.html", label: "Chopsticks" },
-    { href: "/agents.html", label: "Agents" },
-    { href: "/packages.html", label: "Packages" },
-    { href: "/docs.html", label: "Docs" },
-    { href: "/status.html", label: "Status" }
+    { href: "/chopsticks/", label: "Chopsticks" },
+    { href: "/agents/", label: "Agents" },
+    { href: "/packages/", label: "Packages" },
+    { href: "/docs/", label: "Docs" },
+    { href: "/status/", label: "Status" }
   ]
 };
 
@@ -19,24 +19,9 @@ const OAUTH = {
 };
 
 const PACKAGES = [
-  {
-    id: "starter",
-    name: "Starter",
-    agents: 1,
-    useCase: "One voice channel at a time."
-  },
-  {
-    id: "pro",
-    name: "Pro",
-    agents: 3,
-    useCase: "Small servers running multiple sessions."
-  },
-  {
-    id: "enterprise",
-    name: "Enterprise",
-    agents: 6,
-    useCase: "High concurrency and multiple active rooms."
-  }
+  { id: "starter", name: "Starter", agents: 1, useCase: "One voice channel at a time." },
+  { id: "pro", name: "Pro", agents: 3, useCase: "Multiple simultaneous sessions." },
+  { id: "enterprise", name: "Enterprise", agents: 6, useCase: "High concurrency pool." }
 ];
 
 function qs(sel, root = document) {
@@ -65,13 +50,20 @@ function text(s) {
   return document.createTextNode(s);
 }
 
+function normalizePath(p) {
+  // normalize: "/docs" -> "/docs/", "/docs/index.html" -> "/docs/"
+  let out = (p || "/").replace(/index\.html$/, "");
+  if (out !== "/" && !out.endsWith("/")) out += "/";
+  return out;
+}
+
 function activePath() {
-  const p = location.pathname.replace(/index\.html$/, "").replace(/\/$/, "") || "/";
-  return p;
+  return normalizePath(location.pathname || "/");
 }
 
 function buildHeader() {
   const p = activePath();
+
   const header = el("header", { class: "site-header" });
 
   const brand = el("a", { class: "brand", href: "/" }, [
@@ -83,7 +75,7 @@ function buildHeader() {
   const ul = el("ul", { class: "nav-list" });
 
   for (const item of SITE.nav) {
-    const itemPath = item.href === "/" ? "/" : item.href.replace(/\/$/, "");
+    const itemPath = normalizePath(item.href);
     const isActive = itemPath === p;
     ul.append(
       el("li", {}, [
@@ -98,19 +90,18 @@ function buildHeader() {
 }
 
 function buildFooter() {
-  const footer = el("footer", { class: "site-footer" }, [
+  return el("footer", { class: "site-footer" }, [
     el("div", { class: "footer-inner" }, [
       el("div", { class: "footer-left" }, [
         el("div", { class: "fine" }, [text("Wok Specialists")]),
         el("div", { class: "fine dim" }, [text("Chopsticks is a multi-agent Discord system.")])
       ]),
       el("div", { class: "footer-right" }, [
-        el("a", { class: "footer-link", href: "/status.html" }, [text("Status")]),
-        el("a", { class: "footer-link", href: "/docs.html" }, [text("Docs")])
+        el("a", { class: "footer-link", href: "/status/" }, [text("Status")]),
+        el("a", { class: "footer-link", href: "/docs/" }, [text("Docs")])
       ])
     ])
   ]);
-  return footer;
 }
 
 function mountShell() {
@@ -145,7 +136,8 @@ async function fetchJson(path) {
 function oauthInviteUrlFromAgent(agent) {
   if (agent.inviteUrl && typeof agent.inviteUrl === "string") return agent.inviteUrl;
 
-  const clientId = agent.clientId && !String(agent.clientId).startsWith("CLIENT_ID_") ? agent.clientId : null;
+  const raw = agent.clientId ? String(agent.clientId) : "";
+  const clientId = raw && !raw.startsWith("CLIENT_ID_") ? raw : null;
   if (!clientId) return null;
 
   const permissions = agent.permissions ?? OAUTH.defaultPermissions;
@@ -197,9 +189,17 @@ function renderAgentCard(agent) {
 
   actions.append(inviteBtn, copyBtn);
 
-  const tags = el("div", { class: "tag-row" }, (agent.tags || []).slice(0, 6).map(t => el("span", { class: "tag" }, [text(t)])));
+  const tags = el(
+    "div",
+    { class: "tag-row" },
+    (agent.tags || []).slice(0, 8).map(t => el("span", { class: "tag" }, [text(t)]))
+  );
 
-  const caps = el("ul", { class: "caps" }, (agent.capabilities || []).slice(0, 6).map(c => el("li", {}, [text(c)])));
+  const caps = el(
+    "ul",
+    { class: "caps" },
+    (agent.capabilities || []).slice(0, 8).map(c => el("li", {}, [text(c)]))
+  );
 
   return el("article", { class: "card agent-card" }, [
     el("div", { class: "card-top" }, [
@@ -219,7 +219,7 @@ function renderAgentCard(agent) {
         el("div", { class: "label" }, [text("Actions")]),
         actions,
         !inviteConfigured && agent.status === "available"
-          ? el("div", { class: "hint" }, [text("Client ID not set. Configure clientId or inviteUrl in data/agents.json.")])
+          ? el("div", { class: "hint" }, [text("Invite not configured. Set clientId or inviteUrl in data/agents.json.")])
           : el("div", { class: "hint" }, [text(agent.status === "coming-soon" ? "Not deployable yet." : " ")])
       ])
     ])
@@ -232,6 +232,7 @@ function renderAgentLists(agents) {
 
   const hostAvail = qs("[data-agents='available']");
   const hostSoon = qs("[data-agents='soon']");
+  const soonWrap = qs("[data-section='soon']");
 
   if (hostAvail) {
     hostAvail.innerHTML = "";
@@ -241,6 +242,11 @@ function renderAgentLists(agents) {
   if (hostSoon) {
     hostSoon.innerHTML = "";
     for (const a of soon) hostSoon.append(renderAgentCard(a));
+  }
+
+  // If no coming-soon agents, collapse section cleanly
+  if (soonWrap) {
+    soonWrap.hidden = soon.length === 0;
   }
 }
 
@@ -273,14 +279,11 @@ function renderInviteGenerator(agents) {
   const pkgBtns = PACKAGES.map(p =>
     el(
       "button",
-      {
-        class: "btn btn-chip",
-        dataset: { pkg: p.id },
-        onClick: () => setTargetCount(p.agents)
-      },
+      { class: "btn btn-chip", dataset: { pkg: p.id }, onClick: () => setTargetCount(p.agents) },
       [text(`${p.name} (${p.agents})`)]
     )
   );
+  pkgRow.append(...pkgBtns);
 
   const customWrap = el("div", { class: "row" });
   const customInput = el("input", {
@@ -293,44 +296,26 @@ function renderInviteGenerator(agents) {
   });
   const customBtn = el(
     "button",
-    {
-      class: "btn btn-chip",
-      onClick: () => setTargetCount(parseInt(customInput.value || "1", 10))
-    },
+    { class: "btn btn-chip", onClick: () => setTargetCount(parseInt(customInput.value || "1", 10)) },
     [text("Set count")]
   );
-
   customWrap.append(el("div", { class: "label" }, [text("Custom count")]), customInput, customBtn);
-
-  pkgRow.append(...pkgBtns);
 
   const list = el("div", { class: "checklist" });
   const checks = available.map(a => {
     const id = `chk-${a.agentId}`;
-    const input = el("input", {
-      id,
-      type: "checkbox",
-      class: "check",
-      value: a.agentId,
-      onChange: () => refreshOutput()
-    });
+    const input = el("input", { id, type: "checkbox", class: "check", value: a.agentId, onChange: refreshOutput });
     const label = el("label", { for: id, class: "checkline" }, [
       el("span", { class: "checkname" }, [text(a.name)]),
       el("span", { class: "checkmeta" }, [text(oauthInviteUrlFromAgent(a) ? "Invite ready" : "Invite not configured")])
     ]);
     return el("div", { class: "checkrow" }, [input, label]);
   });
-
   for (const row of checks) list.append(row);
 
   const output = el("div", { class: "panel" });
   const outputTitle = el("div", { class: "panel-title" }, [text("Invites")]);
-  const outputBody = el("textarea", {
-    class: "textarea",
-    rows: "8",
-    readOnly: true,
-    spellcheck: "false"
-  });
+  const outputBody = el("textarea", { class: "textarea", rows: "8", readOnly: true, spellcheck: "false" });
 
   const warnBox = el("div", { class: "warnbox", hidden: true });
 
@@ -352,16 +337,11 @@ function renderInviteGenerator(agents) {
 
   const openAllBtn = el(
     "button",
-    {
-      class: "btn btn-ghost",
-      onClick: () => openInvitesStaggered(parseInviteUrls(outputBody.value))
-    },
+    { class: "btn btn-ghost", onClick: () => openInvitesStaggered(parseInviteUrls(outputBody.value)) },
     [text("Open invites")]
   );
 
-  const targetHint = el("div", { class: "hint" }, [text("Tip: match agent count to the number of simultaneous voice channels you want.")]);
-
-  output.append(outputTitle, outputBody, warnBox, el("div", { class: "row row-wrap" }, [copyBtn, openAllBtn]), targetHint);
+  output.append(outputTitle, outputBody, warnBox, el("div", { class: "row row-wrap" }, [copyBtn, openAllBtn]));
 
   const targetPanel = el("div", { class: "panel" });
   const targetTitle = el("div", { class: "panel-title" }, [text("Target concurrency")]);
@@ -386,7 +366,6 @@ function renderInviteGenerator(agents) {
     const target = Math.max(1, Number.isFinite(n) ? n : 1);
     targetCountLabel.textContent = String(target);
 
-    // Auto-check first N
     const inputs = qsa("input[type='checkbox'].check", list);
     inputs.forEach((i, idx) => (i.checked = idx < target));
     refreshOutput();
@@ -398,7 +377,6 @@ function renderInviteGenerator(agents) {
 
   function refreshOutput() {
     const { urls, missing } = normalizeSelection(agents, selectedAgentIds());
-
     const lines = urls.map(x => `${x.agent.name} — ${x.url}`);
     outputBody.value = lines.join("\n");
 
@@ -415,7 +393,6 @@ function renderInviteGenerator(agents) {
     }
   }
 
-  // Default
   setTargetCount(2);
 }
 
@@ -437,16 +414,15 @@ function openInvitesStaggered(urls) {
     return;
   }
 
-  // Best-effort: browsers may block delayed popups; user can still copy list.
   const delayMs = 650;
-
   let opened = 0;
+
   for (let i = 0; i < urls.length; i++) {
     setTimeout(() => {
       const w = window.open(urls[i], "_blank", "noopener,noreferrer");
       if (w) opened++;
       if (i === urls.length - 1) {
-        if (opened === 0) toast("Popups blocked. Use copy list or allow popups for this site.", "warn");
+        if (opened === 0) toast("Popups blocked. Allow popups or use copied list.", "warn");
         else toast(`Opened ${opened}/${urls.length} invites.`, "ok");
       }
     }, i * delayMs);
@@ -460,8 +436,8 @@ async function initAgents() {
   let agents;
   try {
     agents = await fetchJson("/data/agents.json");
-  } catch (e) {
-    toast("Failed to load agents.json", "warn");
+  } catch {
+    toast("Failed to load data/agents.json", "warn");
     return;
   }
 
