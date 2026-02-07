@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Wok Specialists</title>
-  <meta name="description" content="Wok Specialists builds meaningful projects. Chopsticks is a multi-agent Discord system with deployable Agents for simultaneous sessions." />
+  <meta name="description" content="Wok Specialists is a small studio building practical projects across art, design, and technology. Chopsticks is a hosted Discord multitool with deployable Agents for voice concurrency." />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -12,45 +12,105 @@
 
   <main class="wrap">
     <section class="hero">
-      <h1 class="h1">Chopsticks, built as a multi-agent system.</h1>
-      <p class="p dim">Deploy the main bot, then deploy Agents to run multiple voice channels at the same time inside one server.</p>
-    </section>
+      <div class="hero-split">
+        <div class="card card-soft">
+          <h1 class="h1">Wok Specialists</h1>
+          <p class="p dim">
+            A small team building practical projects across art, design, music, and technology.
+            This site holds multiple product areas. Chopsticks is the first one to go deep.
+          </p>
 
-    <section class="section">
-      <div class="grid grid-tiles">
-        <article class="card tile">
-          <h3 class="h3">Chopsticks</h3>
-          <p class="p">Core bot, command surface, and orchestration layer. Built for controlled playback and predictable behavior.</p>
-          <a class="inline" href="/chopsticks/">Read overview</a>
-        </article>
+          <div class="hr"></div>
 
-        <article class="card tile">
-          <h3 class="h3">Agents</h3>
-          <p class="p">Deployable instances from the Chopsticks pool. One Agent equals one concurrent voice session per server.</p>
-          <a class="inline" href="/agents/">Browse Agents</a>
-        </article>
+          <h2 class="h2">Spotlight: Chopsticks</h2>
+          <p class="p dim">
+            Chopsticks is a hosted Discord multitool. Agents are optional add-ons that let one server run multiple voice sessions at once.
+          </p>
 
-        <article class="card tile">
-          <h3 class="h3">Community</h3>
-          <p class="p">Builders shipping art, code, design, music, and systems. Chopsticks is one surface of the larger workshop.</p>
-          <a class="inline" href="/docs/">Start here</a>
-        </article>
+          <div class="row row-wrap">
+            <a class="btn btn-primary" href="/chopsticks/">Open Chopsticks</a>
+            <a class="btn btn-green" href="/agents/">Invite Agents</a>
+            <a class="btn btn-ghost" href="/docs/">Docs</a>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="grid grid-auto">
+            <div class="card card-soft">
+              <h3 class="h3">What “hosted” means</h3>
+              <p class="p dim">You don’t run servers. You invite bots and use commands.</p>
+            </div>
+            <div class="card card-soft">
+              <h3 class="h3">What Agents do</h3>
+              <p class="p dim">More Agents = more simultaneous voice channels in the same server.</p>
+            </div>
+            <div class="card card-soft">
+              <h3 class="h3">What comes next</h3>
+              <p class="p dim">More projects will appear as their own sections when they’re ready.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="hero-image">
+            <img src="/assets/chopsticks.png" alt="Chopsticks bot" />
+          </div>
+
+          <div class="card card-soft">
+            <h2 class="h2">Use cases we build for</h2>
+            <ul class="caps">
+              <li>Server owners who want fewer bots and clearer behavior</li>
+              <li>Groups that split into multiple voice rooms at the same time</li>
+              <li>Communities that want a toolchain that can grow without chaos</li>
+            </ul>
+            <div class="hr"></div>
+            <div class="row row-wrap">
+              <a class="btn btn-ghost" href="https://github.com/Wok-Specialists" target="_blank" rel="noopener noreferrer">GitHub org</a>
+              <a class="btn btn-ghost" href="/status/">Status</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="card">
-        <h2 class="h2">What “multi-channel” means</h2>
-        <p class="p dim">
-          Each Chopsticks Agent is an independent bot user. In one server, one Agent can hold one voice connection at a time.
-          If two voice channels need different audio simultaneously, deploy at least two Agents.
-        </p>
+        <h2 class="h2">Product areas</h2>
+        <p class="p dim">Each area gets its own docs, packages, and surfaces.</p>
+        <div class="hr"></div>
+
+        <div class="grid grid-auto">
+          <article class="card tile card-soft">
+            <h3 class="h3">Chopsticks</h3>
+            <p class="p dim">Hosted multitool bot. Agents unlock multi-channel voice concurrency.</p>
+            <div class="row row-wrap">
+              <a class="btn btn-primary" href="/chopsticks/">Open</a>
+              <a class="btn btn-green" href="/agents/">Agents</a>
+              <a class="btn btn-ghost" href="/docs/">Docs</a>
+            </div>
+          </article>
+
+          <article class="card tile card-soft">
+            <h3 class="h3">Future projects</h3>
+            <p class="p dim">New areas show up here as they harden.</p>
+            <div class="row row-wrap">
+              <a class="btn btn-ghost" href="https://github.com/Wok-Specialists" target="_blank" rel="noopener noreferrer">Track on GitHub</a>
+            </div>
+          </article>
+
+          <article class="card tile card-soft">
+            <h3 class="h3">Packages</h3>
+            <p class="p dim">Simple presets and bundles. More later.</p>
+            <div class="row row-wrap">
+              <a class="btn btn-ghost" href="/packages/">Open</a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   </main>
 
   <div data-mount="footer"></div>
-
   <script type="module" src="/app.js"></script>
 </body>
 </html>

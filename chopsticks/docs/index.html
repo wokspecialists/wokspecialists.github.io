@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chopsticks — Wok Specialists</title>
+  <meta name="description" content="Chopsticks is a hosted Discord multitool. Agents enable multiple simultaneous voice sessions per server." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div data-mount="header"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-split">
+        <div class="card card-soft">
+          <h1 class="h1">Chopsticks</h1>
+          <p class="p dim">
+            A hosted Discord multitool. One bot for day-to-day utility, with optional subsystems that scale when your server gets busy.
+          </p>
+
+          <div class="hr"></div>
+
+          <h2 class="h2">Core idea</h2>
+          <p class="p dim">
+            Chopsticks aims to reduce bot clutter by concentrating common workflows into one reliable tool.
+            Some modules are live now. Others are staged and roll out as they stabilize.
+          </p>
+
+          <div class="hr"></div>
+
+          <h2 class="h2">Use cases</h2>
+          <div class="grid grid-auto">
+            <div class="card card-soft">
+              <h3 class="h3">Owners</h3>
+              <p class="p dim">A tool that behaves predictably when many people use it at once.</p>
+            </div>
+            <div class="card card-soft">
+              <h3 class="h3">Power users</h3>
+              <p class="p dim">Clear controls, quick commands, and fewer edge-case surprises.</p>
+            </div>
+            <div class="card card-soft">
+              <h3 class="h3">Multi-room servers</h3>
+              <p class="p dim">When people split into rooms, voice concurrency matters. That’s where Agents help.</p>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+
+          <div class="row row-wrap">
+            <a class="btn btn-green" href="/agents/">Invite Agents</a>
+            <a class="btn btn-ghost" href="/chopsticks/docs/">Docs</a>
+            <a class="btn btn-ghost" href="/chopsticks/status/">Status</a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="hero-image">
+            <img src="/assets/chopsticks.png" alt="Chopsticks bot" />
+          </div>
+
+          <div class="card card-soft">
+            <h2 class="h2">Agents (voice scaling)</h2>
+            <p class="p dim">
+              Agents are deployable Chopsticks instances. More Agents equals more simultaneous voice sessions in the same server.
+            </p>
+            <div class="hr"></div>
+
+            <div class="label">Rule</div>
+            <ul class="caps">
+              <li>1 Agent = 1 active voice connection in your server</li>
+              <li>2 voice channels at once = invite 2 Agents</li>
+              <li>3 voice channels at once = invite 3 Agents</li>
+            </ul>
+
+            <div class="hr"></div>
+            <div class="row row-wrap">
+              <a class="btn btn-green" href="/agents/">Open invite builder</a>
+              <a class="btn btn-ghost" href="/chopsticks/docs/#multichannel">Read the model</a>
+            </div>
+          </div>
+
+          <div class="card card-soft">
+            <h2 class="h2">Product surfaces</h2>
+            <div class="row row-wrap">
+              <a class="btn btn-ghost" href="/chopsticks/packages/">Packages</a>
+              <a class="btn btn-ghost" href="/chopsticks/docs/">Docs</a>
+              <a class="btn btn-ghost" href="/chopsticks/status/">Status</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div data-mount="footer"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
