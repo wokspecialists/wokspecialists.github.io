@@ -1,1 +1,2 @@
-document.getElementById("year").textContent = new Date().getFullYear();
+// script.js — compatibility shim
+import "./app.js";

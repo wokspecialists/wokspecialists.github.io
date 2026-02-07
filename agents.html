@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agents — Wok Specialists</title>
+  <meta name="description" content="Chopsticks Agents are deployable instances that enable simultaneous voice sessions across multiple channels." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div data-mount="header"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1 class="h1">Chopsticks Agents</h1>
+      <p class="p dim">Deploy extra Agents to run simultaneous sessions across multiple voice channels in the same server.</p>
+    </section>
+
+    <section class="section">
+      <div class="grid grid-2">
+        <article class="card">
+          <h2 class="h2">Why Agents exist</h2>
+          <p class="p dim">
+            One Agent equals one concurrent voice session per server. If two channels need different audio at the same time,
+            deploy two Agents. Add more Agents for more concurrent channels.
+          </p>
+          <div class="hr"></div>
+          <div class="label">Example</div>
+          <p class="p dim">
+            Channel A: Agent 0001 plays Track A for Group A<br/>
+            Channel B: Agent 0002 plays Track B for Group B<br/>
+            More Agents equals more independent sessions.
+          </p>
+          <div class="hr"></div>
+          <div class="label">Session control options</div>
+          <ul class="caps">
+            <li>DJ-controlled: one user or role controls playback and queue</li>
+            <li>Open queue: channel members can add tracks (with configured limits)</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2 class="h2">Invite builder</h2>
+          <p class="p dim">Generate a batch of OAuth invites from the live Agent list. Invites are driven by <span class="kbd">data/agents.json</span>.</p>
+          <div data-invite-generator></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="h2">Available Agents</h2>
+      <p class="p dim">Deployable now. If an invite is not configured, set <span class="kbd">clientId</span> or <span class="kbd">inviteUrl</span> in <span class="kbd">data/agents.json</span>.</p>
+      <div class="grid grid-3" data-agents="available"></div>
+    </section>
+
+    <section class="section">
+      <h2 class="h2">Coming Soon</h2>
+      <p class="p dim">Planned pool expansions. Not deployable yet.</p>
+      <div class="grid grid-3" data-agents="soon"></div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <h2 class="h2">Limits and notes</h2>
+        <ul class="caps">
+          <li>One voice connection per Agent per server</li>
+          <li>Multi-channel requires multiple Agents</li>
+          <li>Lavalink is required for audio</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <div data-mount="footer"></div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
+

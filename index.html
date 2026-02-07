@@ -1,141 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Wok Specialists</title>
-  <meta name="description" content="Wok Specialists is a group focused on creating practical projects across different areas.">
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Wok Specialists builds meaningful projects. Chopsticks is a multi-agent Discord system with deployable Agents for simultaneous sessions." />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
-
 <body>
-  <header class="header">
-    <div class="container header-inner">
-      <div class="logo">
-        <img src="assets/wok-logo.png" alt="Wok Specialists logo" class="wok-logo">
-        Wok Specialists
+  <div data-mount="header"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1 class="h1">Chopsticks, built as a multi-agent system.</h1>
+      <p class="p dim">Deploy the main bot, then deploy Agents to run multiple voice channels at the same time inside one server.</p>
+    </section>
+
+    <section class="section">
+      <div class="grid grid-3">
+        <article class="card tile">
+          <h3 class="h3">Chopsticks</h3>
+          <p class="p">Core bot, command surface, and orchestration layer. Built for controlled playback and predictable behavior.</p>
+          <a class="inline" href="/chopsticks.html">Read overview</a>
+        </article>
+
+        <article class="card tile">
+          <h3 class="h3">Agents</h3>
+          <p class="p">Deployable instances from the Chopsticks pool. One Agent equals one concurrent voice session per server.</p>
+          <a class="inline" href="/agents.html">Browse Agents</a>
+        </article>
+
+        <article class="card tile">
+          <h3 class="h3">Community</h3>
+          <p class="p">Builders shipping art, code, design, music, and systems. Chopsticks is one surface of the larger workshop.</p>
+          <a class="inline" href="/docs.html">Start here</a>
+        </article>
       </div>
-      <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-        <a href="#contributors">Contributors</a>
-      </nav>
-    </div>
-  </header>
+    </section>
 
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-text">
-        <h1>Wok Specialists</h1>
-        <p>Wok Specialists is a group that creates projects across different areas. The focus is on producing work that is clear, functional, and dependable.</p>
+    <section class="section">
+      <div class="card">
+        <h2 class="h2">What “multi-channel” means</h2>
+        <p class="p dim">
+          Each Chopsticks Agent is an independent bot user. In one server, one Agent can hold one voice connection at a time.
+          If Channel A and Channel B need different audio simultaneously, deploy at least two Agents.
+        </p>
       </div>
+    </section>
+  </main>
 
-      <div class="hero-card">
-        <h2>Overview</h2>
-        <ul>
-          <li>Independent projects</li>
-          <li>Community-focused work</li>
-          <li>Collaborative development</li>
-          <li>Future multi‑platform projects</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+  <div data-mount="footer"></div>
 
-  <section id="about" class="section">
-    <div class="container">
-      <h2>About</h2>
-      <p class="about-text">
-        Wok Specialists collaborate on various projects. 
-        The goal is to create straightforward, useful work without unnecessary complexity.
-      </p>
-    </div>
-  </section>
-
-  <section id="projects" class="section alt">
-    <div class="container">
-      <h2>Projects</h2>
-      <div class="grid">
-
-        <div class="card">
-          <img src="assets/chopsticks.png" alt="Chopsticks logo" class="project-logo">
-          <h3>Chopsticks</h3>
-          <p>Inspired by the utensil: versatile, and useful for many tasks in kitchen.</p>
-          <a class="btn small" href="#">Invite</a>
-        </div>
-
-        <div class="card">
-          <h3>Bag O' Rice</h3>
-          <p>A project currently in development. Details will be added as the project progresses.</p>
-        </div>
-
-        <div class="card">
-          <h3>Additional Projects</h3>
-          <p>More work is planned. New projects will be added over time.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="team" class="section">
-    <div class="container">
-      <h2>Team</h2>
-      <p class="about-text">
-        Wok Specialists consists of individuals who contribute planning, design, development, and support across different projects.
-      </p>
-    </div>
-  </section>
-
-  <section id="contact" class="section">
-    <div class="container">
-      <h2>Contact</h2>
-      <p class="about-text">
-        For general inquiries or contributor information:
-        <br>
-        <a class="contact-link" href="mailto:wokspecialists@proton.me">wokspecialists@proton.me</a>
-      </p>
-    </div>
-  </section>
-
-  <section id="contributors" class="section alt">
-    <div class="container">
-      <h2>Contributors</h2>
-      <p class="about-text">
-        Wok Specialists includes individuals who contribute ideas, planning, and development across different projects. 
-        Contributor listings will be expanded as projects progress.
-      </p>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <div class="logo">
-          <img src="assets/wok-logo.png" alt="Wok Specialists logo" class="wok-logo">
-          Wok Specialists
-        </div>
-        <p>Independent project group.</p>
-      </div>
-
-      <div class="footer-links">
-        <div>
-          <h4>Links</h4>
-          <a href="https://github.com/wokspecialists" target="_blank">GitHub</a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        © <span id="year"></span> Wok Specialists
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+  <script type="module" src="/app.js"></script>
 </body>
 </html>

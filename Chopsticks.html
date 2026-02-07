@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chopsticks — Wok Specialists</title>
+  <meta name="description" content="Chopsticks is a multi-agent Discord system: a main bot plus deployable Agents for simultaneous voice sessions." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div data-mount="header"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1 class="h1">Chopsticks</h1>
+      <p class="p dim">A multi-agent Discord system: main bot + deployable Agents for concurrency.</p>
+    </section>
+
+    <section class="section">
+      <div class="grid grid-2">
+        <article class="card">
+          <h2 class="h2">What it is</h2>
+          <p class="p dim">
+            Chopsticks is the orchestration layer: commands, queue rules, and coordination across multiple deployable Agents.
+            The main bot handles control surfaces and routing. Agents do the voice work.
+          </p>
+          <div class="hr"></div>
+          <div class="label">Core features</div>
+          <ul class="caps">
+            <li>Playback and queue management</li>
+            <li>Controlled access patterns (DJ-controlled or open queue)</li>
+            <li>Predictable stop/skip behavior with grace timing</li>
+            <li>Multi-channel concurrency via Agents</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2 class="h2">Architecture</h2>
+          <p class="p dim">
+            The main bot coordinates. Agents are separate bot users pulled from a pool. Each Agent can run one voice session per server.
+            Multiple channels require multiple Agents.
+          </p>
+          <div class="hr"></div>
+          <div class="label">Docs pointers</div>
+          <div class="row row-wrap">
+            <a class="btn btn-ghost" href="/docs.html#quickstart">Quickstart</a>
+            <a class="btn btn-ghost" href="/docs.html#multichannel">How multi-channel works</a>
+            <a class="btn btn-ghost" href="/status.html">Operational status</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div data-mount="footer"></div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
