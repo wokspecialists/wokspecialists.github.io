@@ -292,9 +292,44 @@
       const pointers = new Map();
       let pinchStartDist = 0;
       let pinchStartScale = 1;
+      let snapRaf = 0;
 
       function apply(){
         grid.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      }
+
+      function clampTransform(){
+        const rect = grid.getBoundingClientRect();
+        const maxScale = 1.4;
+        const minScale = 0.85;
+        scale = Math.max(minScale, Math.min(maxScale, scale));
+        const maxX = rect.width * 0.08;
+        const maxY = rect.height * 0.08;
+        x = Math.max(-maxX, Math.min(maxX, x));
+        y = Math.max(-maxY, Math.min(maxY, y));
+      }
+
+      function snapBack(){
+        if (snapRaf) cancelAnimationFrame(snapRaf);
+        const targetScale = 1;
+        const targetX = 0;
+        const targetY = 0;
+        const startScale = scale;
+        const startX = x;
+        const startY = y;
+        const start = performance.now();
+        const duration = 240;
+        function tick(now){
+          const t = Math.min(1, (now - start) / duration);
+          const ease = t * (2 - t);
+          scale = startScale + (targetScale - startScale) * ease;
+          x = startX + (targetX - startX) * ease;
+          y = startY + (targetY - startY) * ease;
+          apply();
+          if (t < 1) snapRaf = requestAnimationFrame(tick);
+          else snapRaf = 0;
+        }
+        snapRaf = requestAnimationFrame(tick);
       }
 
       function distance(a, b){
@@ -326,7 +361,8 @@
           const pts = Array.from(pointers.values());
           const dist = distance(pts[0], pts[1]);
           if (pinchStartDist > 0) {
-            scale = Math.max(0.6, Math.min(2.6, pinchStartScale * (dist / pinchStartDist)));
+            scale = pinchStartScale * (dist / pinchStartDist);
+            clampTransform();
             apply();
           }
           return;
@@ -334,6 +370,7 @@
         if (!dragging) return;
         x = e.clientX - startX;
         y = e.clientY - startY;
+        clampTransform();
         apply();
       });
 
@@ -344,26 +381,27 @@
           grid.classList.remove('dragging');
           try { grid.releasePointerCapture(e.pointerId); } catch {}
         }
+        snapBack();
       });
       grid.addEventListener('pointercancel', (e)=>{
         pointers.delete(e.pointerId);
         dragging = false;
         grid.classList.remove('dragging');
+        snapBack();
       });
 
       grid.addEventListener('wheel', (e)=>{
         e.preventDefault();
         const delta = -e.deltaY;
         const factor = delta > 0 ? 1.08 : 0.92;
-        scale = Math.max(0.6, Math.min(2.6, scale * factor));
+        scale = scale * factor;
+        clampTransform();
         apply();
+        snapBack();
       }, {passive:false});
 
       grid.addEventListener('dblclick', ()=>{
-        scale = 1;
-        x = 0;
-        y = 0;
-        apply();
+        snapBack();
       });
 
       grid.dataset.interactive = '1';
