@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chopsticks — Wok Specialists</title>
-  <meta name="description" content="Chopsticks is a hosted Discord multitool. Agents enable multiple simultaneous voice sessions per server." />
+  <title>Docs — Chopsticks</title>
+  <meta name="description" content="Chopsticks docs: setup, use cases, commands, Agents model, sharding notes." />
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -12,83 +12,84 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="hero-split">
-        <div class="card card-soft">
-          <h1 class="h1">Chopsticks</h1>
-          <p class="p dim">
-            A hosted Discord multitool. One bot for day-to-day utility, with optional subsystems that scale when your server gets busy.
-          </p>
-
-          <div class="hr"></div>
-
-          <h2 class="h2">Core idea</h2>
-          <p class="p dim">
-            Chopsticks aims to reduce bot clutter by concentrating common workflows into one reliable tool.
-            Some modules are live now. Others are staged and roll out as they stabilize.
-          </p>
-
-          <div class="hr"></div>
-
-          <h2 class="h2">Use cases</h2>
-          <div class="grid grid-auto">
-            <div class="card card-soft">
-              <h3 class="h3">Owners</h3>
-              <p class="p dim">A tool that behaves predictably when many people use it at once.</p>
-            </div>
-            <div class="card card-soft">
-              <h3 class="h3">Power users</h3>
-              <p class="p dim">Clear controls, quick commands, and fewer edge-case surprises.</p>
-            </div>
-            <div class="card card-soft">
-              <h3 class="h3">Multi-room servers</h3>
-              <p class="p dim">When people split into rooms, voice concurrency matters. That’s where Agents help.</p>
-            </div>
-          </div>
-
-          <div class="hr"></div>
-
-          <div class="row row-wrap">
-            <a class="btn btn-green" href="/agents/">Invite Agents</a>
-            <a class="btn btn-ghost" href="/chopsticks/docs/">Docs</a>
-            <a class="btn btn-ghost" href="/chopsticks/status/">Status</a>
-          </div>
+      <div class="card">
+        <h1 class="h1">Docs</h1>
+        <p class="p dim">This is the only place with long text.</p>
+        <div class="row row-wrap mt">
+          <a class="btn btn-green" href="/agents/">Invite Agents</a>
+          <a class="btn btn-ghost" href="/chopsticks/status/">Status</a>
+          <a class="btn btn-ghost" href="/chopsticks/embed/">Embed builder</a>
         </div>
+      </div>
+    </section>
 
-        <div class="hero-media">
-          <div class="hero-image">
-            <img src="/assets/chopsticks.png" alt="Chopsticks bot" />
+    <section class="section" id="quickstart">
+      <div class="card">
+        <h2 class="h2">Quickstart</h2>
+        <ol class="caps">
+          <li>Invite Chopsticks.</li>
+          <li>If you want multiple voice channels at once, invite multiple Agents.</li>
+          <li>Join a voice channel and use the voice commands.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="use-cases">
+      <div class="card">
+        <h2 class="h2">Use cases</h2>
+        <div class="grid grid-auto mt">
+          <div class="card card-soft" id="voice">
+            <h3 class="h3">Music in one room</h3>
+            <p class="p dim">Basic playback and queue control.</p>
+            <div class="label mt">Commands</div>
+            <div data-commands></div>
           </div>
 
-          <div class="card card-soft">
-            <h2 class="h2">Agents (voice scaling)</h2>
-            <p class="p dim">
-              Agents are deployable Chopsticks instances. More Agents equals more simultaneous voice sessions in the same server.
-            </p>
-            <div class="hr"></div>
-
-            <div class="label">Rule</div>
+          <div class="card card-soft" id="voice-channels">
+            <h3 class="h3">Custom voice channels</h3>
+            <p class="p dim">Member rooms that spin up on demand and clean up automatically.</p>
+            <div class="label mt">Commands</div>
             <ul class="caps">
-              <li>1 Agent = 1 active voice connection in your server</li>
-              <li>2 voice channels at once = invite 2 Agents</li>
-              <li>3 voice channels at once = invite 3 Agents</li>
+              <li>/vc create</li>
+              <li>/vc rename</li>
+              <li>/vc limit</li>
+              <li>/vc lock</li>
+              <li>/vc claim</li>
             </ul>
-
-            <div class="hr"></div>
-            <div class="row row-wrap">
-              <a class="btn btn-green" href="/agents/">Open invite builder</a>
-              <a class="btn btn-ghost" href="/chopsticks/docs/#multichannel">Read the model</a>
-            </div>
           </div>
 
           <div class="card card-soft">
-            <h2 class="h2">Product surfaces</h2>
-            <div class="row row-wrap">
-              <a class="btn btn-ghost" href="/chopsticks/packages/">Packages</a>
-              <a class="btn btn-ghost" href="/chopsticks/docs/">Docs</a>
-              <a class="btn btn-ghost" href="/chopsticks/status/">Status</a>
-            </div>
+            <h3 class="h3">Two rooms at once</h3>
+            <p class="p dim">Invite two Agents. Each room uses its own Agent session.</p>
+            <div class="label mt">Commands</div>
+            <ul class="caps">
+              <li>/play</li>
+              <li>/queue</li>
+              <li>/skip</li>
+            </ul>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="multichannel">
+      <div class="card">
+        <h2 class="h2">Agents model</h2>
+        <ul class="caps">
+          <li>Each Agent is an independent bot user.</li>
+          <li>In one server, one Agent can hold one voice connection at a time.</li>
+          <li>More simultaneous rooms requires more Agents invited.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="sharding">
+      <div class="card">
+        <h2 class="h2">Sharding (scaling note)</h2>
+        <p class="p dim">
+          Sharding splits one bot into multiple gateway connections so Discord traffic and cache load are distributed.
+          Early on you can run a single shard. As servers grow, you move to multiple shards and route events across them.
+        </p>
       </div>
     </section>
   </main>

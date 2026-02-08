@@ -12,63 +12,44 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="hero-split">
-        <div class="card card-soft">
-          <h1 class="h1">Agents</h1>
-          <p class="p dim">
-            Agents are additional Chopsticks instances. They exist for one reason: concurrency.
-          </p>
-
-          <div class="hr"></div>
-
-          <h2 class="h2">Hardened model</h2>
-          <ul class="caps">
-            <li>Each Agent is an independent bot user.</li>
-            <li>In one server, one Agent can hold one voice connection at a time.</li>
-            <li>If multiple voice channels need different audio at the same time, invite multiple Agents.</li>
-          </ul>
-
-          <div class="hr"></div>
-
-          <h2 class="h2">Use cases</h2>
-          <ul class="caps">
-            <li><strong>Two rooms, two vibes:</strong> Channel A runs Track A while Channel B runs Track B.</li>
-            <li><strong>Event night:</strong> a main room plus one or more side rooms.</li>
-            <li><strong>Long sessions:</strong> multiple groups cycling in/out without stepping on each other.</li>
-          </ul>
-
-          <div class="statbar" data-agent-counts></div>
-        </div>
-
-        <div class="card card-soft">
-          <h2 class="h2">Invite builder</h2>
-          <p class="p dim">Choose how many channels you want active at once, then invite that many Agents.</p>
-          <div data-invite-generator></div>
+      <div class="card">
+        <div class="row row-wrap" style="justify-content:space-between;align-items:flex-end">
+          <div>
+            <h1 class="h1">Agents</h1>
+            <p class="p dim">Concurrency slots for voice. Nothing else.</p>
+            <div class="label mt">Model</div>
+            <ul class="caps">
+              <li>Each Agent is a separate bot user.</li>
+              <li>In one server, one Agent can hold one voice connection at a time.</li>
+              <li>Two rooms at once requires two Agents invited.</li>
+            </ul>
+            <div class="label mt">Counts</div>
+            <div class="p dim" data-agent-counts>Loading…</div>
+          </div>
+          <div class="row row-wrap">
+            <a class="btn btn-ghost" href="/chopsticks/docs/#multichannel">Details</a>
+            <a class="btn btn-ghost" href="/chopsticks/status/">Status</a>
+          </div>
         </div>
       </div>
-    </section>
-
-    <section class="section">
-      <h2 class="h2">Available Agents</h2>
-      <p class="p dim">Deployable now.</p>
-      <div class="grid grid-cards" data-agents="available"></div>
-    </section>
-
-    <section class="section" data-section="soon" hidden>
-      <h2 class="h2">Coming soon</h2>
-      <p class="p dim">Planned expansions to the pool.</p>
-      <div class="grid grid-cards" data-agents="soon"></div>
     </section>
 
     <section class="section">
       <div class="card">
-        <h2 class="h2">Notes</h2>
-        <ul class="caps">
-          <li>Agents are not “DJs”. They are deployable instances.</li>
-          <li>Server owners can choose how strict command access is (DJ-only vs open queue) based on bot configuration.</li>
-          <li>If popups are blocked when opening invites, use the copy list button.</li>
-        </ul>
+        <h2 class="h2">Mass invite</h2>
+        <p class="p dim">Enter a number, apply, then open or copy invite links.</p>
+        <div data-invite-generator></div>
       </div>
+    </section>
+
+    <section class="section">
+      <h2 class="h2">Available</h2>
+      <div class="grid grid-cards" data-agents="available"></div>
+    </section>
+
+    <section class="section" data-section="soon" hidden>
+      <h2 class="h2">Specialized Agents coming soon</h2>
+      <div class="grid grid-cards" data-agents="soon"></div>
     </section>
   </main>
 

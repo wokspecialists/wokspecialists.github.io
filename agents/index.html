@@ -1,5 +1,46 @@
 <!doctype html>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=/chopsticks/agents/">
-<link rel="canonical" href="/chopsticks/agents/">
-<title>Redirecting…</title>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agents — Chopsticks</title>
+  <meta name="description" content="Agents extend Chopsticks with concurrency and future roles. Search, filter, and bulk invite." />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div data-mount="header"></div>
+
+  <main class="wrap">
+    <section class="pagehead">
+      <div class="kicker">Chopsticks</div>
+      <h1 class="h1">Agents</h1>
+      <p class="sub">Inventory surface. Built to scale to 100+ agents.</p>
+    </section>
+
+    <section class="toolbar card">
+      <div class="toolrow">
+        <input class="input input-wide" type="search" placeholder="Search agents…" data-agent-search />
+        <select class="input" data-agent-type>
+          <option value="all">All types</option>
+          <option value="music">Music</option>
+          <option value="vc">Custom VC</option>
+          <option value="future">Future</option>
+        </select>
+        <select class="input" data-agent-status>
+          <option value="all">All status</option>
+          <option value="available">Available</option>
+          <option value="coming-soon">Coming soon</option>
+        </select>
+        <a class="btn btn-ghost" href="/packages/">Invite by plan</a>
+      </div>
+      <div class="hr"></div>
+      <div class="stats" data-agent-counts></div>
+    </section>
+
+    <section class="gridcards" data-agents-grid></section>
+  </main>
+
+  <div data-mount="footer"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

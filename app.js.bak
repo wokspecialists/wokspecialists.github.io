@@ -1,0 +1,444 @@
+// app.js — single module for the whole site
+
+const ORG = {
+  name: "Wok Specialists",
+  githubOrgUrl: "https://github.com/Wok-Specialists",
+};
+
+const ROUTES = {
+  home: "/",
+  chopsticks: "/chopsticks/",
+  packages: "/packages/",
+  agents: "/agents/",
+  docs: "/docs/",
+  status: "/status/",
+};
+
+const SITE = {
+  nav: [
+    { href: ROUTES.home, label: "Home" },
+    { href: ROUTES.chopsticks, label: "Chopsticks" },
+    { href: ROUTES.packages, label: "Plans" },
+    { href: ROUTES.agents, label: "Agents" },
+    { href: ROUTES.docs, label: "Docs" },
+    { href: ROUTES.status, label: "Status" },
+  ],
+};
+
+const OAUTH = {
+  base: "https://discord.com/api/oauth2/authorize",
+  scope: "bot applications.commands",
+  defaultPermissions: "36700160",
+};
+
+// Source of truth for agent inventory
+const AGENTS_JSON_PATHS = [
+  "/chopsticks/data/agents.json",
+  "/data/agents.json",
+];
+
+// Configure later. If not configured, it will be omitted from generated lists.
+const MAIN_BOT = {
+  name: "Chopsticks",
+  clientId: null, // set to real numeric clientId string
+  permissions: OAUTH.defaultPermissions,
+  inviteUrl: null, // or set full inviteUrl
+};
+
+// Server-size plans (member tiers) → sessions (agents allocated)
+const PLANS = [
+  { id: "micro",  name: "Micro",  members: "1–50",     sessions: 1,  note: "One room at a time." },
+  { id: "small",  name: "Small",  members: "51–200",   sessions: 2,  note: "Split voice rooms cleanly." },
+  { id: "medium", name: "Medium", members: "201–1k",   sessions: 4,  note: "Regular multi-room activity." },
+  { id: "large",  name: "Large",  members: "1k–10k",   sessions: 8,  note: "Busy community concurrency." },
+  { id: "xlarge", name: "XL",     members: "10k+",     sessions: 12, note: "Custom scaling." },
+];
+
+function qs(sel, root = document) { return root.querySelector(sel); }
+function qsa(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
+
+function el(tag, props = {}, children = []) {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(props)) {
+    if (k === "class") node.className = v;
+    else if (k === "html") node.innerHTML = v;
+    else if (k.startsWith("on") && typeof v === "function") node.addEventListener(k.slice(2), v);
+    else if (v === true) node.setAttribute(k, "");
+    else if (v !== false && v != null) node.setAttribute(k, String(v));
+  }
+  for (const c of children) node.append(c);
+  return node;
+}
+function text(s) { return document.createTextNode(s); }
+
+function normalizePath(p) {
+  let out = (p || "/").replace(/index\.html$/, "");
+  if (out !== "/" && !out.endsWith("/")) out += "/";
+  return out;
+}
+function activePath() { return normalizePath(location.pathname || "/"); }
+
+function mountShell() {
+  const headerMount = qs("[data-mount='header']");
+  const footerMount = qs("[data-mount='footer']");
+  if (headerMount) headerMount.replaceWith(buildHeader());
+  if (footerMount) footerMount.replaceWith(buildFooter());
+}
+
+function buildHeader() {
+  const p = activePath();
+  const header = el("header", { class: "site-header" });
+
+  const brand = el("a", { class: "brand", href: ROUTES.home }, [
+    el("img", { src: "/assets/chopsticks.png", alt: "", "aria-hidden": "true" }),
+    el("span", { class: "brand-name" }, [text(ORG.name)]),
+  ]);
+
+  const nav = el("nav", { class: "nav", "aria-label": "Primary" });
+  const ul = el("ul", {});
+  for (const item of SITE.nav) {
+    const isActive = normalizePath(item.href) === p;
+    ul.append(
+      el("li", {}, [
+        el("a", { href: item.href, class: isActive ? "is-active" : "" }, [text(item.label)]),
+      ])
+    );
+  }
+  nav.append(ul);
+
+  const right = el("div", { class: "header-right" }, [
+    el("a", { class: "btn btn-primary", href: ROUTES.packages }, [text("Generate invites")]),
+    el("a", { class: "btn btn-ghost", href: ORG.githubOrgUrl, target: "_blank", rel: "noopener noreferrer" }, [text("GitHub")]),
+  ]);
+
+  header.append(brand, nav, right);
+  return header;
+}
+
+function buildFooter() {
+  return el("footer", { class: "site-footer" }, [
+    el("div", { class: "footer-inner" }, [
+      el("div", {}, [
+        el("div", { class: "kicker" }, [text(ORG.name)]),
+        el("div", { class: "sub2" }, [text("Studio shipping practical systems across design and technology.")]),
+      ]),
+      el("div", { class: "footer-links" }, [
+        el("a", { href: ROUTES.chopsticks }, [text("Chopsticks")]),
+        el("a", { href: ROUTES.packages }, [text("Plans")]),
+        el("a", { href: ROUTES.agents }, [text("Agents")]),
+        el("a", { href: ROUTES.docs }, [text("Docs")]),
+        el("a", { href: ROUTES.status }, [text("Status")]),
+      ]),
+    ]),
+  ]);
+}
+
+function toast(msg) {
+  let host = qs("#toast-host");
+  if (!host) {
+    host = el("div", { id: "toast-host" });
+    host.style.position = "fixed";
+    host.style.right = "16px";
+    host.style.bottom = "16px";
+    host.style.display = "grid";
+    host.style.gap = "8px";
+    host.style.zIndex = "999";
+    document.body.append(host);
+  }
+  const t = el("div", { class: "card" }, [
+    el("div", { class: "sub2" }, [text(msg)]),
+  ]);
+  t.style.borderRadius = "14px";
+  t.style.background = "rgba(0,0,0,.70)";
+  t.style.backdropFilter = "blur(10px)";
+  t.style.maxWidth = "360px";
+  host.append(t);
+  setTimeout(() => t.remove(), 1800);
+}
+
+async function fetchJsonAny(paths) {
+  let lastErr = null;
+  for (const p of paths) {
+    try {
+      const res = await fetch(p, { cache: "no-store" });
+      if (!res.ok) throw new Error(`${p} -> ${res.status}`);
+      return await res.json();
+    } catch (e) {
+      lastErr = e;
+    }
+  }
+  throw lastErr || new Error("json-load-failed");
+}
+
+function oauthInviteUrl({ clientId, inviteUrl, permissions }) {
+  if (inviteUrl && typeof inviteUrl === "string") return inviteUrl;
+
+  const raw = clientId ? String(clientId) : "";
+  const id = raw && !raw.startsWith("CLIENT_ID_") ? raw : null;
+  if (!id) return null;
+
+  const u = new URL(OAUTH.base);
+  u.searchParams.set("client_id", id);
+  u.searchParams.set("permissions", String(permissions ?? OAUTH.defaultPermissions));
+  u.searchParams.set("scope", OAUTH.scope);
+  return u.toString();
+}
+
+function pickAgentsForSessions(agents, sessions) {
+  const available = agents
+    .filter(a => (a.status || "available") === "available")
+    .slice()
+    .sort((a, b) => String(a.agentId || "").localeCompare(String(b.agentId || "")));
+
+  return available.slice(0, Math.max(0, sessions));
+}
+
+function buildInviteList({ agents, sessions }) {
+  const list = [];
+
+  // Only include main bot if configured.
+  const mainUrl = oauthInviteUrl(MAIN_BOT);
+  if (mainUrl) list.push({ name: MAIN_BOT.name, url: mainUrl });
+
+  const picked = pickAgentsForSessions(agents, sessions);
+  for (const a of picked) {
+    list.push({ name: a.name || a.agentId, url: oauthInviteUrl(a) });
+  }
+
+  return list;
+}
+
+function openStaggered(urls) {
+  const clean = urls.filter(Boolean);
+  if (!clean.length) { toast("No invite links."); return; }
+
+  let opened = 0;
+  clean.forEach((u, i) => {
+    setTimeout(() => {
+      const w = window.open(u, "_blank", "noopener,noreferrer");
+      if (w) opened++;
+      if (i === clean.length - 1) {
+        if (opened === 0) toast("Popups blocked. Copy instead.");
+        else toast(`Opened ${opened}/${clean.length}.`);
+      }
+    }, i * 650);
+  });
+}
+
+function getPlanIdFromHash() {
+  const m = (location.hash || "").match(/plan=([a-z0-9-]+)/i);
+  const id = m?.[1] || null;
+  if (id && PLANS.some(p => p.id === id)) return id;
+  return null;
+}
+
+function setPlanHash(planId) {
+  location.hash = `plan=${planId}`;
+}
+
+function renderPlans(plansHost, agents) {
+  plansHost.innerHTML = "";
+
+  for (const plan of PLANS) {
+    const card = el("div", { class: "card" }, [
+      el("div", { class: "kicker" }, [text(`Recommended: ${plan.members}`)]),
+      el("div", { class: "title" }, [text(plan.name)]),
+      el("div", { class: "desc" }, [text(`${plan.sessions} concurrent session${plan.sessions === 1 ? "" : "s"} • Custom VCs included`)]),
+      el("div", { class: "desc" }, [text(plan.note)]),
+      el("div", { class: "hr" }),
+      el("div", { class: "cta-row" }, [
+        el("button", { class: "btn btn-primary", onClick: () => setSelectedPlan(plan.id) }, [text("Generate invites")]),
+        el("a", { class: "btn btn-ghost", href: ROUTES.agents }, [text("View agents")]),
+      ]),
+    ]);
+
+    card.dataset.planId = plan.id;
+    plansHost.append(card);
+  }
+
+  function setSelectedPlan(planId) {
+    // Highlight selected
+    qsa(".card", plansHost).forEach(c => c.classList.toggle("is-selected", c.dataset.planId === planId));
+
+    // Render invite panel
+    renderPlanInvite(qs("[data-plan-invite]"), agents, planId);
+
+    // Sync hash
+    setPlanHash(planId);
+  }
+
+  const initial = getPlanIdFromHash() || PLANS[1]?.id || PLANS[0].id;
+  setSelectedPlan(initial);
+
+  window.addEventListener("hashchange", () => {
+    const id = getPlanIdFromHash();
+    if (id) setSelectedPlan(id);
+  });
+}
+
+function renderPlanInvite(host, agents, planId) {
+  if (!host) return;
+
+  const plan = PLANS.find(p => p.id === planId) || PLANS[0];
+  const invites = buildInviteList({ agents, sessions: plan.sessions });
+
+  const missing = invites.filter(x => !x.url);
+
+  const out = el("textarea", { class: "textarea", readOnly: true, spellcheck: "false" }, []);
+  out.value = invites.map(x => `${x.name} — ${x.url || "MISSING_INVITE_URL"}`).join("\n");
+
+  const copyBtn = el("button", {
+    class: "btn btn-ok",
+    onClick: async () => {
+      try { await navigator.clipboard.writeText(out.value); toast("Copied."); }
+      catch { toast("Copy failed."); }
+    }
+  }, [text("Copy list")]);
+
+  const openBtn = el("button", {
+    class: "btn",
+    onClick: () => openStaggered(invites.map(x => x.url).filter(Boolean))
+  }, [text("Open invites")]);
+
+  host.innerHTML = "";
+  host.append(
+    el("div", { class: "kicker" }, [text(`Plan: ${plan.name} • ${plan.members}`)]),
+    el("div", { class: "desc" }, [text(`${plan.sessions} session(s) → ${plan.sessions} agent(s)${oauthInviteUrl(MAIN_BOT) ? " + main bot" : ""}`)]),
+    el("div", { class: "hr" }),
+    out,
+    el("div", { class: "agent-actions" }, [copyBtn, openBtn]),
+  );
+
+  if (missing.length) {
+    host.append(el("div", { class: "hr" }));
+    host.append(el("div", { class: "badge badge-soon" }, [text("Some invites are not configured (placeholders in agents.json).")] ));
+  }
+}
+
+function inferType(agent) {
+  // Prefer explicit field if you add it later
+  if (agent.type) return String(agent.type).toLowerCase();
+
+  // Fallback to tags
+  const t = (agent.tags || []).map(x => String(x).toLowerCase());
+  const isMusic = t.includes("music") || t.includes("voice");
+  const isVc = t.includes("vc") || t.includes("customvc");
+  const isFuture = t.includes("future") || t.includes("soon");
+
+  if (isVc) return "vc";
+  if (isMusic) return "music";
+  if (isFuture) return "future";
+  return "all";
+}
+
+function renderAgentsGrid(host, agents, filters) {
+  const q = (filters.q || "").toLowerCase().trim();
+  const type = filters.type || "all";
+  const status = filters.status || "all";
+
+  const filtered = agents.filter(a => {
+    const name = String(a.name || "").toLowerCase();
+    const id = String(a.agentId || "").toLowerCase();
+    const desc = String(a.description || "").toLowerCase();
+    const tags = (a.tags || []).join(" ").toLowerCase();
+
+    if (q && !(name.includes(q) || id.includes(q) || desc.includes(q) || tags.includes(q))) return false;
+
+    const s = (a.status || "available");
+    if (status !== "all" && s !== status) return false;
+
+    if (type !== "all") {
+      const t = inferType(a);
+      if (t !== type) return false;
+    }
+
+    return true;
+  });
+
+  host.innerHTML = "";
+  for (const a of filtered) {
+    const s = (a.status || "available");
+    const statusLabel = s === "available" ? "Available" : "Coming soon";
+    const badgeClass = s === "available" ? "badge-ok" : "badge-soon";
+    const url = oauthInviteUrl(a);
+
+    const inviteBtn = el("button", {
+      class: `btn ${s === "available" && url ? "btn-ok" : "btn-disabled"}`,
+      disabled: !(s === "available" && url),
+      onClick: () => url && window.open(url, "_blank", "noopener,noreferrer")
+    }, [text(url ? "Invite" : "Not configured")]);
+
+    const copyBtn = el("button", {
+      class: `btn ${url ? "" : "btn-disabled"}`,
+      disabled: !url,
+      onClick: async () => {
+        try { await navigator.clipboard.writeText(url); toast("Copied."); }
+        catch { toast("Copy failed."); }
+      }
+    }, [text("Copy")]);
+
+    host.append(
+      el("div", { class: "card" }, [
+        el("div", { class: "kicker" }, [text(a.agentId || "agent")]),
+        el("div", { class: "title" }, [text(a.name || a.agentId)]),
+        el("div", { class: `badge ${badgeClass}` }, [text(statusLabel)]),
+        el("div", { class: "desc" }, [text(a.description || "")]),
+        el("div", { class: "agent-actions" }, [inviteBtn, copyBtn]),
+      ])
+    );
+  }
+
+  const counts = qs("[data-agent-counts]");
+  if (counts) {
+    const avail = agents.filter(a => (a.status || "available") === "available").length;
+    const soon = agents.length - avail;
+    counts.innerHTML = "";
+    counts.append(
+      el("span", { class: "badge badge-ok" }, [text(`${avail} available`)]),
+      el("span", { class: "badge badge-soon" }, [text(`${soon} coming soon`)]),
+      el("span", { class: "badge" }, [text(`${filtered.length} shown`)]),
+    );
+  }
+}
+
+async function initPages() {
+  mountShell();
+
+  const needsAgents =
+    Boolean(qs("[data-plans]")) ||
+    Boolean(qs("[data-plan-invite]")) ||
+    Boolean(qs("[data-agents-grid]"));
+
+  if (!needsAgents) return;
+
+  let agents = [];
+  try {
+    agents = await fetchJsonAny(AGENTS_JSON_PATHS);
+    if (!Array.isArray(agents)) throw new Error("agents-json-not-array");
+  } catch {
+    toast("Failed to load agents.json");
+    return;
+  }
+
+  const plansHost = qs("[data-plans]");
+  if (plansHost) renderPlans(plansHost, agents);
+
+  const gridHost = qs("[data-agents-grid]");
+  if (gridHost) {
+    const state = { q: "", type: "all", status: "all" };
+
+    const search = qs("[data-agent-search]");
+    const typeSel = qs("[data-agent-type]");
+    const statusSel = qs("[data-agent-status]");
+
+    const sync = () => renderAgentsGrid(gridHost, agents, state);
+
+    if (search) search.addEventListener("input", e => { state.q = e.target.value; sync(); });
+    if (typeSel) typeSel.addEventListener("change", e => { state.type = e.target.value; sync(); });
+    if (statusSel) statusSel.addEventListener("change", e => { state.status = e.target.value; sync(); });
+
+    sync();
+  }
+}
+
+initPages();

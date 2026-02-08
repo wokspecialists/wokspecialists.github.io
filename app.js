@@ -1,28 +1,28 @@
-// app.js — one module file for the whole site
-
 const ORG = {
   name: "Wok Specialists",
   githubOrgUrl: "https://github.com/Wok-Specialists"
 };
 
 const ROUTES = {
+  home: "/",
   chopsticks: "/chopsticks/",
   agents: "/chopsticks/agents/",
   packages: "/chopsticks/packages/",
   docs: "/chopsticks/docs/",
-  status: "/chopsticks/status/"
+  status: "/chopsticks/status/",
+  embed: "/chopsticks/embed/",
+  contribute: "/contribute/"
 };
 
 const SITE = {
   nav: [
-    { href: "/", label: "Home" },
+    { href: ROUTES.home, label: "Home" },
     { href: ROUTES.chopsticks, label: "Chopsticks" },
     { href: "/agents/", label: "Agents" },
     { href: "/packages/", label: "Packages" },
     { href: "/docs/", label: "Docs" },
     { href: "/status/", label: "Status" }
-  ],
-  headerCtas: [{ href: "/agents/", label: "Invite Agents", variant: "primary" }]
+  ]
 };
 
 const OAUTH = {
@@ -31,12 +31,21 @@ const OAUTH = {
   defaultPermissions: "36700160"
 };
 
-function qs(sel, root = document) {
-  return root.querySelector(sel);
-}
-function qsa(sel, root = document) {
-  return Array.from(root.querySelectorAll(sel));
-}
+const COMMANDS = [
+  { name: "/help", desc: "Show available commands and quick tips." },
+  { name: "/play <query|url>", desc: "Play audio in your current voice channel." },
+  { name: "/queue", desc: "Show the queue." },
+  { name: "/skip", desc: "Skip the current track." },
+  { name: "/stop", desc: "Stop playback and clear the queue (behavior depends on rules)." },
+  { name: "/pause", desc: "Pause playback." },
+  { name: "/resume", desc: "Resume playback." },
+  { name: "/nowplaying", desc: "Show current track." },
+  { name: "/volume <0-100>", desc: "Set volume." },
+  { name: "/shuffle", desc: "Shuffle the queue." }
+];
+
+function qs(sel, root = document) { return root.querySelector(sel); }
+function qsa(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
 function el(tag, props = {}, children = []) {
   const node = document.createElement(tag);
   for (const [k, v] of Object.entries(props)) {
@@ -50,36 +59,28 @@ function el(tag, props = {}, children = []) {
   for (const c of children) node.append(c);
   return node;
 }
-function text(s) {
-  return document.createTextNode(s);
-}
+function text(s) { return document.createTextNode(s); }
 
 function normalizePath(p) {
   let out = (p || "/").replace(/index\.html$/, "");
   if (out !== "/" && !out.endsWith("/")) out += "/";
   return out;
 }
-function activePath() {
-  return normalizePath(location.pathname || "/");
-}
+function activePath() { return normalizePath(location.pathname || "/"); }
 
 function iconSvg(name) {
   const common = `fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`;
-  if (name === "github") {
-    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path ${common} d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2 2.2-.2 4.5-1.1 4.5-5 0-1.1-.4-2.1-1.1-2.9.1-.3.5-1.5-.1-3.1 0 0-.9-.3-3 1.1a10.4 10.4 0 0 0-5.4 0C7.3 4.2 6.4 4.5 6.4 4.5c-.6 1.6-.2 2.8-.1 3.1A4 4 0 0 0 5.2 10c0 3.9 2.3 4.8 4.5 5-.3.3-.5.7-.5 1.5V22"/></svg>`;
-  }
-  if (name === "docs") {
-    return `<svg viewBox="0 0 24 24" aria-hidden="true"><path ${common} d="M7 3h8l3 3v15a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path ${common} d="M15 3v4h4"/><path ${common} d="M8 11h8"/><path ${common} d="M8 15h8"/></svg>`;
-  }
+  if (name === "github") return `<svg viewBox="0 0 24 24" aria-hidden="true"><path ${common} d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3.5c0-1 .1-1.4-.5-2 2.2-.2 4.5-1.1 4.5-5 0-1.1-.4-2.1-1.1-2.9.1-.3.5-1.5-.1-3.1 0 0-.9-.3-3 1.1a10.4 10.4 0 0 0-5.4 0C7.3 4.2 6.4 4.5 6.4 4.5c-.6 1.6-.2 2.8-.1 3.1A4 4 0 0 0 5.2 10c0 3.9 2.3 4.8 4.5 5-.3.3-.5.7-.5 1.5V22"/></svg>`;
+  if (name === "spark") return `<svg viewBox="0 0 24 24" aria-hidden="true"><path ${common} d="M12 2l1.7 6.3L20 10l-6.3 1.7L12 18l-1.7-6.3L4 10l6.3-1.7L12 2z"/></svg>`;
+  if (name === "tool") return `<svg viewBox="0 0 24 24" aria-hidden="true"><path ${common} d="M14 7l3 3"/><path ${common} d="M10 14l-7 7"/><path ${common} d="M16 5a4 4 0 0 0-5 5L4 17l3 3 7-7a4 4 0 0 0 5-5l-3 3-3-3 3-3z"/></svg>`;
   return "";
 }
 
 function buildHeader() {
   const p = activePath();
-
   const header = el("header", { class: "site-header" });
 
-  const brand = el("a", { class: "brand", href: "/" }, [
+  const brand = el("a", { class: "brand", href: ROUTES.home }, [
     el("span", { class: "brand-mark", "aria-hidden": "true" }, [text("▣")]),
     el("span", { class: "brand-name" }, [text(ORG.name)])
   ]);
@@ -90,28 +91,19 @@ function buildHeader() {
   for (const item of SITE.nav) {
     const itemPath = normalizePath(item.href);
     const isActive = itemPath === p;
-    ul.append(el("li", {}, [el("a", { href: item.href, class: `nav-link ${isActive ? "is-active" : ""}` }, [text(item.label)])]));
+    ul.append(el("li", {}, [
+      el("a", { href: item.href, class: `nav-link ${isActive ? "is-active" : ""}` }, [text(item.label)])
+    ]));
   }
 
   nav.append(ul);
 
-  const right = el("div", { class: "header-right" });
-
-  const ctas = el("div", { class: "header-ctas" });
-  for (const cta of SITE.headerCtas) {
-    ctas.append(el("a", { href: cta.href, class: "btn btn-primary" }, [text(cta.label)]));
-  }
-
-  const icons = el("div", { class: "icon-links" }, [
+  const right = el("div", { class: "header-right" }, [
     el("a", { class: "icon-btn", href: ORG.githubOrgUrl, target: "_blank", rel: "noopener noreferrer", title: "GitHub" }, [
       el("span", { class: "icon", html: iconSvg("github") })
-    ]),
-    el("a", { class: "icon-btn", href: "/docs/", title: "Docs" }, [
-      el("span", { class: "icon", html: iconSvg("docs") })
     ])
   ]);
 
-  right.append(ctas, icons);
   header.append(brand, nav, right);
   return header;
 }
@@ -121,12 +113,12 @@ function buildFooter() {
     el("div", { class: "footer-inner" }, [
       el("div", { class: "footer-left" }, [
         el("div", { class: "fine" }, [text(ORG.name)]),
-        el("div", { class: "fine dim" }, [text("A small team shipping practical projects across art, design, and technology.")])
+        el("div", { class: "fine dim" }, [text("Projects across bots, games, art, and tools.")])
       ]),
       el("div", { class: "footer-right" }, [
         el("a", { class: "footer-link", href: ROUTES.chopsticks }, [text("Chopsticks")]),
-        el("a", { class: "footer-link", href: "/agents/" }, [text("Agents")]),
-        el("a", { class: "footer-link", href: ORG.githubOrgUrl, target: "_blank", rel: "noopener noreferrer" }, [text("GitHub")])
+        el("a", { class: "footer-link", href: ROUTES.embed }, [text("Embed builder")]),
+        el("a", { class: "footer-link", href: ROUTES.contribute }, [text("Contribute")])
       ])
     ])
   ]);
@@ -142,15 +134,10 @@ function mountShell() {
 function toast(msg, kind = "info") {
   const host = qs("#toast-host") || el("div", { id: "toast-host" });
   if (!host.isConnected) document.body.append(host);
-
   const t = el("div", { class: `toast toast-${kind}` }, [el("div", { class: "toast-body" }, [text(msg)])]);
   host.append(t);
-
   setTimeout(() => t.classList.add("show"), 10);
-  setTimeout(() => {
-    t.classList.remove("show");
-    setTimeout(() => t.remove(), 200);
-  }, 2400);
+  setTimeout(() => { t.classList.remove("show"); setTimeout(() => t.remove(), 200); }, 2200);
 }
 
 async function fetchJson(path) {
@@ -177,59 +164,39 @@ function oauthInviteUrlFromAgent(agent) {
 function renderAgentCard(agent) {
   const statusClass = agent.status === "available" ? "badge-ok" : "badge-soon";
   const statusLabel = agent.status === "available" ? "Available" : "Coming soon";
-
   const inviteUrl = oauthInviteUrlFromAgent(agent);
   const inviteConfigured = Boolean(inviteUrl);
 
-  const inviteBtn = el(
-    "button",
-    {
-      class: `btn ${agent.status !== "available" ? "btn-disabled" : inviteConfigured ? "btn-green" : "btn-muted"}`,
-      disabled: agent.status !== "available" || !inviteConfigured,
-      onClick: () => inviteUrl && window.open(inviteUrl, "_blank", "noopener,noreferrer")
-    },
-    [text(inviteConfigured ? "Invite" : "Invite not configured")]
-  );
+  const inviteBtn = el("button", {
+    class: `btn ${agent.status !== "available" ? "btn-disabled" : inviteConfigured ? "btn-green" : "btn-muted"}`,
+    disabled: agent.status !== "available" || !inviteConfigured,
+    onClick: () => inviteUrl && window.open(inviteUrl, "_blank", "noopener,noreferrer")
+  }, [text(inviteConfigured ? "Invite" : "Invite not configured")]);
 
-  const copyBtn = el(
-    "button",
-    {
-      class: `btn btn-ghost ${inviteConfigured ? "" : "btn-disabled"}`,
-      disabled: !inviteConfigured,
-      onClick: async () => {
-        try {
-          await navigator.clipboard.writeText(inviteUrl);
-          toast("Invite link copied.", "ok");
-        } catch {
-          toast("Copy failed.", "warn");
-        }
-      }
-    },
-    [text("Copy")]
-  );
+  const copyBtn = el("button", {
+    class: `btn btn-ghost ${inviteConfigured ? "" : "btn-disabled"}`,
+    disabled: !inviteConfigured,
+    onClick: async () => {
+      try { await navigator.clipboard.writeText(inviteUrl); toast("Copied.", "ok"); }
+      catch { toast("Copy failed.", "warn"); }
+    }
+  }, [text("Copy")]);
 
   const tags = el("div", { class: "tag-row" }, (agent.tags || []).slice(0, 10).map(t => el("span", { class: "tag" }, [text(t)])));
   const caps = el("ul", { class: "caps" }, (agent.capabilities || []).slice(0, 8).map(c => el("li", {}, [text(c)])));
 
-  return el("article", { class: "card agent-card" }, [
-    el("div", { class: "card-top" }, [
-      el("div", { class: "card-title" }, [
-        el("h3", { class: "h3" }, [text(agent.name || agent.agentId)]),
-        el("span", { class: `badge ${statusClass}` }, [text(statusLabel)])
-      ]),
-      el("p", { class: "p dim" }, [text(agent.description || "")])
+  return el("article", { class: "card" }, [
+    el("div", { class: "card-title" }, [
+      el("h3", { class: "h3" }, [text(agent.name || agent.agentId)]),
+      el("span", { class: `badge ${statusClass}` }, [text(statusLabel)])
     ]),
+    el("p", { class: "p dim" }, [text(agent.description || "")]),
     tags,
-    el("div", { class: "card-split" }, [
-      el("div", {}, [el("div", { class: "label" }, [text("Capabilities")]), caps]),
-      el("div", {}, [
-        el("div", { class: "label" }, [text("Actions")]),
-        el("div", { class: "card-actions" }, [inviteBtn, copyBtn]),
-        !inviteConfigured && agent.status === "available"
-          ? el("div", { class: "hint" }, [text("Set clientId or inviteUrl in data/agents.json.")])
-          : el("div", { class: "hint" }, [text(agent.status === "coming-soon" ? "Not deployable yet." : " ")])
-      ])
-    ])
+    el("div", { class: "hr" }),
+    el("div", { class: "label" }, [text("Capabilities")]),
+    caps,
+    el("div", { class: "hr" }),
+    el("div", { class: "row row-wrap" }, [inviteBtn, copyBtn])
   ]);
 }
 
@@ -242,6 +209,9 @@ function renderAgentLists(agents) {
   const soonWrap = qs("[data-section='soon']");
   const counts = qs("[data-agent-counts]");
 
+  if (counts) {
+    counts.textContent = `${available.length} available · ${soon.length} coming soon`;
+  }
   if (hostAvail) {
     hostAvail.innerHTML = "";
     available.forEach(a => hostAvail.append(renderAgentCard(a)));
@@ -251,14 +221,6 @@ function renderAgentLists(agents) {
     soon.forEach(a => hostSoon.append(renderAgentCard(a)));
   }
   if (soonWrap) soonWrap.hidden = soon.length === 0;
-
-  if (counts) {
-    counts.innerHTML = "";
-    counts.append(
-      el("span", { class: "stat" }, [el("span", { class: "stat-num" }, [text(String(available.length))]), text(" available")]),
-      el("span", { class: "stat" }, [el("span", { class: "stat-num" }, [text(String(soon.length))]), text(" coming soon")])
-    );
-  }
 }
 
 function parseInviteUrls(textBlock) {
@@ -274,13 +236,9 @@ function parseInviteUrls(textBlock) {
 }
 
 function openInvitesStaggered(urls) {
-  if (!urls.length) {
-    toast("No invite links.", "warn");
-    return;
-  }
+  if (!urls.length) { toast("No invite links.", "warn"); return; }
   const delayMs = 700;
   let opened = 0;
-
   for (let i = 0; i < urls.length; i++) {
     setTimeout(() => {
       const w = window.open(urls[i], "_blank", "noopener,noreferrer");
@@ -299,21 +257,8 @@ function renderInviteGenerator(agents) {
 
   const available = agents.filter(a => a.status === "available");
 
-  const presets = [
-    { label: "1", value: 1 },
-    { label: "2", value: 2 },
-    { label: "3", value: 3 },
-    { label: "5", value: 5 }
-  ];
-
-  const presetRow = el("div", { class: "row row-wrap" }, presets.map(p =>
-    el("button", { class: "btn btn-chip", onClick: () => setTargetCount(p.value) }, [text(p.label)])
-  ));
-
-  const customWrap = el("div", { class: "row" });
-  const customInput = el("input", { class: "input", type: "number", min: "1", step: "1", value: "2" });
-  const customBtn = el("button", { class: "btn btn-chip", onClick: () => setTargetCount(parseInt(customInput.value || "1", 10)) }, [text("Set")]);
-  customWrap.append(el("div", { class: "label" }, [text("Custom")]), customInput, customBtn);
+  const countInput = el("input", { class: "input", type: "number", min: "1", step: "1", value: "2", "aria-label": "How many Agents" });
+  const applyBtn = el("button", { class: "btn btn-blue" }, [text("Apply")]);
 
   const list = el("div", { class: "checklist" });
   available.forEach(a => {
@@ -328,51 +273,39 @@ function renderInviteGenerator(agents) {
 
   const out = el("textarea", { class: "textarea", rows: "9", readOnly: true, spellcheck: "false" });
   const warn = el("div", { class: "warnbox", hidden: true });
-  const target = el("div", { class: "big-count" }, [text("2")]);
 
-  const copyBtn = el("button", {
-    class: "btn btn-green",
-    onClick: async () => {
-      try { await navigator.clipboard.writeText(out.value || ""); toast("Copied.", "ok"); }
-      catch { toast("Copy failed.", "warn"); }
-    }
-  }, [text("Copy list")]);
+  const copyBtn = el("button", { class: "btn btn-green", onClick: async () => {
+    try { await navigator.clipboard.writeText(out.value || ""); toast("Copied.", "ok"); }
+    catch { toast("Copy failed.", "warn"); }
+  }}, [text("Copy list")]);
 
   const openBtn = el("button", { class: "btn btn-red", onClick: () => openInvitesStaggered(parseInviteUrls(out.value)) }, [text("Open")]);
 
-  root.innerHTML = "";
-  root.append(el("div", { class: "grid-2" }, [
-    el("div", {}, [
-      el("div", { class: "panel" }, [
-        el("div", { class: "panel-title" }, [text("Simultaneous channels")]),
-        target,
-        el("div", { class: "label mt" }, [text("Quick")]),
-        presetRow,
-        customWrap
-      ]),
-      el("div", { class: "panel" }, [
-        el("div", { class: "panel-title" }, [text("Agents")]),
-        list
-      ])
-    ]),
-    el("div", {}, [
-      el("div", { class: "panel" }, [
-        el("div", { class: "panel-title" }, [text("Invites")]),
-        out,
-        warn,
-        el("div", { class: "row row-wrap" }, [copyBtn, openBtn])
-      ])
-    ])
-  ]));
-
-  function setTargetCount(n) {
-    const t = Math.max(1, Number.isFinite(n) ? n : 1);
-    target.textContent = String(t);
-
+  applyBtn.addEventListener("click", () => {
+    const n = Math.max(1, parseInt(countInput.value || "1", 10));
     const inputs = qsa("input[type='checkbox'].check", list);
-    inputs.forEach((i, idx) => (i.checked = idx < t));
+    inputs.forEach((i, idx) => (i.checked = idx < n));
     refreshOutput();
-  }
+  });
+
+  root.innerHTML = "";
+  root.append(
+    el("div", { class: "panel" }, [
+      el("div", { class: "panel-title" }, [text("Mass invite")]),
+      el("p", { class: "p dim" }, [text("Enter how many Agents you want, apply, then open or copy the links.")]),
+      el("div", { class: "row row-wrap mt" }, [countInput, applyBtn])
+    ]),
+    el("div", { class: "panel" }, [
+      el("div", { class: "panel-title" }, [text("Select Agents")]),
+      list
+    ]),
+    el("div", { class: "panel" }, [
+      el("div", { class: "panel-title" }, [text("Invites")]),
+      out,
+      warn,
+      el("div", { class: "row row-wrap mt" }, [copyBtn, openBtn])
+    ])
+  );
 
   function selectedAgentIds() {
     return qsa("input[type='checkbox'].check", list).filter(i => i.checked).map(i => i.value);
@@ -382,14 +315,8 @@ function renderInviteGenerator(agents) {
     const map = new Map(agents.map(a => [a.agentId, a]));
     const selected = selectedAgentIds().map(id => map.get(id)).filter(Boolean).filter(a => a.status === "available");
 
-    const urls = selected
-      .map(a => ({ a, url: oauthInviteUrlFromAgent(a) }))
-      .filter(x => Boolean(x.url));
-
-    const missing = selected
-      .map(a => ({ a, url: oauthInviteUrlFromAgent(a) }))
-      .filter(x => !x.url)
-      .map(x => x.a);
+    const urls = selected.map(a => ({ a, url: oauthInviteUrlFromAgent(a) })).filter(x => Boolean(x.url));
+    const missing = selected.map(a => ({ a, url: oauthInviteUrlFromAgent(a) })).filter(x => !x.url).map(x => x.a);
 
     out.value = urls.map(x => `${x.a.name} — ${x.url}`).join("\n");
 
@@ -398,14 +325,111 @@ function renderInviteGenerator(agents) {
       warn.innerHTML = "";
       warn.append(
         el("div", { class: "warn-title" }, [text("Missing invites")]),
-        el("ul", { class: "warn-list" }, missing.map(a => el("li", {}, [text(a.name)])))
+        el("ul", { class: "warn-list" }, missing.map(a => el("li", {}, [text(a.name)]))),
+        el("div", { class: "hint" }, [text("Set clientId or inviteUrl in data/agents.json.")])
       );
     } else {
       warn.hidden = true;
     }
   }
 
-  setTargetCount(2);
+  // default
+  applyBtn.click();
+}
+
+function renderCommands() {
+  const root = qs("[data-commands]");
+  if (!root) return;
+
+  const list = el("div", { class: "grid grid-cards" });
+  COMMANDS.forEach(c => {
+    list.append(el("div", { class: "card card-soft" }, [
+      el("div", { class: "row row-wrap" }, [
+        el("span", { class: "tag", html: `<span style="font-family:var(--mono)">${c.name}</span>` }),
+        el("span", { class: "p dim" }, [text(c.desc)])
+      ])
+    ]));
+  });
+
+  root.innerHTML = "";
+  root.append(list);
+}
+
+function renderEmbedBuilder() {
+  const root = qs("[data-embed-builder]");
+  if (!root) return;
+
+  const title = el("input", { class: "input", placeholder: "Title" });
+  const desc = el("textarea", { class: "textarea", rows: "5", placeholder: "Description" });
+  const color = el("input", { class: "input", placeholder: "Color (hex)", value: "#2d7dff" });
+  const author = el("input", { class: "input", placeholder: "Author (optional)" });
+  const footer = el("input", { class: "input", placeholder: "Footer (optional)" });
+
+  const out = el("textarea", { class: "textarea", rows: "10", readOnly: true, spellcheck: "false" });
+
+  const copy = el("button", { class: "btn btn-green", onClick: async () => {
+    try { await navigator.clipboard.writeText(out.value || ""); toast("Copied.", "ok"); }
+    catch { toast("Copy failed.", "warn"); }
+  }}, [text("Copy JSON")]);
+
+  const build = el("button", { class: "btn btn-blue" }, [text("Build")]);
+
+  function clampHex(h) {
+    const x = (h || "").trim();
+    if (!x) return null;
+    const v = x.startsWith("#") ? x.slice(1) : x;
+    if (!/^[0-9a-fA-F]{6}$/.test(v)) return null;
+    return parseInt(v, 16);
+  }
+
+  function buildJson() {
+    const embed = {};
+    if (title.value.trim()) embed.title = title.value.trim();
+    if (desc.value.trim()) embed.description = desc.value.trim();
+
+    const c = clampHex(color.value);
+    if (c != null) embed.color = c;
+
+    if (author.value.trim()) embed.author = { name: author.value.trim() };
+    if (footer.value.trim()) embed.footer = { text: footer.value.trim() };
+
+    const payload = { embeds: [embed] };
+    out.value = JSON.stringify(payload, null, 2);
+  }
+
+  build.addEventListener("click", buildJson);
+
+  root.innerHTML = "";
+  root.append(
+    el("div", { class: "grid grid-2" }, [
+      el("div", {}, [
+        el("div", { class: "card card-soft" }, [
+          el("h2", { class: "h2" }, [text("Embed builder")]),
+          el("p", { class: "p dim" }, [text("Build a Discord embed payload you can paste into tools or future dashboards.")]),
+          el("div", { class: "hr" }),
+          el("div", { class: "grid grid-auto" }, [
+            el("div", {}, [el("div", { class: "label" }, [text("Title")]), title]),
+            el("div", {}, [el("div", { class: "label" }, [text("Color")]), color]),
+            el("div", {}, [el("div", { class: "label" }, [text("Author")]), author]),
+            el("div", {}, [el("div", { class: "label" }, [text("Footer")]), footer])
+          ]),
+          el("div", { class: "label mt" }, [text("Description")]),
+          desc,
+          el("div", { class: "row row-wrap mt" }, [build, copy])
+        ])
+      ]),
+      el("div", {}, [
+        el("div", { class: "card" }, [
+          el("h2", { class: "h2" }, [text("Output")]),
+          el("p", { class: "p dim" }, [text("JSON payload (embeds array).")]),
+          el("div", { class: "hr" }),
+          out
+        ])
+      ])
+    ])
+  );
+
+  build.click();
 }
 
 async function initAgents() {
@@ -413,12 +437,8 @@ async function initAgents() {
   if (!needs) return;
 
   let agents;
-  try {
-    agents = await fetchJson("/data/agents.json");
-  } catch {
-    toast("Failed to load data/agents.json", "warn");
-    return;
-  }
+  try { agents = await fetchJson("/data/agents.json"); }
+  catch { toast("Failed to load /data/agents.json", "warn"); return; }
 
   renderAgentLists(agents);
   renderInviteGenerator(agents);
@@ -427,6 +447,8 @@ async function initAgents() {
 function init() {
   mountShell();
   initAgents();
+  renderCommands();
+  renderEmbedBuilder();
 }
 
 init();

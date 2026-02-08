@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chopsticks Status — Wok Specialists</title>
+  <title>Status — Chopsticks</title>
   <meta name="description" content="Service status for Chopsticks and the Agent pool." />
   <link rel="stylesheet" href="/styles.css" />
 </head>
@@ -12,42 +12,44 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="card card-soft">
+      <div class="card">
         <h1 class="h1">Status</h1>
-        <p class="p dim">Updates for Chopsticks and the Agent pool.</p>
-        <div class="hr"></div>
-        <div class="row row-wrap">
-          <a class="btn btn-primary" href="/agents/">Invite Agents</a>
-          <a class="btn btn-ghost" href="https://github.com/Wok-Specialists" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <p class="p dim">Manual updates now. Cluster-style status later.</p>
+        <div class="row row-wrap mt">
+          <a class="btn btn-green" href="/agents/">Invite Agents</a>
+          <a class="btn btn-ghost" href="/chopsticks/docs/">Docs</a>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="grid grid-auto">
-        <div class="card">
+        <div class="card card-soft">
           <h2 class="h2">Service</h2>
-          <p class="p dim"><strong>Operational</strong> (update manually)</p>
-          <div class="hr"></div>
           <ul class="caps">
-            <li>Commands responding</li>
-            <li>Voice join working</li>
-            <li>Playback working</li>
+            <li>Commands responding: Operational</li>
+            <li>Voice join: Operational</li>
+            <li>Playback: Operational</li>
+            <li>Agent pool: Operational</li>
           </ul>
         </div>
 
-        <div class="card">
+        <div class="card card-soft">
           <h2 class="h2">If something feels off</h2>
           <ul class="caps">
-            <li>Check connect/speak permissions in the voice channel</li>
-            <li>Disconnect and retry</li>
-            <li>If rooms conflict, invite more Agents</li>
+            <li>Check voice permissions (connect/speak).</li>
+            <li>Retry join once.</li>
+            <li>If rooms collide: invite more Agents.</li>
           </ul>
         </div>
 
-        <div class="card">
-          <h2 class="h2">Notes</h2>
-          <p class="p dim">Post short timestamps and user guidance here during incidents.</p>
+        <div class="card card-soft">
+          <h2 class="h2">Dashboard</h2>
+          <p class="p dim">Pre-alpha. Not public yet. Link appears when it’s usable.</p>
+          <div class="label mt">Inspiration</div>
+          <ul class="caps">
+            <li>Status surfaces and dashboards like large bots build trust and reduce support load.</li>
+          </ul>
         </div>
       </div>
     </section>

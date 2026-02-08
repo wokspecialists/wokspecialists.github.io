@@ -1,0 +1,94 @@
+[
+  {
+    "agentId": "agent-0001",
+    "name": "Agent 0001",
+    "description": "General-purpose voice session slot.",
+    "capabilities": ["music", "queue", "search", "filters"],
+    "inviteUrl": null,
+    "clientId": "CLIENT_ID_AGENT_0001",
+    "permissions": "36700160",
+    "tags": ["general", "voice"],
+    "status": "available"
+  },
+  {
+    "agentId": "agent-0002",
+    "name": "Agent 0002",
+    "description": "General-purpose voice session slot.",
+    "capabilities": ["music", "queue", "search", "filters"],
+    "inviteUrl": null,
+    "clientId": "CLIENT_ID_AGENT_0002",
+    "permissions": "36700160",
+    "tags": ["general", "voice"],
+    "status": "available"
+  },
+  {
+    "agentId": "agent-0003",
+    "name": "Agent 0003",
+    "description": "General-purpose voice session slot.",
+    "capabilities": ["music", "queue", "search", "filters"],
+    "inviteUrl": null,
+    "clientId": "CLIENT_ID_AGENT_0003",
+    "permissions": "36700160",
+    "tags": ["general", "voice"],
+    "status": "available"
+  },
+  {
+    "agentId": "agent-0004",
+    "name": "Agent 0004",
+    "description": "General-purpose voice session slot.",
+    "capabilities": ["music", "queue", "search", "filters"],
+    "inviteUrl": null,
+    "clientId": "CLIENT_ID_AGENT_0004",
+    "permissions": "36700160",
+    "tags": ["general", "voice"],
+    "status": "available"
+  },
+  {
+    "agentId": "agent-0005",
+    "name": "Agent 0005",
+    "description": "General-purpose voice session slot.",
+    "capabilities": ["music", "queue", "search", "filters"],
+    "inviteUrl": null,
+    "clientId": "CLIENT_ID_AGENT_0005",
+    "permissions": "36700160",
+    "tags": ["general", "voice"],
+    "status": "available"
+  },
+
+  { "agentId": "agent-0006", "name": "Agent 0006", "description": "Playlist-heavy routing and long queues.", "capabilities": ["music", "queue", "playlists"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0006", "permissions": "36700160", "tags": ["specialized", "playlists"], "status": "coming-soon" },
+  { "agentId": "agent-0007", "name": "Agent 0007", "description": "Low-latency room switching focus.", "capabilities": ["music", "queue", "fast-switch"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0007", "permissions": "36700160", "tags": ["specialized", "fast"], "status": "coming-soon" },
+  { "agentId": "agent-0008", "name": "Agent 0008", "description": "Events: handoffs and room coordination.", "capabilities": ["music", "queue", "events"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0008", "permissions": "36700160", "tags": ["specialized", "events"], "status": "coming-soon" },
+  { "agentId": "agent-0009", "name": "Agent 0009", "description": "Filters and EQ emphasis.", "capabilities": ["music", "filters", "eq"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0009", "permissions": "36700160", "tags": ["specialized", "audio"], "status": "coming-soon" },
+  { "agentId": "agent-0010", "name": "Agent 0010", "description": "High-concurrency pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0010", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+
+  { "agentId": "agent-0011", "name": "Agent 0011", "description": "Session stability focus.", "capabilities": ["music", "queue", "stability"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0011", "permissions": "36700160", "tags": ["specialized", "stability"], "status": "coming-soon" },
+  { "agentId": "agent-0012", "name": "Agent 0012", "description": "Long-run rooms and auto-leave tuning.", "capabilities": ["music", "queue", "autoleave"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0012", "permissions": "36700160", "tags": ["specialized", "rooms"], "status": "coming-soon" },
+  { "agentId": "agent-0013", "name": "Agent 0013", "description": "Queue protection and guardrails focus.", "capabilities": ["music", "queue", "limits"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0013", "permissions": "36700160", "tags": ["specialized", "guardrails"], "status": "coming-soon" },
+  { "agentId": "agent-0014", "name": "Agent 0014", "description": "High-concurrency pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0014", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0015", "name": "Agent 0015", "description": "High-concurrency pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0015", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+
+  { "agentId": "agent-0016", "name": "Agent 0016", "description": "Specialized room type: study/ambient defaults.", "capabilities": ["music", "queue", "presets"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0016", "permissions": "36700160", "tags": ["specialized", "presets"], "status": "coming-soon" },
+  { "agentId": "agent-0017", "name": "Agent 0017", "description": "Specialized room type: party/energy defaults.", "capabilities": ["music", "queue", "presets"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0017", "permissions": "36700160", "tags": ["specialized", "presets"], "status": "coming-soon" },
+  { "agentId": "agent-0018", "name": "Agent 0018", "description": "Specialized room type: chill/mix defaults.", "capabilities": ["music", "queue", "presets"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0018", "permissions": "36700160", "tags": ["specialized", "presets"], "status": "coming-soon" },
+
+  { "agentId": "agent-0019", "name": "Agent 0019", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0019", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0020", "name": "Agent 0020", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0020", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+
+  { "agentId": "agent-0021", "name": "Agent 0021", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0021", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0022", "name": "Agent 0022", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0022", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0023", "name": "Agent 0023", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0023", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0024", "name": "Agent 0024", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0024", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0025", "name": "Agent 0025", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0025", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+
+  { "agentId": "agent-0026", "name": "Agent 0026", "description": "Experimental voice room features.", "capabilities": ["music", "queue", "experiments"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0026", "permissions": "36700160", "tags": ["experimental"], "status": "coming-soon" },
+  { "agentId": "agent-0027", "name": "Agent 0027", "description": "Experimental voice room features.", "capabilities": ["music", "queue", "experiments"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0027", "permissions": "36700160", "tags": ["experimental"], "status": "coming-soon" },
+  { "agentId": "agent-0028", "name": "Agent 0028", "description": "Experimental voice room features.", "capabilities": ["music", "queue", "experiments"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0028", "permissions": "36700160", "tags": ["experimental"], "status": "coming-soon" },
+  { "agentId": "agent-0029", "name": "Agent 0029", "description": "Experimental voice room features.", "capabilities": ["music", "queue", "experiments"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0029", "permissions": "36700160", "tags": ["experimental"], "status": "coming-soon" },
+  { "agentId": "agent-0030", "name": "Agent 0030", "description": "Experimental voice room features.", "capabilities": ["music", "queue", "experiments"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0030", "permissions": "36700160", "tags": ["experimental"], "status": "coming-soon" },
+
+  { "agentId": "agent-0031", "name": "Agent 0031", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0031", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0032", "name": "Agent 0032", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0032", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0033", "name": "Agent 0033", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0033", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0034", "name": "Agent 0034", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0034", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" },
+  { "agentId": "agent-0035", "name": "Agent 0035", "description": "Pool expansion slot.", "capabilities": ["music", "queue"], "inviteUrl": null, "clientId": "CLIENT_ID_AGENT_0035", "permissions": "36700160", "tags": ["pool"], "status": "coming-soon" }
+]
