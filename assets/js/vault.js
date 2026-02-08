@@ -25,6 +25,13 @@
     if (kind === 'item') state.selected = value || '';
   }
   parseHash();
+  window.addEventListener('hashchange', ()=>{
+    state.category = '';
+    state.collection = '';
+    state.selected = '';
+    parseHash();
+    render();
+  });
 
   const tagCounts = {};
   for (const item of catalog) {
@@ -40,6 +47,11 @@
   const byId = new Map(catalog.map(i=>[i.id, i]));
 
   const searchInput = app.querySelector('[data-vault-search]');
+  function jumpToResults(){
+    if (!window.matchMedia('(max-width: 1100px)').matches) return;
+    const results = app.querySelector('#vault-results');
+    if (results) results.scrollIntoView({behavior:'smooth', block:'start'});
+  }
   if (searchInput) {
     searchInput.addEventListener('input', (e)=>{
       state.query = e.target.value.trim().toLowerCase();
@@ -86,14 +98,14 @@
       const all = document.createElement('button');
       all.className = 'filter-chip' + (!state.category ? ' active' : '');
       all.textContent = `All (${catalog.length})`;
-      all.addEventListener('click', ()=>{state.category='';state.collection='';render();});
+      all.addEventListener('click', ()=>{state.category='';state.collection='';render();jumpToResults();});
       catWrap.appendChild(all);
       for (const cat of categories) {
         const btn = document.createElement('button');
         btn.className = 'filter-chip' + (state.category === cat.id ? ' active' : '');
         const count = counts[cat.id] || 0;
         btn.textContent = `${cat.label} (${count})`;
-        btn.addEventListener('click', ()=>{state.category = cat.id; state.collection=''; render();});
+        btn.addEventListener('click', ()=>{state.category = cat.id; state.collection=''; render();jumpToResults();});
         catWrap.appendChild(btn);
       }
     }
@@ -103,7 +115,7 @@
         const btn = document.createElement('button');
         btn.className = 'filter-chip' + (state.tag === tag ? ' active' : '');
         btn.textContent = `${tag} (${tagCounts[tag] || 0})`;
-        btn.addEventListener('click', ()=>{state.tag = state.tag === tag ? '' : tag; render();});
+        btn.addEventListener('click', ()=>{state.tag = state.tag === tag ? '' : tag; render();jumpToResults();});
         tagWrap.appendChild(btn);
       }
     }
@@ -136,7 +148,7 @@
       const card = document.createElement('div');
       card.className = 'vault-collection';
       card.innerHTML = `<h4>${col.title}</h4><div class="muted">${col.summary || ''}</div>`;
-      card.addEventListener('click', ()=>{state.collection = col.id; state.category=''; render(); location.hash = `collection/${col.id}`;});
+      card.addEventListener('click', ()=>{state.collection = col.id; state.category=''; render(); location.hash = `collection/${col.id}`; jumpToResults();});
       wrap.appendChild(card);
     }
   }
@@ -173,6 +185,9 @@
     const countNodes = app.querySelectorAll('[data-vault-count]');
     if (!wrap) return;
     const items = filterItems();
+    if (state.selected && !items.some(i=>i.id === state.selected)) {
+      state.selected = '';
+    }
     countNodes.forEach(node => node.textContent = `${items.length} items`);
     wrap.innerHTML = '';
     if (!items.length) {
@@ -188,6 +203,8 @@
       try { domain = new URL(item.url).hostname.replace(/^www\./, ''); } catch {}
       const card = document.createElement('article');
       card.className = 'vault-item';
+      card.dataset.itemId = item.id;
+      if (state.selected === item.id) card.dataset.selected = 'true';
       card.innerHTML = `
         <div class="meta">${cat ? cat.label : item.category}</div>
         <div class="title-row">
@@ -204,10 +221,32 @@
           <button class="btn ghost" type="button" data-detail="${item.id}">Details</button>
         </div>
       `;
+      card.addEventListener('click', (e)=>{
+        const target = e.target;
+        if (!target) return;
+        const tag = target.tagName ? target.tagName.toLowerCase() : '';
+        if (tag === 'a' || tag === 'button') return;
+        state.selected = item.id;
+        renderDetail();
+        wrap.querySelectorAll('[data-selected]').forEach(el=>el.removeAttribute('data-selected'));
+        card.dataset.selected = 'true';
+        if (window.matchMedia('(max-width: 1100px)').matches) {
+          const pane = app.querySelector('[data-vault-detail]');
+          if (pane) pane.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
       wrap.appendChild(card);
     }
     wrap.querySelectorAll('[data-detail]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{state.selected = btn.dataset.detail; renderDetail(); location.hash = `item/${state.selected}`;});
+      btn.addEventListener('click', ()=>{
+        state.selected = btn.dataset.detail;
+        renderDetail();
+        location.hash = `item/${state.selected}`;
+        if (window.matchMedia('(max-width: 1100px)').matches) {
+          const pane = app.querySelector('[data-vault-detail]');
+          if (pane) pane.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
     });
   }
 

@@ -120,28 +120,36 @@
 
       <div class="vault-layout max">
         <aside class="vault-rail">
-          <div class="rail-block">
-            <div class="kicker">Categories</div>
-            <div id="vault-categories" class="vault-filters" data-vault-categories></div>
-          </div>
-          <div class="rail-block">
-            <div class="kicker">Collections</div>
-            <div id="vault-collections" class="grid" data-vault-collections></div>
-          </div>
-          <div class="rail-block">
-            <div class="kicker">Tags</div>
-            <div id="vault-tags" class="vault-filters" data-vault-tags></div>
-          </div>
-          <div class="rail-block">
-            <div class="kicker">Local Updates</div>
-            <div class="linklist">
-              <a href="/data/open-source/catalog.json">Catalog JSON</a>
-              <a href="/data/open-source/categories.json">Categories</a>
-              <a href="/data/open-source/collections.json">Collections</a>
-              <a href="/data/open-source/README.md">Catalog Guide</a>
+          <details class="rail-block" open>
+            <summary>Categories</summary>
+            <div class="rail-body">
+              <div id="vault-categories" class="vault-filters" data-vault-categories></div>
             </div>
-            <div class="muted" style="margin-top:6px">Edit locally to scale the vault.</div>
-          </div>
+          </details>
+          <details class="rail-block" open>
+            <summary>Collections</summary>
+            <div class="rail-body">
+              <div id="vault-collections" class="grid" data-vault-collections></div>
+            </div>
+          </details>
+          <details class="rail-block" open>
+            <summary>Tags</summary>
+            <div class="rail-body">
+              <div id="vault-tags" class="vault-filters" data-vault-tags></div>
+            </div>
+          </details>
+          <details class="rail-block">
+            <summary>Local Updates</summary>
+            <div class="rail-body">
+              <div class="linklist">
+                <a href="/data/open-source/catalog.json">Catalog JSON</a>
+                <a href="/data/open-source/categories.json">Categories</a>
+                <a href="/data/open-source/collections.json">Collections</a>
+                <a href="/data/open-source/README.md">Catalog Guide</a>
+              </div>
+              <div class="muted" style="margin-top:6px">Edit locally to scale the vault.</div>
+            </div>
+          </details>
         </aside>
 
         <div class="vault-board" id="vault-results">
