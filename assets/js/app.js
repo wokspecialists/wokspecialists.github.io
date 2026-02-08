@@ -174,6 +174,24 @@
   }
   addLogos();
 
+  const revealTargets = document.querySelectorAll('[data-reveal], [data-stagger], .reveal, .stagger');
+  if (revealTargets.length) {
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.hasAttribute('data-stagger')) el.classList.add('stagger');
+        el.classList.add('visible');
+        if (el.classList.contains('stagger')) {
+          const kids = Array.from(el.children);
+          kids.forEach((child, idx)=>child.style.setProperty('--delay', `${idx * 70}ms`));
+        }
+        io.unobserve(el);
+      });
+    }, {threshold:0.15});
+    revealTargets.forEach(el=>io.observe(el));
+  }
+
   const root = document.documentElement;
   const btn = document.getElementById("theme-toggle");
   if (btn) {
@@ -218,7 +236,7 @@
       const seq = raw.split(',').map(v=>v.trim()).filter(Boolean);
       const link = grid.getAttribute('data-node-link') || '';
       const frag = document.createDocumentFragment();
-      for (const token of seq) {
+      seq.forEach((token, idx)=>{
         const color = token === 'g' ? 'green' : token === 'r' ? 'red' : 'gold';
         let dot;
         if (link) {
@@ -230,8 +248,10 @@
           dot = document.createElement('span');
           dot.className = `node-dot ${color}`;
         }
+        dot.style.animation = 'glowPulse 2.2s ease-in-out infinite';
+        dot.style.animationDelay = `${(idx % 12) * 80}ms`;
         frag.appendChild(dot);
-      }
+      });
       grid.appendChild(frag);
       grid.dataset.built = '1';
     });

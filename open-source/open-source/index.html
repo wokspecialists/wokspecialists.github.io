@@ -31,20 +31,34 @@
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><a href="/open-source/catalog/">Rooms</a><span>/</span><span>Open Source</span></div>
 
     <section class="section" data-reveal>
-      <div class="vault-hero">
-        <div class="kicker">Vault</div>
-        <div class="display">Open Source Catalog</div>
-        <div class="muted">Vault Room: Open Source. Search, filter, and explore.</div>
-        <div class="hero-actions">
-          <a class="btn" href="/open-source/catalog/">Vault Rooms</a>
-          <a class="btn" href="/open-source/">Vault Gate</a>
-          <a class="btn" href="/open-source/import/">Bulk Import</a>
+      <div class="catalog-hero">
+        <div>
+          <div class="kicker">Vault Room</div>
+          <div class="display">Open Source Catalog</div>
+          <div class="muted">Large, organized index of tools and resources. Use filters to narrow fast.</div>
+          <div class="hero-actions">
+            <a class="btn primary" href="/open-source/catalog/">Vault Rooms</a>
+            <a class="btn" href="/open-source/">Vault Gate</a>
+            <a class="btn" href="/open-source/import/">Bulk Import</a>
+          </div>
         </div>
-        <div class="vault-meta">
-          <div class="vault-meta-card"><strong data-vault-total>0</strong><span>Total Items</span></div>
-          <div class="vault-meta-card"><strong data-vault-meta="categories">0</strong><span>Categories</span></div>
-          <div class="vault-meta-card"><strong data-vault-meta="collections">0</strong><span>Collections</span></div>
-          <div class="vault-meta-card"><strong data-vault-meta="tags">0</strong><span>Tags</span></div>
+        <div class="catalog-metrics">
+          <div class="metric">
+            <strong data-vault-total>0</strong>
+            <span>Total Items</span>
+          </div>
+          <div class="metric">
+            <strong data-vault-meta="categories">0</strong>
+            <span>Categories</span>
+          </div>
+          <div class="metric">
+            <strong data-vault-meta="collections">0</strong>
+            <span>Collections</span>
+          </div>
+          <div class="metric">
+            <strong data-vault-meta="tags">0</strong>
+            <span>Tags</span>
+          </div>
         </div>
       </div>
     </section>
@@ -52,14 +66,19 @@
  
 
     <section class="section" id="vault-app" data-reveal>
-      <div class="vault-toolbar">
-        <input class="input" data-vault-search type="search" placeholder="Search tools, platforms, or tags"/>
-        <button class="btn ghost" type="button" data-vault-clear>Clear Search</button>
-        <button class="btn" type="button" data-vault-reset>Reset Filters</button>
-        <div class="toolbar-hint">Press <span class="kbd">/</span> to search</div>
+      <div class="catalog-toolbar">
+        <div class="search-stack">
+          <label class="kicker" for="vault-search">Search</label>
+          <input id="vault-search" class="input" data-vault-search type="search" placeholder="Search tools, platforms, tags"/>
+          <div class="toolbar-hint">Press <span class="kbd">/</span> to search</div>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn ghost" type="button" data-vault-clear>Clear Search</button>
+          <button class="btn" type="button" data-vault-reset>Reset Filters</button>
+        </div>
       </div>
 
-      <div class="vault-subtoolbar">
+      <div class="catalog-subtoolbar">
         <div class="chip-row">
           <a href="#vault-categories">Categories</a>
           <a href="#vault-collections">Collections</a>
@@ -71,8 +90,8 @@
 
       <div class="divider"></div>
 
-      <div class="vault">
-        <aside class="vault-panel">
+      <div class="catalog-grid">
+        <aside class="catalog-panel">
           <h3 id="vault-categories">Categories</h3>
           <div class="vault-filters" data-vault-categories></div>
           <div class="divider"></div>
@@ -83,15 +102,15 @@
           <div class="vault-filters" data-vault-tags></div>
         </aside>
 
-        <div class="vault-results-wrap" id="vault-results">
-          <div class="vault-results-head">
+        <div class="catalog-results" id="vault-results">
+          <div class="catalog-results-head">
             <h3>Results</h3>
             <div class="vault-count" data-vault-count>0 items</div>
           </div>
           <div class="vault-results" data-vault-results></div>
         </div>
 
-        <aside class="vault-detail" data-vault-detail>
+        <aside class="catalog-detail" data-vault-detail>
           <div class="muted">Select an item for details.</div>
         </aside>
       </div>
@@ -99,7 +118,8 @@
 
     <section class="section" data-reveal>
       <div class="card glass">
-        <div class="muted">Add your own links</div>
+        <div class="kicker">Maintain</div>
+        <div class="h3">Add your own links</div>
         <div class="linklist">
           <a href="/open-source/import/">Bulk Import Tool</a>
           <a href="/data/open-source/catalog.json">Catalog JSON</a>
@@ -107,7 +127,7 @@
           <a href="/data/open-source/collections.json">Collections</a>
           <a href="/data/open-source/README.md">Catalog Guide</a>
         </div>
-        <div class="muted" style="margin-top:8px">Add entries in the JSON files to scale the vault.</div>
+        <div class="muted" style="margin-top:8px">Edit the JSON files to scale the vault.</div>
       </div>
     </section>
 
