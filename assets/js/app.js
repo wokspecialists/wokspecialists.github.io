@@ -173,8 +173,7 @@
   const root = document.documentElement;
   const btn = document.getElementById("theme-toggle");
   if (btn) {
-    btn.title = "Light mode in development";
-    btn.setAttribute("aria-label", "Theme toggle. Light mode in development.");
+    btn.setAttribute("aria-label", "Theme toggle");
   }
   const themes = ["mono","dark","light","neon"];
   const saved = localStorage.getItem("theme");
@@ -189,7 +188,7 @@
     const labels = {
       dark: "Dark",
       light: "Light",
-      neon: "Pulse",
+      neon: "Arcade",
       mono: "Greyscale"
     };
     btn.textContent = labels[current] || "Theme";
@@ -205,6 +204,14 @@
     });
   }
   setLabel();
+
+  if (!document.querySelector('link[data-fa]')) {
+    const fa = document.createElement('link');
+    fa.rel = 'stylesheet';
+    fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css';
+    fa.setAttribute('data-fa', '1');
+    document.head.appendChild(fa);
+  }
 
   function buildAgentNodes(){
     const grids = document.querySelectorAll('[data-nodes-seq]');
@@ -303,6 +310,30 @@
     }
   }
   bindAgentFilters();
+
+  function bindAgentWindows(){
+    const wraps = document.querySelectorAll('[data-agent-window]');
+    wraps.forEach(wrap=>{
+      const label = wrap.querySelector('[data-agent-window-label]');
+      const buttons = wrap.querySelectorAll('[data-agent-window-btn]');
+      if (!label || !buttons.length) return;
+      const key = 'agentWindow';
+      const setWindow = (value) => {
+        label.textContent = value;
+        buttons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-agent-window-btn') === value));
+        localStorage.setItem(key, value);
+      };
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const value = btn.getAttribute('data-agent-window-btn');
+          setWindow(value);
+        });
+      });
+      const saved = localStorage.getItem(key) || buttons[0].getAttribute('data-agent-window-btn');
+      setWindow(saved);
+    });
+  }
+  bindAgentWindows();
 
   function addChopsticksLogos(){
     const links = document.querySelectorAll('a[href^="/chopsticks"]');

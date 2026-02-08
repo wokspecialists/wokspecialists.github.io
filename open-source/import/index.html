@@ -6,13 +6,13 @@
   <title>Vault Importer · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body class="site bg-noise">
+<body class="site bg-noise" data-import-api="http://localhost:8787">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
-        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/atlas/">Atlas</a>
         <a data-nav href="/studio/">Studio</a>
         <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
@@ -34,11 +34,41 @@
       <div class="category-hero">
         <div class="kicker">Vault Tools</div>
         <div class="display">Bulk Importer</div>
-        <div class="muted">Paste CSV/TSV or JSON and export clean catalog entries.</div>
+        <div class="muted">Admin‑approved access only. Requires a local importer gate.</div>
+        <div class="muted">Run the local gate from `backend/README.md` before requesting access.</div>
         <div class="btnrow">
           <a class="btn primary" href="/open-source/open-source/">Vault Catalog</a>
           <a class="btn" href="/data/open-source/README.md">Schema</a>
         </div>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="grid two" data-stagger>
+        <article class="card">
+          <h3>Request Access</h3>
+          <div class="muted">Submit a request. An admin will approve and issue a token.</div>
+          <div class="form-grid">
+            <input class="input" id="req-name" placeholder="Name"/>
+            <input class="input" id="req-contact" placeholder="Contact (optional)"/>
+            <textarea class="input" id="req-reason" rows="4" placeholder="Reason for access"></textarea>
+          </div>
+          <div class="btnrow">
+            <button class="btn" id="req-submit" type="button">Request Access</button>
+          </div>
+          <div class="muted" id="req-status" style="margin-top:8px"></div>
+        </article>
+        <article class="card">
+          <h3>Access Token</h3>
+          <div class="muted">Paste your approved token to unlock the importer.</div>
+          <input class="input" id="token-input" placeholder="Token"/>
+          <div class="btnrow" style="margin-top:10px">
+            <button class="btn primary" id="token-verify" type="button">Verify Token</button>
+            <button class="btn" id="token-clear" type="button">Clear</button>
+          </div>
+          <div class="muted" id="token-status" style="margin-top:8px"></div>
+          <div class="muted" style="margin-top:8px">Importer gate: <span id="api-base">http://localhost:8787</span></div>
+        </article>
       </div>
     </section>
 

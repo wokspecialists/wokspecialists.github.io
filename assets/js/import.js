@@ -1,4 +1,15 @@
 (function(){
+  const apiBaseEl = document.getElementById('api-base');
+  const reqName = document.getElementById('req-name');
+  const reqContact = document.getElementById('req-contact');
+  const reqReason = document.getElementById('req-reason');
+  const reqSubmit = document.getElementById('req-submit');
+  const reqStatus = document.getElementById('req-status');
+  const tokenInput = document.getElementById('token-input');
+  const tokenVerify = document.getElementById('token-verify');
+  const tokenClear = document.getElementById('token-clear');
+  const tokenStatus = document.getElementById('token-status');
+
   const fileInput = document.getElementById('file-input');
   const rawInput = document.getElementById('raw-input');
   const parseBtn = document.getElementById('parse-btn');
@@ -7,7 +18,20 @@
   const preview = document.getElementById('preview');
   const summary = document.getElementById('summary');
 
+  const apiBase = localStorage.getItem('importApi') || document.body.dataset.importApi || 'http://localhost:8787';
+  if (apiBaseEl) apiBaseEl.textContent = apiBase;
+
+  function setLocked(locked){
+    [fileInput, rawInput, parseBtn, clearBtn, downloadBtn].forEach(el=>{
+      if (!el) return;
+      el.disabled = locked;
+      el.setAttribute('aria-disabled', locked ? 'true' : 'false');
+      el.classList.toggle('is-locked', locked);
+    });
+  }
+
   let parsed = [];
+  let unlocked = false;
 
   function parseCSV(text){
     const lines = text.split(/\r?\n/).filter(Boolean);
@@ -50,6 +74,7 @@
   }
 
   parseBtn.addEventListener('click', ()=>{
+    if (!unlocked) return;
     const text = rawInput.value.trim();
     const data = text.startsWith('[') ? parseJSON(text) : parseCSV(text);
     parsed = normalize(data);
@@ -57,12 +82,14 @@
   });
 
   clearBtn.addEventListener('click', ()=>{
+    if (!unlocked) return;
     rawInput.value = '';
     parsed = [];
     render();
   });
 
   downloadBtn.addEventListener('click', ()=>{
+    if (!unlocked) return;
     if (!parsed.length) return;
     const blob = new Blob([JSON.stringify(parsed, null, 2)], {type:'application/json'});
     const a = document.createElement('a');
@@ -73,11 +100,98 @@
   });
 
   fileInput.addEventListener('change', async (e)=>{
+    if (!unlocked) return;
     const file = e.target.files && e.target.files[0];
     if (!file) return;
     const text = await file.text();
     rawInput.value = text;
   });
 
+  async function validateToken(token){
+    if (!token) {
+      tokenStatus.textContent = 'Token required.';
+      return false;
+    }
+    try {
+      const res = await fetch(`${apiBase}/api/import/validate?token=${encodeURIComponent(token)}`);
+      const data = await res.json();
+      if (data.valid) {
+        tokenStatus.textContent = `Approved. Expires at ${new Date(data.expiresAt).toLocaleString()}.`;
+        return true;
+      }
+      tokenStatus.textContent = 'Invalid or expired token.';
+    } catch (err) {
+      tokenStatus.textContent = 'Importer gate is offline.';
+    }
+    return false;
+  }
+
+  if (tokenVerify) {
+    tokenVerify.addEventListener('click', async ()=>{
+      const token = tokenInput.value.trim();
+      const ok = await validateToken(token);
+      if (ok) {
+        localStorage.setItem('importToken', token);
+        unlocked = true;
+        setLocked(false);
+      } else {
+        unlocked = false;
+        setLocked(true);
+      }
+    });
+  }
+
+  if (tokenClear) {
+    tokenClear.addEventListener('click', ()=>{
+      tokenInput.value = '';
+      tokenStatus.textContent = '';
+      localStorage.removeItem('importToken');
+      unlocked = false;
+      setLocked(true);
+    });
+  }
+
+  if (reqSubmit) {
+    reqSubmit.addEventListener('click', async ()=>{
+      const name = reqName.value.trim();
+      const reason = reqReason.value.trim();
+      const contact = reqContact.value.trim();
+      if (!name || !reason) {
+        reqStatus.textContent = 'Name and reason are required.';
+        return;
+      }
+      reqStatus.textContent = 'Submitting request...';
+      try {
+        const res = await fetch(`${apiBase}/api/request`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, reason, contact })
+        });
+        const data = await res.json();
+        if (data.ok) {
+          reqStatus.textContent = `Request submitted. ID: ${data.id}`;
+        } else {
+          reqStatus.textContent = data.error || 'Request failed.';
+        }
+      } catch {
+        reqStatus.textContent = 'Importer gate is offline.';
+      }
+    });
+  }
+
+  async function init(){
+    setLocked(true);
+    const stored = localStorage.getItem('importToken');
+    if (stored) {
+      tokenInput.value = stored;
+      const ok = await validateToken(stored);
+      if (ok) {
+        unlocked = true;
+        setLocked(false);
+      }
+    }
+  }
+
+  init();
   render();
 })();

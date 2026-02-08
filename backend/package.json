@@ -1,0 +1,14 @@
+{
+  "name": "wok-importer-gate",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local admin-gated importer service for Wok Specialists",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

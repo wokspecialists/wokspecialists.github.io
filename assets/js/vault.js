@@ -26,7 +26,13 @@
   }
   parseHash();
 
-  const tags = Array.from(new Set(catalog.flatMap(i=>i.tags || []))).sort();
+  const tagCounts = {};
+  for (const item of catalog) {
+    for (const tag of (item.tags || [])) {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    }
+  }
+  const tags = Object.keys(tagCounts).sort((a,b)=>tagCounts[b]-tagCounts[a]);
 
   const categoryMap = new Map(categories.map(c=>[c.id, c]));
   const collectionMap = new Map(collections.map(c=>[c.id, c]));
@@ -73,27 +79,30 @@
   function renderFilters(){
     const catWrap = app.querySelector('[data-vault-categories]');
     const tagWrap = app.querySelector('[data-vault-tags]');
+    const counts = {};
+    for (const item of catalog) counts[item.category] = (counts[item.category] || 0) + 1;
     if (catWrap) {
       catWrap.innerHTML = '';
       const all = document.createElement('button');
       all.className = 'filter-chip' + (!state.category ? ' active' : '');
-      all.textContent = 'All';
+      all.textContent = `All (${catalog.length})`;
       all.addEventListener('click', ()=>{state.category='';state.collection='';render();});
       catWrap.appendChild(all);
       for (const cat of categories) {
         const btn = document.createElement('button');
         btn.className = 'filter-chip' + (state.category === cat.id ? ' active' : '');
-        btn.textContent = cat.label;
+        const count = counts[cat.id] || 0;
+        btn.textContent = `${cat.label} (${count})`;
         btn.addEventListener('click', ()=>{state.category = cat.id; state.collection=''; render();});
         catWrap.appendChild(btn);
       }
     }
     if (tagWrap) {
       tagWrap.innerHTML = '';
-      for (const tag of tags.slice(0, 24)) {
+      for (const tag of tags.slice(0, 36)) {
         const btn = document.createElement('button');
         btn.className = 'filter-chip' + (state.tag === tag ? ' active' : '');
-        btn.textContent = tag;
+        btn.textContent = `${tag} (${tagCounts[tag] || 0})`;
         btn.addEventListener('click', ()=>{state.tag = state.tag === tag ? '' : tag; render();});
         tagWrap.appendChild(btn);
       }
@@ -126,7 +135,7 @@
     for (const col of collections) {
       const card = document.createElement('div');
       card.className = 'vault-collection';
-      card.innerHTML = `<h4>${col.title}</h4><div class="muted">${col.summary}</div>`;
+      card.innerHTML = `<h4>${col.title}</h4><div class="muted">${col.summary || ''}</div>`;
       card.addEventListener('click', ()=>{state.collection = col.id; state.category=''; render(); location.hash = `collection/${col.id}`;});
       wrap.appendChild(card);
     }
@@ -166,6 +175,13 @@
     const items = filterItems();
     countNodes.forEach(node => node.textContent = `${items.length} items`);
     wrap.innerHTML = '';
+    if (!items.length) {
+      const empty = document.createElement('div');
+      empty.className = 'vault-empty';
+      empty.innerHTML = `<div class=\"h3\">No results</div><div class=\"muted\">Try clearing filters or searching a different term.</div>`;
+      wrap.appendChild(empty);
+      return;
+    }
     for (const item of items) {
       const cat = categoryMap.get(item.category);
       let domain = '';
@@ -179,6 +195,9 @@
           <div class="title">${item.title}</div>
         </div>
         <div class="muted">${item.note || ''}</div>
+        <div class="tag-row">
+          ${(item.tags || []).slice(0, 6).map(t=>`<span class=\"pill\">${t}</span>`).join('')}
+        </div>
         <div class="actions">
           <a class="btn" href="${item.url}" target="_blank" rel="noreferrer">Open</a>
           <a class="btn ghost" href="/go/?id=${item.id}">Redirect</a>
@@ -201,10 +220,13 @@
       return;
     }
     const cat = categoryMap.get(item.category);
+    let domain = '';
+    try { domain = new URL(item.url).hostname.replace(/^www\./, ''); } catch {}
     pane.innerHTML = `
       <div class="badge">${cat ? cat.label : item.category}</div>
       <h3>${item.title}</h3>
       <div class="muted">${item.note || ''}</div>
+      <div class="muted" style="margin-top:8px">${domain}</div>
       <div class="linklist" style="margin-top:12px">
         ${(item.tags || []).map(t=>`<span class="pill">${t}</span>`).join('')}
       </div>
@@ -223,6 +245,24 @@
     renderResults();
     renderDetail();
   }
+
+  const viewKey = 'vaultView';
+  const viewButtons = app.querySelectorAll('[data-vault-view]');
+  const resultsWrap = app.querySelector('[data-vault-results]');
+  function applyView(mode){
+    if (!resultsWrap) return;
+    resultsWrap.dataset.view = mode;
+    viewButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-vault-view') === mode));
+  }
+  const savedView = localStorage.getItem(viewKey) || 'grid';
+  applyView(savedView);
+  viewButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const mode = btn.getAttribute('data-vault-view') || 'grid';
+      localStorage.setItem(viewKey, mode);
+      applyView(mode);
+    });
+  });
 
   render();
 })();

@@ -12,7 +12,7 @@
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
-        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/atlas/">Atlas</a>
         <a data-nav href="/studio/">Studio</a>
         <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
@@ -33,18 +33,41 @@
       <div class="vault-gate">
         <div class="kicker">Vault</div>
         <div class="display">Vault Gate</div>
-        <div class="muted">This is the Vault entry. Rooms appear after you enter.</div>
+        <div class="muted">Enter once. Rooms and shortcuts appear after the gate.</div>
         <div class="gate-actions">
           <a class="btn primary" href="/open-source/catalog/" data-gate-enter="vault">Enter the Vault</a>
+          <a class="btn" href="/open-source/open-source/">Open Source Room</a>
           <a class="btn" href="/open-source/import/">Bulk Import</a>
         </div>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="card glass">
-        <div class="kicker">Entry Only</div>
-        <div class="muted">Rooms and shortcuts appear after you enter the Vault.</div>
+      <div class="grid three" data-stagger>
+        <article class="card">
+          <div class="kicker">Room 01</div>
+          <div class="h3">Open Source</div>
+          <div class="muted">Streaming, tools, torrenting, media, gaming, and more.</div>
+          <div class="linklist">
+            <a href="/open-source/open-source/">Enter Room</a>
+          </div>
+        </article>
+        <article class="card glass">
+          <div class="kicker">Vault Systems</div>
+          <div class="h3">Catalog Engine</div>
+          <div class="muted">Search, filters, and redirects.</div>
+          <div class="linklist">
+            <a href="/open-source/catalog/">Vault Rooms</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="kicker">Scaling</div>
+          <div class="h3">Bulk Import</div>
+          <div class="muted">Edit local JSON files to grow the room.</div>
+          <div class="linklist">
+            <a href="/open-source/import/">Open Import Tool</a>
+          </div>
+        </article>
       </div>
     </section>
 
