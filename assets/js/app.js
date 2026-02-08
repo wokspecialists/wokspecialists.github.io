@@ -237,6 +237,7 @@
           dot = document.createElement('span');
           dot.className = `node-dot ${color}`;
         }
+        dot.dataset.nodeIndex = String(idx + 1);
         dot.style.animation = 'glowPulse 2.2s ease-in-out infinite, nodeFloat 6s ease-in-out infinite';
         dot.style.animationDelay = `${(idx % 12) * 80}ms`;
         frag.appendChild(dot);
@@ -265,6 +266,7 @@
         const isUnavailable = unavailable.has(id);
         a.className = `agent-pill ${isUnavailable ? 'unavailable' : 'available'}`;
         a.href = `${base}${id}`;
+        a.dataset.agentIndex = String(i);
         a.textContent = isUnavailable ? `Agent ${id} (Unavailable)` : `Agent ${id}`;
         if (isUnavailable) {
           a.setAttribute('aria-disabled', 'true');
@@ -281,6 +283,34 @@
   }
   buildAgentPools();
 
+  function linkAgentsToNodes(){
+    const sections = document.querySelectorAll('[data-agent-section]');
+    sections.forEach(section=>{
+      const grid = section.querySelector('.battlefield-grid');
+      const pool = section.querySelector('[data-agent-grid]');
+      if (!grid || !pool) return;
+      const nodes = Array.from(grid.querySelectorAll('.node-dot'));
+      const pills = Array.from(pool.querySelectorAll('.agent-pill'));
+      const getNode = (index)=>nodes[Number(index) - 1];
+      pills.forEach(pill=>{
+        const idx = pill.dataset.agentIndex;
+        const node = getNode(idx);
+        if (!node) return;
+        const on = ()=>{
+          node.dataset.boost = '1';
+        };
+        const off = ()=>{
+          node.dataset.boost = '0';
+        };
+        pill.addEventListener('mouseenter', on);
+        pill.addEventListener('mouseleave', off);
+        pill.addEventListener('focus', on);
+        pill.addEventListener('blur', off);
+      });
+    });
+  }
+  linkAgentsToNodes();
+
   function layoutBattlefieldNodes(){
     const grids = document.querySelectorAll('.battlefield-grid');
     grids.forEach(grid=>{
@@ -288,10 +318,18 @@
       if (!rect.width || !rect.height) return;
       const nodes = Array.from(grid.querySelectorAll('.node-dot'));
       const pad = 10;
-      nodes.forEach(node=>{
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const ring = Math.min(rect.width, rect.height) * 0.35;
+      const spiralStep = (Math.PI * 2) / Math.max(1, nodes.length);
+      nodes.forEach((node, idx)=>{
         if (node.dataset.placed) return;
-        const x = pad + Math.random() * (rect.width - pad * 2);
-        const y = pad + Math.random() * (rect.height - pad * 2);
+        const angle = idx * spiralStep;
+        const radius = ring * (0.55 + 0.45 * Math.sin(idx * 0.35));
+        const jitterX = (Math.random() - 0.5) * 18;
+        const jitterY = (Math.random() - 0.5) * 18;
+        const x = cx + Math.cos(angle) * radius + jitterX;
+        const y = cy + Math.sin(angle) * radius + jitterY;
         node.style.left = `${x}px`;
         node.style.top = `${y}px`;
         node.dataset.x = String(x);
@@ -416,10 +454,11 @@
           const power = Math.max(0, 1 - dist / 140);
           const moveX = Math.max(-6, Math.min(6, dx * -0.02));
           const moveY = Math.max(-6, Math.min(6, dy * -0.02));
-          const scale = Math.min(1.6, 1 + power * 0.6);
+          const boost = dot.dataset.boost === '1' ? 0.5 : 0;
+          const scale = Math.min(2.1, 1 + power * 0.6 + boost);
           dot.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
-          dot.style.boxShadow = power > 0.05 ? `0 0 ${10 + power * 18}px rgba(255,255,255,.35)` : '';
-          dot.style.filter = power > 0.05 ? 'brightness(1.15)' : '';
+          dot.style.boxShadow = power > 0.05 || boost ? `0 0 ${10 + power * 18 + boost * 12}px rgba(255,255,255,.35)` : '';
+          dot.style.filter = power > 0.05 || boost ? 'brightness(1.15)' : '';
         });
       }
       grid.addEventListener('mousemove', (e)=>{
