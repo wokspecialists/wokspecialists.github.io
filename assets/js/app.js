@@ -7,28 +7,6 @@
     fa.crossOrigin = "anonymous";
     document.head.appendChild(fa);
   }
-  const nav = document.querySelector('.nav');
-  if (nav && location.pathname.startsWith('/open-source')) {
-    const banner = document.createElement('section');
-    banner.className = 'disclaimer';
-    banner.innerHTML = `
-      <div class="wrap">
-        <strong>Third‑party directory. No safeguards.</strong>
-        Wok Specialists does not own, host, or control linked resources and is not affiliated, sponsored, or endorsed by any listed site.
-        Inclusion does not imply approval, and availability, accuracy, or safety is not guaranteed.
-        This index is not filtered for content, risk, or legality.
-        <details>
-          <summary>Read the full warning</summary>
-          <div>
-            This index is informational and may include a wide range of resources, including content that is unsafe, offensive, or restricted
-            in some locations. Users are responsible for verifying legality, safety, and compliance with local laws and each site’s terms.
-            Wok Specialists does not provide warranties for external content and does not monitor or moderate third‑party destinations.
-          </div>
-        </details>
-      </div>
-    `;
-    nav.insertAdjacentElement('afterend', banner);
-  }
 
   const vaultPath = location.pathname;
   const vaultKey = 'vaultGateAccepted';
@@ -198,7 +176,7 @@
     btn.title = "Light mode in development";
     btn.setAttribute("aria-label", "Theme toggle. Light mode in development.");
   }
-  const themes = ["dark","light","neon","mono"];
+  const themes = ["mono","dark","light","neon"];
   const saved = localStorage.getItem("theme");
   if (themes.includes(saved)) {
     root.setAttribute("data-theme", saved);
@@ -211,8 +189,8 @@
     const labels = {
       dark: "Dark",
       light: "Light",
-      neon: "Signal",
-      mono: "No Color"
+      neon: "Pulse",
+      mono: "Greyscale"
     };
     btn.textContent = labels[current] || "Theme";
   }
@@ -315,8 +293,14 @@
       btn.addEventListener('click', () => {
         const mode = btn.getAttribute('data-agent-filter');
         setMode(mode);
+        filters.forEach(b => b.classList.toggle('active', b === btn));
       });
     });
+    const defaultBtn = Array.from(filters).find(btn => btn.getAttribute('data-agent-filter') === 'all') || filters[0];
+    if (defaultBtn) {
+      setMode(defaultBtn.getAttribute('data-agent-filter'));
+      filters.forEach(b => b.classList.toggle('active', b === defaultBtn));
+    }
   }
   bindAgentFilters();
 
