@@ -292,15 +292,18 @@
       const nodes = Array.from(grid.querySelectorAll('.node-dot'));
       const pills = Array.from(pool.querySelectorAll('.agent-pill'));
       const getNode = (index)=>nodes[Number(index) - 1];
+      const refresh = typeof grid._renderHover === 'function' ? grid._renderHover : null;
       pills.forEach(pill=>{
         const idx = pill.dataset.agentIndex;
         const node = getNode(idx);
         if (!node) return;
         const on = ()=>{
           node.dataset.boost = '1';
+          if (refresh) refresh();
         };
         const off = ()=>{
           node.dataset.boost = '0';
+          if (refresh) refresh();
         };
         pill.addEventListener('mouseenter', on);
         pill.addEventListener('mouseleave', off);
@@ -446,6 +449,10 @@
         raf = 0;
         const rect = grid.getBoundingClientRect();
         if (!rect.width || !rect.height) return;
+        if (!lastX && !lastY) {
+          lastX = rect.left + rect.width / 2;
+          lastY = rect.top + rect.height / 2;
+        }
         dots.forEach(dot=>{
           const drect = dot.getBoundingClientRect();
           const dx = (drect.left + drect.width / 2) - lastX;
@@ -461,6 +468,10 @@
           dot.style.filter = power > 0.05 || boost ? 'brightness(1.15)' : '';
         });
       }
+      grid._renderHover = ()=>{
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(renderHover);
+      };
       grid.addEventListener('mousemove', (e)=>{
         lastX = e.clientX;
         lastY = e.clientY;
