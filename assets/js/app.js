@@ -237,7 +237,7 @@
           dot = document.createElement('span');
           dot.className = `node-dot ${color}`;
         }
-        dot.style.animation = 'glowPulse 2.2s ease-in-out infinite';
+        dot.style.animation = 'glowPulse 2.2s ease-in-out infinite, nodeFloat 6s ease-in-out infinite';
         dot.style.animationDelay = `${(idx % 12) * 80}ms`;
         frag.appendChild(dot);
       });
@@ -370,6 +370,72 @@
     });
   }
   setupBattlefieldInteractions();
+
+  function bootLiquidNet(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const canvas = document.createElement('canvas');
+    canvas.className = 'liquid-net';
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    document.body.appendChild(canvas);
+    let w = 0;
+    let h = 0;
+    let particles = [];
+
+    function resize(){
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+      const count = Math.min(90, Math.max(40, Math.floor(w / 24)));
+      particles = Array.from({length:count}).map(()=>({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6
+      }));
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function step(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = 'rgba(120,140,180,0.15)';
+      ctx.strokeStyle = 'rgba(120,140,180,0.08)';
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -20) p.x = w + 20;
+        if (p.x > w + 20) p.x = -20;
+        if (p.y < -20) p.y = h + 20;
+        if (p.y > h + 20) p.y = -20;
+      }
+      for (let i = 0; i < particles.length; i++) {
+        const a = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 120) {
+            ctx.globalAlpha = (1 - dist / 120) * 0.4;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 0.35;
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  bootLiquidNet();
 
   function bindAgentFilters(){
     const filters = document.querySelectorAll('[data-agent-filter]');
