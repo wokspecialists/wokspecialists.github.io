@@ -467,39 +467,7 @@
   }
   bootLiquidNet();
 
-  function enableHScrollDrag(){
-    const scrollers = document.querySelectorAll('.grid, .deck-scroll, .vault-hscroll');
-    scrollers.forEach(scroller=>{
-      if (scroller.dataset.dragscroll) return;
-      let down = false;
-      let startX = 0;
-      let scrollLeft = 0;
-      scroller.addEventListener('mousedown', (e)=>{
-        if (e.button !== 0) return;
-        down = true;
-        scroller.classList.add('dragging');
-        startX = e.pageX - scroller.offsetLeft;
-        scrollLeft = scroller.scrollLeft;
-      });
-      scroller.addEventListener('mouseleave', ()=>{
-        down = false;
-        scroller.classList.remove('dragging');
-      });
-      scroller.addEventListener('mouseup', ()=>{
-        down = false;
-        scroller.classList.remove('dragging');
-      });
-      scroller.addEventListener('mousemove', (e)=>{
-        if (!down) return;
-        e.preventDefault();
-        const x = e.pageX - scroller.offsetLeft;
-        const walk = (x - startX) * 1.3;
-        scroller.scrollLeft = scrollLeft - walk;
-      });
-      scroller.dataset.dragscroll = '1';
-    });
-  }
-  enableHScrollDrag();
+  // drag-to-scroll removed per UX request
 
   function bindAgentFilters(){
     const filters = document.querySelectorAll('[data-agent-filter]');

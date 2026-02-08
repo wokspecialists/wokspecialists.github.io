@@ -321,13 +321,18 @@ body{
   background:var(--line);
   box-shadow:0 0 0 1px rgba(0,0,0,.2);
   display:inline-block;
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
 .node-dot.green{background:#22c55e}
 .node-dot.red{background:#ef4444}
 .node-dot.gold{background:#f59e0b}
 [data-theme="mono"] .node-dot.gold{background:#9aa0a6}
 .node-dot.node-link{cursor:pointer}
-.node-dot.node-link:hover{transform:translateY(-1px)}
+.node-dot:hover{
+  transform:scale(1.65);
+  filter:brightness(1.2);
+  box-shadow:0 0 12px rgba(255,255,255,.45), 0 0 18px rgba(59,130,246,.35);
+}
 
 @keyframes nodeFloat{
   0%,100%{transform:translateY(0)}
@@ -739,11 +744,6 @@ body{
   overscroll-behavior-x:contain;
 }
 
-.grid.dragging,
-.deck-scroll.dragging,
-.vault-hscroll.dragging{
-  cursor:grabbing;
-}
 .deck-panel{
   scroll-snap-align:start;
   min-height:220px;
