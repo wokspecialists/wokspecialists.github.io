@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="mono">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -17,7 +17,7 @@
         <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
         <a data-nav href="/docs/">Docs</a>
-        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/technology/">Technology</a>
         <a data-nav href="/plans/">Plans</a>
         <a data-nav href="/company/">Company</a>
       </nav>
@@ -32,7 +32,7 @@
     <section class="section" data-reveal>
       <div class="kicker">Projects</div>
       <div class="display">Active builds</div>
-      <div class="muted">Work in progress across the studio.</div>
+      <div class="muted">Three main projects right now: Chopsticks, Vault, and Embed Builder.</div>
       <div class="btnrow">
         <a class="btn primary" href="/studio/">Studio</a>
         <a class="btn" href="/plans/">Roadmap</a>
@@ -40,26 +40,45 @@
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Chopsticks</h3>
+      <div class="grid three project-grid" data-stagger>
+        <article class="card project-card active">
+          <div class="project-head">
+            <div>
+              <div class="kicker">Bot</div>
+              <h3><span class="logo-inline"><img src="/assets/images/chopsticks-logo.svg" alt="Chopsticks logo"/><span>Chopsticks</span></span></h3>
+            </div>
+            <div class="project-status">Operational · in development</div>
+          </div>
           <div class="muted">Discord multitool bot with deployable agents.</div>
+          <div class="muted">Hosted by Goot27 (member).</div>
           <div class="linklist">
             <a href="/chopsticks/">Overview</a>
             <a href="/chopsticks/docs/">Docs</a>
             <a href="/commands/">Commands</a>
           </div>
         </article>
-        <article class="card">
-          <h3>Vault</h3>
-          <div class="muted">Open source catalog inside the vault.</div>
+        <article class="card project-card">
+          <div class="project-head">
+            <div>
+              <div class="kicker">Vault</div>
+              <h3>Open Source</h3>
+            </div>
+            <div class="project-status">In development</div>
+          </div>
+          <div class="muted">Streaming, tools, torrenting, media, and more.</div>
           <div class="linklist">
             <a href="/open-source/">Vault Gate</a>
-            <a href="/open-source/vault/">Open Source Catalog</a>
+            <a href="/open-source/open-source/">Open Source Room</a>
           </div>
         </article>
-        <article class="card">
-          <h3>Embed Builder</h3>
+        <article class="card project-card">
+          <div class="project-head">
+            <div>
+              <div class="kicker">Tool</div>
+              <h3>Embed Builder</h3>
+            </div>
+            <div class="project-status">In development</div>
+          </div>
           <div class="muted">Utility for structured embeds.</div>
           <div class="linklist">
             <a href="/embed/">Open Builder</a>
@@ -69,15 +88,15 @@
     </section>
 
     <section class="section" data-reveal data-agent-section id="bot-pool">
-      <div class="kicker">Chopsticks · Bot Pool</div>
+      <div class="kicker"><span class="logo-inline"><img src="/assets/images/chopsticks-logo.svg" alt="Chopsticks logo"/><span>Chopsticks</span></span> · Bot Pool</div>
       <div class="agent-pool">
         <div class="split">
           <div>
             <div class="h2">35 agents total</div>
           </div>
           <div class="agent-stats">
-            <div class="agent-stat"><strong>25</strong>Available</div>
-            <div class="agent-stat"><strong>10</strong>Unavailable</div>
+            <div class="agent-stat available"><strong>25</strong>Available</div>
+            <div class="agent-stat unavailable"><strong>10</strong>Unavailable</div>
           </div>
         </div>
         <div class="btnrow" style="margin-top:10px">

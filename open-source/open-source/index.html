@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="mono">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -17,7 +17,7 @@
         <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
         <a data-nav href="/docs/">Docs</a>
-        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/technology/">Technology</a>
         <a data-nav href="/plans/">Plans</a>
         <a data-nav href="/company/">Company</a>
       </nav>
@@ -28,14 +28,15 @@
   </header>
 
   <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><span>Open Source Catalog</span></div>
+    <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><a href="/open-source/catalog/">Rooms</a><span>/</span><span>Open Source</span></div>
 
     <section class="section" data-reveal>
       <div class="vault-hero">
         <div class="kicker">Vault</div>
         <div class="display">Open Source Catalog</div>
-        <div class="muted">The catalog lives inside the Vault. Search, filter, and explore. In development.</div>
+        <div class="muted">Vault Room: Open Source. Search, filter, and explore.</div>
         <div class="hero-actions">
+          <a class="btn" href="/open-source/catalog/">Vault Rooms</a>
           <a class="btn" href="/open-source/">Vault Gate</a>
           <a class="btn" href="/open-source/import/">Bulk Import</a>
         </div>
@@ -48,23 +49,23 @@
       </div>
     </section>
 
-    <section class="section" data-reveal>
-      <div class="kicker">Vault Rooms</div>
-      <div class="vault-grid">
-        <a class="vault-tile" href="/open-source/streaming/">Streaming</a>
-        <a class="vault-tile" href="/open-source/tools/">Tools</a>
-        <a class="vault-tile" href="/open-source/torrenting/">Torrenting</a>
-        <a class="vault-tile" href="/open-source/media/">Media</a>
-        <a class="vault-tile" href="/open-source/gaming/">Gaming</a>
-        <a class="vault-tile" href="/open-source/learning/">Learning</a>
-        <a class="vault-tile" href="/open-source/privacy/">Privacy</a>
-        <a class="vault-tile" href="/open-source/security/">Security</a>
-      </div>
-    </section>
+ 
 
     <section class="section" id="vault-app" data-reveal>
       <div class="vault-toolbar">
         <input class="input" data-vault-search type="search" placeholder="Search tools, platforms, or tags"/>
+        <button class="btn ghost" type="button" data-vault-clear>Clear Search</button>
+        <button class="btn" type="button" data-vault-reset>Reset Filters</button>
+        <div class="toolbar-hint">Press <span class="kbd">/</span> to search</div>
+      </div>
+
+      <div class="vault-subtoolbar">
+        <div class="chip-row">
+          <a href="#vault-categories">Categories</a>
+          <a href="#vault-collections">Collections</a>
+          <a href="#vault-tags">Tags</a>
+          <a href="#vault-results">Results</a>
+        </div>
         <div class="vault-count" data-vault-count>0 items</div>
       </div>
 
@@ -72,17 +73,23 @@
 
       <div class="vault">
         <aside class="vault-panel">
-          <h3>Categories</h3>
+          <h3 id="vault-categories">Categories</h3>
           <div class="vault-filters" data-vault-categories></div>
           <div class="divider"></div>
-          <h3>Collections</h3>
+          <h3 id="vault-collections">Collections</h3>
           <div class="grid" data-vault-collections></div>
           <div class="divider"></div>
-          <h3>Tags</h3>
+          <h3 id="vault-tags">Tags</h3>
           <div class="vault-filters" data-vault-tags></div>
         </aside>
 
-        <div class="vault-results" data-vault-results></div>
+        <div class="vault-results-wrap" id="vault-results">
+          <div class="vault-results-head">
+            <h3>Results</h3>
+            <div class="vault-count" data-vault-count>0 items</div>
+          </div>
+          <div class="vault-results" data-vault-results></div>
+        </div>
 
         <aside class="vault-detail" data-vault-detail>
           <div class="muted">Select an item for details.</div>

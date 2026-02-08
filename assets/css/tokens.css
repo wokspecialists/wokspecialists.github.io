@@ -67,7 +67,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:400 var
   --glow-1:rgba(255,255,255,.08);
   --glow-2:rgba(255,255,255,.06);
   --glow-3:rgba(255,255,255,.05);
-  --bg-gradient:linear-gradient(160deg, #0f1012 0%, #14161a 55%, #101215 100%);
+  --bg-gradient:none;
 }
 
 [data-theme="neon"]{

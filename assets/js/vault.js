@@ -40,6 +40,35 @@
       render();
     });
   }
+  const clearBtn = app.querySelector('[data-vault-clear]');
+  if (clearBtn && searchInput) {
+    clearBtn.addEventListener('click', ()=>{
+      state.query = '';
+      searchInput.value = '';
+      render();
+      searchInput.focus();
+    });
+  }
+  const resetBtn = app.querySelector('[data-vault-reset]');
+  if (resetBtn && searchInput) {
+    resetBtn.addEventListener('click', ()=>{
+      state.query = '';
+      state.category = '';
+      state.collection = '';
+      state.tag = '';
+      searchInput.value = '';
+      render();
+      searchInput.focus();
+    });
+  }
+  document.addEventListener('keydown', (e)=>{
+    if (!searchInput) return;
+    if (e.key !== '/' || e.metaKey || e.ctrlKey || e.altKey) return;
+    const tag = (e.target && e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+    e.preventDefault();
+    searchInput.focus();
+  });
 
   function renderFilters(){
     const catWrap = app.querySelector('[data-vault-categories]');
@@ -112,7 +141,7 @@
     for (const cat of categories) {
       const count = counts[cat.id] || 0;
       const a = document.createElement('a');
-      a.href = `/open-source/vault/#category/${cat.id}`;
+      a.href = `/open-source/open-source/#category/${cat.id}`;
       a.textContent = `${cat.label} (${count})`;
       wrap.appendChild(a);
     }
@@ -132,10 +161,10 @@
 
   function renderResults(){
     const wrap = app.querySelector('[data-vault-results]');
-    const count = app.querySelector('[data-vault-count]');
+    const countNodes = app.querySelectorAll('[data-vault-count]');
     if (!wrap) return;
     const items = filterItems();
-    if (count) count.textContent = `${items.length} items`;
+    countNodes.forEach(node => node.textContent = `${items.length} items`);
     wrap.innerHTML = '';
     for (const item of items) {
       const cat = categoryMap.get(item.category);
@@ -181,7 +210,7 @@
       </div>
       <div class="btnrow" style="margin-top:12px">
         <a class="btn primary" href="${item.url}" target="_blank" rel="noreferrer">Open Site</a>
-        <a class="btn" href="/go/?id=${item.id}">Safe Redirect</a>
+        <a class="btn" href="/go/?id=${item.id}">Redirect</a>
       </div>
     `;
   }

@@ -30,6 +30,94 @@
     nav.insertAdjacentElement('afterend', banner);
   }
 
+  const vaultPath = location.pathname;
+  const vaultKey = 'vaultGateAccepted';
+  const vaultModeKey = 'vaultGateMode';
+  const vaultExpireKey = 'vaultGateExpiresAt';
+  const vaultPermKey = 'vaultGatePermanent';
+  const vaultSessionKey = 'vaultGateSession';
+  const vaultDefaultTtlMs = 1000 * 60 * 60 * 2;
+
+  function setVaultAccess({mode = 'timed', ttlMs = vaultDefaultTtlMs} = {}) {
+    localStorage.setItem(vaultKey, '1');
+    localStorage.setItem(vaultModeKey, mode);
+    if (mode === 'permanent') {
+      localStorage.setItem(vaultPermKey, '1');
+      localStorage.removeItem(vaultExpireKey);
+    } else if (mode === 'session') {
+      sessionStorage.setItem(vaultSessionKey, '1');
+      localStorage.removeItem(vaultExpireKey);
+    } else {
+      const expiresAt = Date.now() + ttlMs;
+      localStorage.setItem(vaultExpireKey, String(expiresAt));
+      localStorage.removeItem(vaultPermKey);
+    }
+  }
+
+  function hasVaultAccess() {
+    if (sessionStorage.getItem(vaultSessionKey) === '1') return true;
+    if (localStorage.getItem(vaultPermKey) === '1') return true;
+    if (localStorage.getItem(vaultKey) !== '1') return false;
+    const mode = localStorage.getItem(vaultModeKey) || 'timed';
+    if (mode === 'timed') {
+      const expiresAt = Number(localStorage.getItem(vaultExpireKey) || 0);
+      if (!expiresAt || Date.now() > expiresAt) {
+        localStorage.removeItem(vaultKey);
+        localStorage.removeItem(vaultExpireKey);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const params = new URLSearchParams(location.search);
+  if (params.has('vault')) {
+    const mode = params.get('mode') || 'timed';
+    const ttlMinutes = Number(params.get('ttl'));
+    const ttlMs = Number.isFinite(ttlMinutes) && ttlMinutes > 0 ? ttlMinutes * 60 * 1000 : vaultDefaultTtlMs;
+    setVaultAccess({mode, ttlMs});
+  }
+
+  if (vaultPath.startsWith('/open-source/') && vaultPath !== '/open-source/' && vaultPath !== '/open-source') {
+    if (!hasVaultAccess()) {
+      const next = encodeURIComponent(location.pathname + location.search + location.hash);
+      location.replace(`/open-source/?next=${next}`);
+      return;
+    }
+  }
+  const gateEnter = document.querySelector('[data-gate-enter="vault"]');
+  if (gateEnter) {
+    const gateParams = new URLSearchParams(location.search);
+    const next = gateParams.get('next');
+    if (next) {
+      gateEnter.setAttribute('href', next);
+    }
+    gateEnter.addEventListener('click', () => {
+      setVaultAccess({});
+    });
+  }
+
+  function markStatusCards(){
+    if (!location.pathname.startsWith('/technology/status')) return;
+    const cards = document.querySelectorAll('.grid .card');
+    cards.forEach(card => {
+      const muted = card.querySelector('.muted');
+      if (!muted) return;
+      const text = muted.textContent.trim().toLowerCase();
+      let state = 'unknown';
+      if (text.includes('operational') || text.includes('online') || text.includes('available')) state = 'up';
+      if (text.includes('degraded') || text.includes('partial')) state = 'warn';
+      if (text.includes('down') || text.includes('offline') || text.includes('unavailable')) state = 'down';
+      card.dataset.status = state;
+      const dot = document.createElement('span');
+      dot.className = 'status-dot';
+      dot.setAttribute('aria-hidden', 'true');
+      muted.classList.add('status-text');
+      muted.prepend(dot);
+    });
+  }
+  markStatusCards();
+
   const path = location.pathname.replace(/\/+$/, '') || '/';
   document.querySelectorAll('[data-nav]').forEach(a=>{
     const href = a.getAttribute('href').replace(/\/+$/, '') || '/';
@@ -45,6 +133,23 @@
     pill.className = 'dev-pill';
     pill.textContent = 'In development';
     brand.appendChild(pill);
+  }
+
+  const main = document.querySelector('main');
+  const pathEl = document.querySelector('.path');
+  const isStartGate = location.pathname === '/' || location.pathname === '/start/' || location.pathname === '/start';
+  if (main && !isStartGate && !document.querySelector('.identity-band')) {
+    const band = document.createElement('section');
+    band.className = 'identity-band';
+    band.innerHTML = `
+      <div class="identity-brand"><span class="dot"></span><span>Wok Specialists</span></div>
+      <div class="identity-tagline">One studio · many builds</div>
+    `;
+    if (pathEl) {
+      pathEl.insertAdjacentElement('afterend', band);
+    } else {
+      main.prepend(band);
+    }
   }
 
   function addLogos(){
@@ -75,16 +180,27 @@
     btn.title = "Light mode in development";
     btn.setAttribute("aria-label", "Theme toggle. Light mode in development.");
   }
-  const themes = ["dark","light","mono","neon"];
+  const themes = ["dark","light","neon","mono"];
   const saved = localStorage.getItem("theme");
-  if (themes.includes(saved)) root.setAttribute("data-theme", saved);
+  if (themes.includes(saved)) {
+    root.setAttribute("data-theme", saved);
+  } else {
+    root.setAttribute("data-theme", "mono");
+  }
   function setLabel(){
     if (!btn) return;
-    btn.textContent = "Theme";
+    const current = root.getAttribute("data-theme") || "mono";
+    const labels = {
+      dark: "Dark",
+      light: "Light",
+      neon: "Signal",
+      mono: "No Color"
+    };
+    btn.textContent = labels[current] || "Theme";
   }
   if (btn) {
     btn.addEventListener("click", () => {
-      const current = root.getAttribute("data-theme") || "dark";
+      const current = root.getAttribute("data-theme") || "mono";
       const idx = themes.indexOf(current);
       const next = themes[(idx + 1) % themes.length];
       root.setAttribute("data-theme", next);
@@ -110,7 +226,7 @@
         const isUnavailable = unavailable.has(id);
         a.className = `agent-pill ${isUnavailable ? 'unavailable' : 'available'}`;
         a.href = `${base}${id}`;
-        a.textContent = isUnavailable ? `Agent ${id} (Unavailable)` : `Invite Agent ${id}`;
+        a.textContent = isUnavailable ? `Agent ${id} (Unavailable)` : `Agent ${id}`;
         if (isUnavailable) {
           a.setAttribute('aria-disabled', 'true');
           a.dataset.logo = 'off';
