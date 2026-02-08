@@ -216,11 +216,20 @@
       if (grid.dataset.built) return;
       const raw = grid.getAttribute('data-nodes-seq') || '';
       const seq = raw.split(',').map(v=>v.trim()).filter(Boolean);
+      const link = grid.getAttribute('data-node-link') || '';
       const frag = document.createDocumentFragment();
       for (const token of seq) {
-        const dot = document.createElement('span');
         const color = token === 'g' ? 'green' : token === 'r' ? 'red' : 'gold';
-        dot.className = `node-dot ${color}`;
+        let dot;
+        if (link) {
+          dot = document.createElement('a');
+          dot.href = link;
+          dot.className = `node-dot node-link ${color}`;
+          dot.setAttribute('aria-label', 'Open agent pool');
+        } else {
+          dot = document.createElement('span');
+          dot.className = `node-dot ${color}`;
+        }
         frag.appendChild(dot);
       }
       grid.appendChild(frag);
