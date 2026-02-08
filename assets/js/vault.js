@@ -118,6 +118,18 @@
     }
   }
 
+  function renderMeta(){
+    const totalNodes = app.querySelectorAll('[data-vault-total]');
+    totalNodes.forEach(n => n.textContent = String(catalog.length));
+    const metaNodes = app.querySelectorAll('[data-vault-meta]');
+    metaNodes.forEach(n => {
+      const kind = n.getAttribute('data-vault-meta');
+      if (kind === 'categories') n.textContent = String(categories.length);
+      if (kind === 'collections') n.textContent = String(collections.length);
+      if (kind === 'tags') n.textContent = String(tags.length);
+    });
+  }
+
   function renderResults(){
     const wrap = app.querySelector('[data-vault-results]');
     const count = app.querySelector('[data-vault-count]');
@@ -176,6 +188,7 @@
 
   function render(){
     renderCounts();
+    renderMeta();
     renderFilters();
     renderCollections();
     renderResults();
