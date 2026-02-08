@@ -13,6 +13,15 @@ npm install
 ADMIN_USER=admin ADMIN_PASS=change-me PORT=8787 npm start
 ```
 
+## Local-only & Rate Limits
+- Local-only access is **on by default** (`LOCAL_ONLY=1`).
+- Rate limit defaults: `60 requests / 60s`.
+
+Override:
+```bash
+LOCAL_ONLY=1 RATE_MAX=60 RATE_WINDOW_MS=60000 npm start
+```
+
 ## Admin Approval
 - Open `http://localhost:8787/admin`
 - Use Basic Auth with `ADMIN_USER` / `ADMIN_PASS`

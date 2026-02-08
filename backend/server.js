@@ -14,12 +14,43 @@ const ADMIN_PASS = process.env.ADMIN_PASS || "change-me";
 const DATA_DIR = path.join(__dirname, "data");
 const REQUESTS_FILE = path.join(DATA_DIR, "requests.json");
 const TOKENS_FILE = path.join(DATA_DIR, "tokens.json");
+const RATE_WINDOW_MS = Number(process.env.RATE_WINDOW_MS || 60_000);
+const RATE_MAX = Number(process.env.RATE_MAX || 60);
+const LOCAL_ONLY = (process.env.LOCAL_ONLY || "1") === "1";
 
 const app = express();
 app.use(cors({ origin: true }));
 app.use(express.json({ limit: "1mb" }));
 
 ensureDataFiles();
+
+const rateMap = new Map();
+app.use((req, res, next) => {
+  if (LOCAL_ONLY) {
+    const allowed = new Set(["127.0.0.1", "::1", "localhost"]);
+    const host = (req.headers.host || "").split(":")[0];
+    const originHost = (req.headers.origin || "").replace(/^https?:\/\//, "").split(":")[0];
+    if ((host && !allowed.has(host)) || (originHost && !allowed.has(originHost))) {
+      return res.status(403).json({ error: "Local access only" });
+    }
+  }
+  const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "unknown")
+    .toString()
+    .split(",")[0]
+    .trim();
+  const now = Date.now();
+  const bucket = rateMap.get(ip) || { count: 0, start: now };
+  if (now - bucket.start > RATE_WINDOW_MS) {
+    bucket.count = 0;
+    bucket.start = now;
+  }
+  bucket.count += 1;
+  rateMap.set(ip, bucket);
+  if (bucket.count > RATE_MAX) {
+    return res.status(429).json({ error: "Rate limit exceeded" });
+  }
+  next();
+});
 
 function ensureDataFiles() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
