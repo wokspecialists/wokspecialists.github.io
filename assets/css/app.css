@@ -186,6 +186,7 @@ body{
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   padding-bottom:8px;
+  overscroll-behavior-x:contain;
 }
 .hscroll-site .grid > *{
   scroll-snap-align:start;
@@ -683,6 +684,7 @@ body{
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   padding-bottom:8px;
+  overscroll-behavior-x:contain;
 }
 .vault-hscroll::-webkit-scrollbar{height:8px}
 .vault-hscroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:999px}
@@ -734,6 +736,13 @@ body{
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   padding-bottom:8px;
+  overscroll-behavior-x:contain;
+}
+
+.grid.dragging,
+.deck-scroll.dragging,
+.vault-hscroll.dragging{
+  cursor:grabbing;
 }
 .deck-panel{
   scroll-snap-align:start;

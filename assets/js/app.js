@@ -373,6 +373,7 @@
 
   function bootLiquidNet(){
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (document.querySelector('.liquid-net')) return;
     const canvas = document.createElement('canvas');
     canvas.className = 'liquid-net';
     const ctx = canvas.getContext('2d');
@@ -380,29 +381,58 @@
     document.body.appendChild(canvas);
     let w = 0;
     let h = 0;
+    let dpr = 1;
     let particles = [];
+    let tick = 0;
+
+    function makeGridPoints(){
+      const area = w * h;
+      const target = Math.min(140, Math.max(60, Math.floor(area / 28000)));
+      const cols = Math.ceil(Math.sqrt(target * (w / h)));
+      const rows = Math.ceil(target / cols);
+      const cellW = w / cols;
+      const cellH = h / rows;
+      const list = [];
+      for (let r = 0; r < rows; r += 1) {
+        for (let c = 0; c < cols; c += 1) {
+          const jitterX = (Math.random() - 0.5) * cellW * 0.45;
+          const jitterY = (Math.random() - 0.5) * cellH * 0.45;
+          list.push({
+            x: c * cellW + cellW / 2 + jitterX,
+            y: r * cellH + cellH / 2 + jitterY,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+      return list;
+    }
 
     function resize(){
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      const count = Math.min(90, Math.max(40, Math.floor(w / 24)));
-      particles = Array.from({length:count}).map(()=>({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6
-      }));
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      particles = makeGridPoints();
     }
     resize();
     window.addEventListener('resize', resize);
 
     function step(){
-      ctx.clearRect(0,0,w,h);
-      ctx.fillStyle = 'rgba(120,140,180,0.15)';
+      tick += 0.01;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(120,140,180,0.14)';
       ctx.strokeStyle = 'rgba(120,140,180,0.08)';
       for (const p of particles) {
-        p.x += p.vx;
-        p.y += p.vy;
+        const driftX = Math.cos(p.phase + tick) * 0.2;
+        const driftY = Math.sin(p.phase + tick * 1.2) * 0.2;
+        p.x += p.vx + driftX;
+        p.y += p.vy + driftY;
         if (p.x < -20) p.x = w + 20;
         if (p.x > w + 20) p.x = -20;
         if (p.y < -20) p.y = h + 20;
@@ -415,8 +445,8 @@
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const dist = Math.hypot(dx, dy);
-          if (dist < 120) {
-            ctx.globalAlpha = (1 - dist / 120) * 0.4;
+          if (dist < 150) {
+            ctx.globalAlpha = (1 - dist / 150) * 0.35;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -424,10 +454,10 @@
           }
         }
       }
-      ctx.globalAlpha = 0.35;
+      ctx.globalAlpha = 0.4;
       for (const p of particles) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 1.3, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalAlpha = 1;
@@ -436,6 +466,40 @@
     requestAnimationFrame(step);
   }
   bootLiquidNet();
+
+  function enableHScrollDrag(){
+    const scrollers = document.querySelectorAll('.grid, .deck-scroll, .vault-hscroll');
+    scrollers.forEach(scroller=>{
+      if (scroller.dataset.dragscroll) return;
+      let down = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      scroller.addEventListener('mousedown', (e)=>{
+        if (e.button !== 0) return;
+        down = true;
+        scroller.classList.add('dragging');
+        startX = e.pageX - scroller.offsetLeft;
+        scrollLeft = scroller.scrollLeft;
+      });
+      scroller.addEventListener('mouseleave', ()=>{
+        down = false;
+        scroller.classList.remove('dragging');
+      });
+      scroller.addEventListener('mouseup', ()=>{
+        down = false;
+        scroller.classList.remove('dragging');
+      });
+      scroller.addEventListener('mousemove', (e)=>{
+        if (!down) return;
+        e.preventDefault();
+        const x = e.pageX - scroller.offsetLeft;
+        const walk = (x - startX) * 1.3;
+        scroller.scrollLeft = scrollLeft - walk;
+      });
+      scroller.dataset.dragscroll = '1';
+    });
+  }
+  enableHScrollDrag();
 
   function bindAgentFilters(){
     const filters = document.querySelectorAll('[data-agent-filter]');
