@@ -600,15 +600,46 @@ body{
 }
 .vault-hero-tiles{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(3, minmax(0,1fr));
   gap:12px;
 }
+@media (max-width:1200px){.vault-hero-tiles{grid-template-columns:1fr 1fr}}
 @media (max-width:980px){.vault-hero-tiles{grid-template-columns:1fr}}
 .vault-hero-tiles .tile{
   border:1px solid var(--line);
   border-radius:14px;
   padding:12px;
   background:var(--panel3);
+}
+.vault-hero-tiles a.tile{
+  color:inherit;
+  text-decoration:none;
+  display:block;
+}
+.vault-hero-tiles .tile.warning{
+  border-color:rgba(239,68,68,.35);
+  background:linear-gradient(160deg, rgba(239,68,68,.12), rgba(15,15,15,.15));
+}
+[data-theme="mono"] .vault-hero-tiles .tile.warning{
+  background:var(--panel3);
+  border-color:rgba(239,68,68,.35);
+}
+[data-theme="light"] .vault-hero-tiles .tile.warning{
+  background:#fff6f6;
+  border-color:rgba(239,68,68,.25);
+}
+
+.vault-page .section{
+  padding:22px 0;
+}
+.vault-page .vault-shell{
+  padding:16px;
+}
+.vault-page .vault-hero-grid{
+  gap:12px;
+}
+.vault-page .vault-command{
+  padding:12px;
 }
 .vault-command{
   border:1px solid var(--line);

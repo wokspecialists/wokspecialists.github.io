@@ -6,7 +6,7 @@
   <title>Open Source Catalog · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body class="site bg-noise">
+<body class="site bg-noise vault-page">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
@@ -30,7 +30,7 @@
   <main class="wrap">
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><a href="/open-source/catalog/">Rooms</a><span>/</span><span>Open Source</span></div>
 
-    <section class="section" data-reveal>
+    <section class="section" id="vault-app" data-reveal>
       <div class="vault-shell">
         <div class="vault-hero-grid">
           <div class="vault-hero-core">
@@ -42,7 +42,7 @@
               <a class="btn" href="/open-source/">Vault Gate</a>
             </div>
           </div>
-          <div class="vault-hero-stats">
+          <div class="stat-row">
             <div class="stat">
               <strong data-vault-total>0</strong>
               <span>Total Items</span>
@@ -76,23 +76,19 @@
                 <a href="/open-source/open-source/#category/gaming">Gaming</a>
               </div>
             </div>
+            <div class="tile warning">
+              <div class="kicker">Warning</div>
+              <div class="h3">Third‑party directory. No safeguards.</div>
+              <div class="muted">Wok Specialists does not own, host, or control linked resources and is not affiliated, sponsored, or endorsed by any listed site.</div>
+              <div class="muted">Inclusion does not imply approval. Availability, accuracy, legality, or safety is not guaranteed.</div>
+              <div class="muted">Use at your own risk and comply with local laws and each site’s terms.</div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section" data-reveal>
-      <div class="card warning-card">
-        <div class="kicker">Warning</div>
-        <div class="h3">Third‑party directory. No safeguards.</div>
-        <div class="muted">Wok Specialists does not own, host, or control linked resources and is not affiliated, sponsored, or endorsed by any listed site.</div>
-        <div class="muted">Inclusion does not imply approval. Availability, accuracy, legality, or safety is not guaranteed.</div>
-        <div class="muted">Use at your own risk and comply with local laws and each site’s terms.</div>
-      </div>
-    </section>
+        <div class="divider"></div>
 
-    <section class="section" id="vault-app" data-reveal>
-      <div class="vault-command">
+        <div class="vault-command">
         <div class="search-stack">
           <label class="kicker" for="vault-search">Search</label>
           <input id="vault-search" class="input" data-vault-search type="search" placeholder="Search tools, platforms, tags"/>
@@ -136,6 +132,16 @@
             <div class="kicker">Tags</div>
             <div id="vault-tags" class="vault-filters" data-vault-tags></div>
           </div>
+          <div class="rail-block">
+            <div class="kicker">Local Updates</div>
+            <div class="linklist">
+              <a href="/data/open-source/catalog.json">Catalog JSON</a>
+              <a href="/data/open-source/categories.json">Categories</a>
+              <a href="/data/open-source/collections.json">Collections</a>
+              <a href="/data/open-source/README.md">Catalog Guide</a>
+            </div>
+            <div class="muted" style="margin-top:6px">Edit locally to scale the vault.</div>
+          </div>
         </aside>
 
         <div class="vault-board" id="vault-results">
@@ -153,33 +159,6 @@
           <div class="muted">Select an item for details.</div>
         </aside>
       </div>
-    </section>
-
-    <section class="section" data-reveal>
-      <div class="grid two" data-stagger>
-        <div class="card glass">
-          <div class="kicker">Maintain</div>
-          <div class="h3">Local updates</div>
-          <div class="linklist">
-            <a href="/data/open-source/catalog.json">Catalog JSON</a>
-            <a href="/data/open-source/categories.json">Categories</a>
-            <a href="/data/open-source/collections.json">Collections</a>
-            <a href="/data/open-source/README.md">Catalog Guide</a>
-          </div>
-          <div class="muted" style="margin-top:8px">Edit the JSON files locally to scale the vault.</div>
-        </div>
-        <div class="card glass">
-          <div class="kicker">Routing</div>
-          <div class="h3">Quick rooms</div>
-          <div class="muted">Streaming, tools, torrenting, media, and more live inside this room.</div>
-          <div class="linklist">
-            <a href="/open-source/open-source/#category/streaming">Streaming</a>
-            <a href="/open-source/open-source/#category/tools">Tools</a>
-            <a href="/open-source/open-source/#category/torrenting">Torrenting</a>
-            <a href="/open-source/open-source/#category/media">Media</a>
-            <a href="/open-source/open-source/#category/gaming">Gaming</a>
-          </div>
-        </div>
       </div>
     </section>
 
