@@ -279,6 +279,98 @@
   }
   buildAgentPools();
 
+  function setupBattlefieldInteractions(){
+    const grids = document.querySelectorAll('.battlefield-grid');
+    grids.forEach(grid=>{
+      if (grid.dataset.interactive) return;
+      let scale = 1;
+      let x = 0;
+      let y = 0;
+      let dragging = false;
+      let startX = 0;
+      let startY = 0;
+      const pointers = new Map();
+      let pinchStartDist = 0;
+      let pinchStartScale = 1;
+
+      function apply(){
+        grid.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      }
+
+      function distance(a, b){
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+        return Math.hypot(dx, dy);
+      }
+
+      grid.addEventListener('pointerdown', (e)=>{
+        pointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
+        if (pointers.size === 2) {
+          const pts = Array.from(pointers.values());
+          pinchStartDist = distance(pts[0], pts[1]);
+          pinchStartScale = scale;
+        }
+        if (pointers.size > 1) return;
+        if (e.button && e.button !== 0) return;
+        dragging = true;
+        startX = e.clientX - x;
+        startY = e.clientY - y;
+        grid.classList.add('dragging');
+        grid.setPointerCapture(e.pointerId);
+      });
+
+      grid.addEventListener('pointermove', (e)=>{
+        if (!pointers.has(e.pointerId)) return;
+        pointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
+        if (pointers.size === 2) {
+          const pts = Array.from(pointers.values());
+          const dist = distance(pts[0], pts[1]);
+          if (pinchStartDist > 0) {
+            scale = Math.max(0.6, Math.min(2.6, pinchStartScale * (dist / pinchStartDist)));
+            apply();
+          }
+          return;
+        }
+        if (!dragging) return;
+        x = e.clientX - startX;
+        y = e.clientY - startY;
+        apply();
+      });
+
+      grid.addEventListener('pointerup', (e)=>{
+        pointers.delete(e.pointerId);
+        if (dragging) {
+          dragging = false;
+          grid.classList.remove('dragging');
+          try { grid.releasePointerCapture(e.pointerId); } catch {}
+        }
+      });
+      grid.addEventListener('pointercancel', (e)=>{
+        pointers.delete(e.pointerId);
+        dragging = false;
+        grid.classList.remove('dragging');
+      });
+
+      grid.addEventListener('wheel', (e)=>{
+        e.preventDefault();
+        const delta = -e.deltaY;
+        const factor = delta > 0 ? 1.08 : 0.92;
+        scale = Math.max(0.6, Math.min(2.6, scale * factor));
+        apply();
+      }, {passive:false});
+
+      grid.addEventListener('dblclick', ()=>{
+        scale = 1;
+        x = 0;
+        y = 0;
+        apply();
+      });
+
+      grid.dataset.interactive = '1';
+    });
+  }
+  setupBattlefieldInteractions();
+
   function bindAgentFilters(){
     const filters = document.querySelectorAll('[data-agent-filter]');
     if (!filters.length) return;

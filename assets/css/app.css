@@ -278,7 +278,11 @@ body{
   gap:8px;
   justify-items:center;
   align-items:center;
+  transform-origin:center;
+  touch-action:none;
+  cursor:grab;
 }
+.battlefield-grid.dragging{cursor:grabbing}
 @media (max-width:700px){.battlefield-grid{grid-template-columns:repeat(10, minmax(0, 1fr))}}
 .legend{
   display:flex;
