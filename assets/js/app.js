@@ -237,6 +237,7 @@
           dot = document.createElement('span');
           dot.className = `node-dot ${color}`;
         }
+        if (link) dot.dataset.link = link;
         dot.dataset.nodeIndex = String(idx + 1);
         dot.style.animation = 'glowPulse 2.2s ease-in-out infinite, nodeFloat 6s ease-in-out infinite';
         dot.style.animationDelay = `${(idx % 12) * 80}ms`;
@@ -247,6 +248,7 @@
     });
     layoutBattlefieldNodes();
     enableNodeDragging();
+    setupNodeMenus();
   }
   buildAgentNodes();
 
@@ -392,6 +394,7 @@
         node.addEventListener('pointerdown', (e)=>{
           if (e.button && e.button !== 0) return;
           e.preventDefault();
+          node.dataset.dragging = '1';
           node.setPointerCapture(e.pointerId);
           const rect = grid.getBoundingClientRect();
           const startX = e.clientX - rect.left - Number(node.dataset.x || 0);
@@ -407,6 +410,7 @@
             node.removeEventListener('pointermove', move);
             node.removeEventListener('pointerup', up);
             node.removeEventListener('pointercancel', up);
+            delete node.dataset.dragging;
           }
           node.addEventListener('pointermove', move);
           node.addEventListener('pointerup', up);
@@ -414,6 +418,53 @@
         });
       });
       grid.dataset.nodeDrag = '1';
+    });
+  }
+
+  function setupNodeMenus(){
+    const grids = document.querySelectorAll('.battlefield-grid');
+    grids.forEach(grid=>{
+      if (grid.dataset.nodeMenu) return;
+      const menu = document.createElement('div');
+      menu.className = 'node-menu';
+      menu.innerHTML = `
+        <div class="node-menu-title">Agent Node</div>
+        <a class="btn ghost node-menu-link" href="#">Open Agent Pool</a>
+        <div class="muted node-menu-meta">Hover to preview • drag to move</div>
+      `;
+      menu.style.display = 'none';
+      grid.appendChild(menu);
+      let hideTimer = 0;
+      function showMenu(node){
+        const rect = grid.getBoundingClientRect();
+        const nrect = node.getBoundingClientRect();
+        const left = nrect.left - rect.left + 16;
+        const top = nrect.top - rect.top + 16;
+        menu.style.transform = `translate(${left}px, ${top}px)`;
+        const link = node.dataset.link || grid.getAttribute('data-node-link') || '#';
+        menu.querySelector('.node-menu-link').href = link;
+        menu.style.display = 'grid';
+      }
+      function hideMenu(){
+        menu.style.display = 'none';
+      }
+      grid.addEventListener('mouseleave', hideMenu);
+      grid.querySelectorAll('.node-dot').forEach(node=>{
+        node.addEventListener('mouseenter', ()=>{
+          if (hideTimer) clearTimeout(hideTimer);
+          showMenu(node);
+        });
+        node.addEventListener('mouseleave', ()=>{
+          hideTimer = window.setTimeout(hideMenu, 180);
+        });
+        node.addEventListener('click', (e)=>{
+          if (node.dataset.dragging) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        });
+      });
+      grid.dataset.nodeMenu = '1';
     });
   }
 

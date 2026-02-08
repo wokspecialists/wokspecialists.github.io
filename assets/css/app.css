@@ -325,6 +325,26 @@ body{
   cursor:grab;
 }
 .node-dot:active{cursor:grabbing}
+
+.node-menu{
+  position:absolute;
+  min-width:180px;
+  padding:10px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--panel2);
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  display:grid;
+  gap:8px;
+  z-index:5;
+}
+.node-menu-title{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--muted);
+}
+.node-menu-meta{font-size:11px}
 .node-dot.green{background:#22c55e}
 .node-dot.red{background:#ef4444}
 .node-dot.gold{background:#f59e0b}
