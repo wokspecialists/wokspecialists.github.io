@@ -32,39 +32,47 @@
     <section class="section" data-reveal>
       <div class="hero-split">
         <div class="hero-card">
-          <div class="kicker">Chopsticks</div>
+          <div class="kicker">Bot</div>
           <div class="display">
             <span class="logo-inline">
               <img src="/assets/images/chopsticks-logo.svg" alt="Chopsticks logo"/>
-              <span>Discord multitool bot</span>
+              <span>Chopsticks</span>
             </span>
           </div>
-          <div class="muted">VoiceMaster + deployable agents that can run in multiple channels at once.</div>
+          <div class="muted">VoiceMaster + deployable agents for multi‑channel tasks.</div>
           <div class="btnrow">
-            <a class="btn primary" href="/chopsticks/docs/">Docs</a>
+            <a class="btn primary" href="/projects/#bot-pool">Agent Pool</a>
+            <a class="btn" href="/chopsticks/docs/">Docs</a>
             <a class="btn" href="/commands/">Commands</a>
-            <a class="btn lime" href="/projects/#bot-pool">Agent Pool</a>
           </div>
         </div>
         <div class="hero-card hero-side">
-          <div class="hero-logo">
-            <img src="/assets/images/chopsticks-logo.svg" alt="Chopsticks logo"/>
-          </div>
+          <div class="kicker">Live Field</div>
           <div class="stat-row">
             <div class="stat">
               <strong>35</strong>
               <span>Agents Online</span>
             </div>
             <div class="stat">
+              <strong>25</strong>
+              <span>Slots Available</span>
+            </div>
+            <div class="stat">
               <strong>10</strong>
               <span>Unavailable</span>
             </div>
-            <div class="stat">
-              <strong>Pre‑Alpha</strong>
-              <span>Special Agents</span>
+          </div>
+          <div class="muted">One slot = one active agent in a channel.</div>
+          <div class="agent-battlefield" aria-label="Agent availability battlefield">
+            <div class="battlefield-label">Agent Field</div>
+            <div class="battlefield-grid" data-nodes-seq="g,g,g,r,g,g,g,g,r,g,g,s,g,g,r,r,g,g,g,g,g,r,g,g,g,g,r,g,g,s,g,g,r,g,g,g,g,g,r,g,g,g,s,g,g,r,g"></div>
+            <div class="legend">
+              <span><span class="node-dot green"></span>Available</span>
+              <span><span class="node-dot red"></span>Unavailable</span>
+              <span><span class="node-dot gold"></span>Special</span>
             </div>
           </div>
-          <div class="muted">Deploy by slot count. One agent per channel, or run many.</div>
+          <div class="muted">Special agents are pre‑alpha.</div>
         </div>
       </div>
     </section>
@@ -106,8 +114,8 @@
 
     <section class="section" data-reveal>
       <div class="card glass">
-        <div class="kicker">Bot Pool</div>
-        <div class="h2"><span class="logo-inline"><img src="/assets/images/chopsticks-logo.svg" alt="Chopsticks logo"/><span>Chopsticks</span></span> Agent Pool</div>
+        <div class="kicker">Agent Access</div>
+        <div class="h2">Bot Pool + Agent Index</div>
         <div class="muted">Invite, reserve, and manage agent availability from the project hub.</div>
         <div class="btnrow">
           <a class="btn" href="/projects/#bot-pool">Open Bot Pool</a>

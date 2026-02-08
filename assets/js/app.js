@@ -210,6 +210,25 @@
   }
   setLabel();
 
+  function buildAgentNodes(){
+    const grids = document.querySelectorAll('[data-nodes-seq]');
+    grids.forEach(grid=>{
+      if (grid.dataset.built) return;
+      const raw = grid.getAttribute('data-nodes-seq') || '';
+      const seq = raw.split(',').map(v=>v.trim()).filter(Boolean);
+      const frag = document.createDocumentFragment();
+      for (const token of seq) {
+        const dot = document.createElement('span');
+        const color = token === 'g' ? 'green' : token === 'r' ? 'red' : 'gold';
+        dot.className = `node-dot ${color}`;
+        frag.appendChild(dot);
+      }
+      grid.appendChild(frag);
+      grid.dataset.built = '1';
+    });
+  }
+  buildAgentNodes();
+
   function buildAgentPools(){
     const pools = document.querySelectorAll('[data-agent-grid]');
     pools.forEach(pool=>{
