@@ -377,21 +377,32 @@
       if (grid.dataset.ripple) return;
       const dots = Array.from(grid.querySelectorAll('.node-dot'));
       if (!dots.length) return;
-      grid.addEventListener('mousemove', (e)=>{
+      let raf = 0;
+      let lastX = 0;
+      let lastY = 0;
+      function renderHover(){
+        raf = 0;
         const rect = grid.getBoundingClientRect();
-        const cx = e.clientX - rect.left;
-        const cy = e.clientY - rect.top;
+        if (!rect.width || !rect.height) return;
         dots.forEach(dot=>{
           const drect = dot.getBoundingClientRect();
-          const dx = (drect.left + drect.width / 2) - e.clientX;
-          const dy = (drect.top + drect.height / 2) - e.clientY;
+          const dx = (drect.left + drect.width / 2) - lastX;
+          const dy = (drect.top + drect.height / 2) - lastY;
           const dist = Math.hypot(dx, dy);
           const power = Math.max(0, 1 - dist / 140);
-          const offset = power * 8;
-          dot.style.transform = `translate(${dx * -0.02}px, ${dy * -0.02}px) scale(${1 + power * 0.6})`;
+          const moveX = Math.max(-6, Math.min(6, dx * -0.02));
+          const moveY = Math.max(-6, Math.min(6, dy * -0.02));
+          const scale = Math.min(1.6, 1 + power * 0.6);
+          dot.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
           dot.style.boxShadow = power > 0.05 ? `0 0 ${10 + power * 18}px rgba(255,255,255,.35)` : '';
-          dot.style.filter = power > 0.05 ? 'brightness(1.2)' : '';
+          dot.style.filter = power > 0.05 ? 'brightness(1.15)' : '';
         });
+      }
+      grid.addEventListener('mousemove', (e)=>{
+        lastX = e.clientX;
+        lastY = e.clientY;
+        if (raf) return;
+        raf = requestAnimationFrame(renderHover);
       });
       grid.addEventListener('mouseleave', ()=>{
         dots.forEach(dot=>{
