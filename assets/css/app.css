@@ -1,0 +1,50 @@
+@import url("./tokens.css");
+
+.wrap{max-width:var(--max);margin:0 auto;padding:24px}
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(11,15,20,.85);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav .row{display:flex;align-items:center;gap:14px;justify-content:space-between;padding:14px 24px;max-width:var(--max);margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+.brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{padding:8px 10px;border-radius:10px;border:1px solid transparent;color:var(--muted)}
+.links a.active{border-color:var(--line);background:var(--panel);color:var(--text)}
+
+.grid{display:grid;gap:14px}
+.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.grid.two,.grid.three{grid-template-columns:1fr}}
+
+.card{
+  background:linear-gradient(180deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  padding:var(--pad);
+}
+.card h2{margin:0 0 8px;font-size:var(--h2)}
+.muted{color:var(--muted)}
+.h1{font-size:var(--h1);line-height:1.1;margin:10px 0 8px}
+.kicker{color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-size:12px}
+.hr{height:1px;background:var(--line);margin:18px 0}
+.btnrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.btn{
+  border:1px solid var(--line);
+  background:var(--panel);
+  padding:10px 12px;
+  border-radius:12px;
+  display:inline-flex;gap:10px;align-items:center;
+}
+.btn.primary{border-color:rgba(94,234,212,.35)}
+.badge{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 8px;color:var(--muted)}
+.table{width:100%;border-collapse:separate;border-spacing:0}
+.table th,.table td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.table th{color:var(--muted);font-weight:600}
+.input{
+  width:100%;
+  padding:10px 12px;border-radius:12px;border:1px solid var(--line);
+  background:#0a111a;color:var(--text);
+}
+footer{color:var(--muted);padding:26px 0}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Embed Builder</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
+</head>
+<body>
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/chopsticks/">Chopsticks</a>
+        <a data-nav href="/commands/">Commands</a>
+        <a data-nav href="/agents/">Agents</a>
+        <a data-nav href="/embed/">Embed Builder</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="kicker">Tool</div>
+    <div class="h1">Embed Builder</div>
+    <div class="muted">Build an embed payload and export JSON + Discord.js snippet.</div>
+
+    <div class="hr"></div>
+
+    <div class="grid two">
+      <section class="card">
+        <h2>Fields</h2>
+        <div class="hr"></div>
+        <label class="muted">Title</label>
+        <input id="t" class="input" placeholder="Embed title"/>
+        <div style="height:10px"></div>
+
+        <label class="muted">Description</label>
+        <textarea id="d" class="input" style="min-height:120px" placeholder="Embed description"></textarea>
+        <div style="height:10px"></div>
+
+        <label class="muted">Color (hex)</label>
+        <input id="c" class="input" placeholder="#5eead4"/>
+        <div class="btnrow">
+          <button class="btn primary" id="copyjson">Copy JSON</button>
+          <button class="btn" id="copyjs">Copy discord.js</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Output</h2>
+        <div class="hr"></div>
+        <div class="muted">JSON</div>
+        <pre id="json" style="white-space:pre-wrap"></pre>
+        <div class="hr"></div>
+        <div class="muted">Discord.js</div>
+        <pre id="js" style="white-space:pre-wrap"></pre>
+      </section>
+    </div>
+
+    <script>
+      const t=document.getElementById("t");
+      const d=document.getElementById("d");
+      const c=document.getElementById("c");
+      const j=document.getElementById("json");
+      const s=document.getElementById("js");
+
+      function normColor(x){
+        const v=(x||"").trim();
+        if(!v) return 0x5eead4;
+        const h=v.startsWith("#")?v.slice(1):v;
+        if(!/^[0-9a-fA-F]{6}$/.test(h)) return 0x5eead4;
+        return parseInt(h,16);
+      }
+
+      function build(){
+        const payload={
+          embeds:[{
+            title:(t.value||"").slice(0,256),
+            description:(d.value||"").slice(0,4096),
+            color:normColor(c.value)
+          }]
+        };
+        j.textContent=JSON.stringify(payload,null,2);
+        s.textContent=
+\`// discord.js v14
+const payload = \${JSON.stringify(payload,null,2)};
+await interaction.reply(payload);\`;
+        return {payload};
+      }
+
+      [t,d,c].forEach(el=>el.addEventListener("input",build));
+      build();
+
+      async function copy(text){
+        await navigator.clipboard.writeText(text);
+      }
+      document.getElementById("copyjson").onclick=()=>copy(j.textContent);
+      document.getElementById("copyjs").onclick=()=>copy(s.textContent);
+    </script>
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+    </footer>
+  </main>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

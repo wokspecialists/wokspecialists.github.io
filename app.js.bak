@@ -90,7 +90,6 @@ function buildHeader() {
   const header = el("header", { class: "site-header" });
 
   const brand = el("a", { class: "brand", href: ROUTES.home }, [
-    el("img", { src: "/assets/chopsticks.png", alt: "", "aria-hidden": "true" }),
     el("span", { class: "brand-name" }, [text(ORG.name)]),
   ]);
 

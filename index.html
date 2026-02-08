@@ -1,64 +1,76 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Wok Specialists</title>
-  <meta name="description" content="Wok Specialists ships bots, games, art, and tools. Chopsticks is the current flagship: a hosted Discord multitool with optional Agents for voice concurrency." />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
 <body>
-  <div data-mount="header"></div>
-
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/chopsticks/">Chopsticks</a>
+        <a data-nav href="/commands/">Commands</a>
+        <a data-nav href="/agents/">Agents</a>
+        <a data-nav href="/embed/">Embed Builder</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+    </div>
+  </header>
   <main class="wrap">
-    <section class="hero">
-      <div class="card">
-        <div class="row row-wrap" style="justify-content:space-between;align-items:flex-end">
-          <div>
-            <h1 class="h1">Wok Specialists</h1>
-            <p class="p dim">Bots, games, art, and tools. Built small. Shipped clean.</p>
-          </div>
-          <div class="row row-wrap">
-            <a class="btn btn-ghost" href="https://github.com/Wok-Specialists" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a class="btn btn-ghost" href="/contribute/">Contribute</a>
-          </div>
-        </div>
+    <div class="kicker">Wok Specialists · Wok Tech LLC</div>
+    <div class="h1">Projects built for real daily use.</div>
+    <div class="muted">Chopsticks is a multitool Discord bot: VoiceMaster + Music + Agents.</div>
 
+    <div class="hr"></div>
+
+    <div class="grid two">
+      <section class="card">
+        <h2>Server Admin</h2>
+        <div class="muted">Install fast. Operate safely. Minimal steps.</div>
+        <div class="btnrow">
+          <a class="btn primary" href="/chopsticks/">Chopsticks overview</a>
+          <a class="btn" href="/docs/">Quickstart</a>
+          <a class="btn" href="/status/">Status</a>
+        </div>
         <div class="hr"></div>
+        <div class="muted">Core flows</div>
+        <ul>
+          <li>VoiceMaster: join-to-create custom voice channels</li>
+          <li>Music: Lavalink-backed playback</li>
+          <li>Agents: run multiple bot agents for concurrency</li>
+        </ul>
+      </section>
 
-        <div class="grid grid-auto">
-          <div class="card card-soft">
-            <h2 class="h2">Chopsticks</h2>
-            <p class="p dim">Hosted Discord multitool. Voice concurrency via Agents.</p>
-            <div class="row row-wrap mt">
-              <a class="btn btn-blue" href="/chopsticks/">Open</a>
-              <a class="btn btn-green" href="/agents/">Agents</a>
-              <a class="btn btn-ghost" href="/docs/">Docs</a>
-            </div>
-          </div>
-
-          <div class="card card-soft">
-            <h2 class="h2">Projects</h2>
-            <p class="p dim">More areas appear here as they harden.</p>
-            <div class="row row-wrap mt">
-              <a class="btn btn-ghost" href="https://github.com/Wok-Specialists" target="_blank" rel="noopener noreferrer">Browse repos</a>
-            </div>
-          </div>
-
-          <div class="card card-soft">
-            <h2 class="h2">Pre-alpha</h2>
-            <p class="p dim">Dashboards and builders roll out early and iterate fast.</p>
-            <div class="row row-wrap mt">
-              <a class="btn btn-ghost" href="/chopsticks/embed/">Embed builder</a>
-              <a class="btn btn-ghost" href="/status/">Status</a>
-            </div>
-          </div>
+      <section class="card">
+        <h2>Power User / Dev</h2>
+        <div class="muted">Docs, architecture, self-hosting and scaling surfaces.</div>
+        <div class="btnrow">
+          <a class="btn primary" href="/commands/">Command directory</a>
+          <a class="btn" href="/agents/">Agents surface</a>
+          <a class="btn" href="/embed/">Embed Builder</a>
         </div>
-      </div>
-    </section>
+        <div class="hr"></div>
+        <div class="muted">Operator surfaces</div>
+        <ul>
+          <li>Searchable commands + examples</li>
+          <li>Agent pool catalog + batch invite builder</li>
+          <li>Embed Builder: payload + code export</li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+    </footer>
   </main>
-
-  <div data-mount="footer"></div>
-  <script type="module" src="/app.js"></script>
+  <script src="/assets/js/app.js"></script>
 </body>
 </html>

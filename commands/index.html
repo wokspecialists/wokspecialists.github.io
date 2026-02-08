@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Commands</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
+</head>
+<body>
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/chopsticks/">Chopsticks</a>
+        <a data-nav href="/commands/">Commands</a>
+        <a data-nav href="/agents/">Agents</a>
+        <a data-nav href="/embed/">Embed Builder</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="kicker">Directory</div>
+    <div class="h1">Commands</div>
+    <div class="muted">Search and filter commands. Replace the dataset with your generated manifest.</div>
+
+    <div class="hr"></div>
+
+    <input id="q" class="input" placeholder="Search commands (name, description, category)"/>
+
+    <div class="hr"></div>
+
+    <div class="card">
+      <table class="table" id="tbl">
+        <thead>
+          <tr><th>Command</th><th>Description</th><th>Category</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      const data = [
+        {name:"/play", desc:"Play a track or playlist.", cat:"Music"},
+        {name:"/pause", desc:"Pause playback.", cat:"Music"},
+        {name:"/skip", desc:"Skip the current track.", cat:"Music"},
+        {name:"/queue", desc:"Show the queue.", cat:"Music"},
+        {name:"/voicemaster", desc:"VoiceMaster controls and profile tools.", cat:"Voice"}
+      ];
+      const tbody = document.querySelector("#tbl tbody");
+      const q = document.getElementById("q");
+      function render(list){
+        tbody.innerHTML = "";
+        for(const r of list){
+          const tr = document.createElement("tr");
+          tr.innerHTML = \`<td><code>\${r.name}</code></td><td>\${r.desc}</td><td>\${r.cat}</td>\`;
+          tbody.appendChild(tr);
+        }
+      }
+      function filt(){
+        const s = q.value.trim().toLowerCase();
+        if(!s) return render(data);
+        render(data.filter(r =>
+          (r.name+r.desc+r.cat).toLowerCase().includes(s)
+        ));
+      }
+      q.addEventListener("input", filt);
+      render(data);
+    </script>
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+    </footer>
+  </main>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

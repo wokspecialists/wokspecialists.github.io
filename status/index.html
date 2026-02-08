@@ -1,5 +1,94 @@
 <!doctype html>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="0; url=/chopsticks/status/">
-<link rel="canonical" href="/chopsticks/status/">
-<title>Redirecting…</title>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Status</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
+</head>
+<body>
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/chopsticks/">Chopsticks</a>
+        <a data-nav href="/commands/">Commands</a>
+        <a data-nav href="/agents/">Agents</a>
+        <a data-nav href="/embed/">Embed Builder</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="kicker">Reliability</div>
+    <div class="h1">Status</div>
+    <div class="muted">Component health and incidents. Wire to your self-host JSON when ready.</div>
+
+    <div class="hr"></div>
+
+    <section class="card">
+      <h2>Components</h2>
+      <div class="hr"></div>
+      <table class="table" id="comp">
+        <thead><tr><th>Component</th><th>Status</th><th>Notes</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <div class="hr"></div>
+
+    <section class="card">
+      <h2>Incidents</h2>
+      <div class="hr"></div>
+      <div id="inc" class="muted">No incidents reported.</div>
+    </section>
+
+    <script>
+      const fallback={
+        components:[
+          {name:"Web", status:"operational", notes:""},
+          {name:"Bot API", status:"operational", notes:""},
+          {name:"Gateway", status:"operational", notes:""},
+          {name:"Lavalink", status:"unknown", notes:"self-hosted"},
+          {name:"Agents", status:"operational", notes:""}
+        ],
+        incidents:[]
+      };
+
+      async function load(){
+        // If you self-host, point this to your endpoint and keep the fallback.
+        // e.g. const url="https://yourhost.tld/api/status";
+        const url="";
+        let data=fallback;
+        if(url){
+          try{
+            const r=await fetch(url,{cache:"no-store"});
+            if(r.ok) data=await r.json();
+          }catch{}
+        }
+        const tbody=document.querySelector("#comp tbody");
+        tbody.innerHTML="";
+        for(const c of data.components||[]){
+          const tr=document.createElement("tr");
+          tr.innerHTML=\`<td>\${c.name}</td><td><span class="badge">\${c.status}</span></td><td class="muted">\${c.notes||""}</td>\`;
+          tbody.appendChild(tr);
+        }
+        const inc=document.getElementById("inc");
+        if(!data.incidents || !data.incidents.length){inc.textContent="No incidents reported.";return;}
+        inc.innerHTML=data.incidents.map(x=>\`<div><span class="badge">\${x.status}</span> \${x.title} <span class="muted">(\${x.date})</span></div>\`).join("");
+      }
+      load();
+    </script>
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+    </footer>
+  </main>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

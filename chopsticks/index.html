@@ -1,61 +1,90 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Status — Chopsticks</title>
-  <meta name="description" content="Service status for Chopsticks and the Agent pool." />
-  <link rel="stylesheet" href="/styles.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Chopsticks</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
 <body>
-  <div data-mount="header"></div>
-
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/">Home</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/chopsticks/">Chopsticks</a>
+        <a data-nav href="/commands/">Commands</a>
+        <a data-nav href="/agents/">Agents</a>
+        <a data-nav href="/embed/">Embed Builder</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+    </div>
+  </header>
   <main class="wrap">
-    <section class="hero">
-      <div class="card">
-        <h1 class="h1">Status</h1>
-        <p class="p dim">Manual updates now. Cluster-style status later.</p>
-        <div class="row row-wrap mt">
-          <a class="btn btn-green" href="/agents/">Invite Agents</a>
-          <a class="btn btn-ghost" href="/chopsticks/docs/">Docs</a>
-        </div>
+    <div class="kicker">Product</div>
+    <div class="h1">Chopsticks</div>
+    <div class="muted">Multitool Discord bot focused on voice experiences: VoiceMaster + Music + Agents.</div>
+
+    <div class="hr"></div>
+
+    <div class="grid three">
+      <section class="card">
+        <h2>VoiceMaster</h2>
+        <div class="muted">Join-to-create voice channels with profile-driven control.</div>
+        <div class="hr"></div>
+        <div class="badge">Daily use</div>
+        <ul>
+          <li>Custom voice channels on-demand</li>
+          <li>Per-guild profiles</li>
+          <li>Permission-aware controls</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Music</h2>
+        <div class="muted">Lavalink-backed playback with queue control.</div>
+        <div class="hr"></div>
+        <div class="badge">Core</div>
+        <ul>
+          <li>/play, /pause, /skip, /queue</li>
+          <li>Multi-channel via Agents</li>
+          <li>Predictable session rules</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Agents</h2>
+        <div class="muted">Deploy multiple agents to increase concurrency and isolate sessions.</div>
+        <div class="hr"></div>
+        <div class="badge">Scaling</div>
+        <ul>
+          <li>Multiple agent clients</li>
+          <li>Parallel voice sessions</li>
+          <li>Operational surface in /agents</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="hr"></div>
+
+    <section class="card">
+      <h2>Install</h2>
+      <div class="muted">Invite, configure, run Lavalink, then use commands.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/docs/">Docs</a>
+        <a class="btn" href="/commands/">Commands</a>
+        <a class="btn" href="/agents/">Agents</a>
       </div>
     </section>
-
-    <section class="section">
-      <div class="grid grid-auto">
-        <div class="card card-soft">
-          <h2 class="h2">Service</h2>
-          <ul class="caps">
-            <li>Commands responding: Operational</li>
-            <li>Voice join: Operational</li>
-            <li>Playback: Operational</li>
-            <li>Agent pool: Operational</li>
-          </ul>
-        </div>
-
-        <div class="card card-soft">
-          <h2 class="h2">If something feels off</h2>
-          <ul class="caps">
-            <li>Check voice permissions (connect/speak).</li>
-            <li>Retry join once.</li>
-            <li>If rooms collide: invite more Agents.</li>
-          </ul>
-        </div>
-
-        <div class="card card-soft">
-          <h2 class="h2">Dashboard</h2>
-          <p class="p dim">Pre-alpha. Not public yet. Link appears when it’s usable.</p>
-          <div class="label mt">Inspiration</div>
-          <ul class="caps">
-            <li>Status surfaces and dashboards like large bots build trust and reduce support load.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+    </footer>
   </main>
-
-  <div data-mount="footer"></div>
-  <script type="module" src="/app.js"></script>
+  <script src="/assets/js/app.js"></script>
 </body>
 </html>
