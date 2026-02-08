@@ -31,32 +31,51 @@
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><a href="/open-source/catalog/">Rooms</a><span>/</span><span>Open Source</span></div>
 
     <section class="section" data-reveal>
-      <div class="vault-hero">
-        <div class="vault-hero-main">
-          <div class="kicker">Vault Room</div>
-          <div class="display">Open Source Catalog</div>
-          <div class="muted">A dense, structured index of tools and resources. Search fast, filter clean, and open what you need.</div>
-          <div class="hero-actions">
-            <a class="btn primary" href="/open-source/catalog/">Vault Rooms</a>
-            <a class="btn" href="/open-source/">Vault Gate</a>
+      <div class="vault-shell">
+        <div class="vault-hero-grid">
+          <div class="vault-hero-core">
+            <div class="kicker">Vault Room 01</div>
+            <div class="display">Open Source Catalog</div>
+            <div class="muted">A dense index of tools and resources. Search fast, filter clean, open what you need.</div>
+            <div class="hero-actions">
+              <a class="btn primary" href="/open-source/catalog/">Vault Rooms</a>
+              <a class="btn" href="/open-source/">Vault Gate</a>
+            </div>
           </div>
-        </div>
-        <div class="vault-hero-stats">
-          <div class="stat">
-            <strong data-vault-total>0</strong>
-            <span>Total Items</span>
+          <div class="vault-hero-stats">
+            <div class="stat">
+              <strong data-vault-total>0</strong>
+              <span>Total Items</span>
+            </div>
+            <div class="stat">
+              <strong data-vault-meta="categories">0</strong>
+              <span>Categories</span>
+            </div>
+            <div class="stat">
+              <strong data-vault-meta="collections">0</strong>
+              <span>Collections</span>
+            </div>
+            <div class="stat">
+              <strong data-vault-meta="tags">0</strong>
+              <span>Tags</span>
+            </div>
           </div>
-          <div class="stat">
-            <strong data-vault-meta="categories">0</strong>
-            <span>Categories</span>
-          </div>
-          <div class="stat">
-            <strong data-vault-meta="collections">0</strong>
-            <span>Collections</span>
-          </div>
-          <div class="stat">
-            <strong data-vault-meta="tags">0</strong>
-            <span>Tags</span>
+          <div class="vault-hero-tiles">
+            <div class="tile">
+              <div class="kicker">Focus</div>
+              <div class="h3">Streaming · Tools · Torrenting</div>
+              <div class="muted">Fast slices into the largest categories.</div>
+            </div>
+            <div class="tile">
+              <div class="kicker">Quick Routes</div>
+              <div class="linklist">
+                <a href="/open-source/open-source/#category/streaming">Streaming</a>
+                <a href="/open-source/open-source/#category/tools">Tools</a>
+                <a href="/open-source/open-source/#category/torrenting">Torrenting</a>
+                <a href="/open-source/open-source/#category/media">Media</a>
+                <a href="/open-source/open-source/#category/gaming">Gaming</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -103,23 +122,23 @@
 
       <div class="divider"></div>
 
-      <div class="vault-layout">
-        <aside class="vault-sidebar">
-          <div class="sidebar-block">
-            <h3 id="vault-categories">Categories</h3>
-            <div class="vault-filters" data-vault-categories></div>
+      <div class="vault-layout max">
+        <aside class="vault-rail">
+          <div class="rail-block">
+            <div class="kicker">Categories</div>
+            <div id="vault-categories" class="vault-filters" data-vault-categories></div>
           </div>
-          <div class="sidebar-block">
-            <h3 id="vault-collections">Collections</h3>
-            <div class="grid" data-vault-collections></div>
+          <div class="rail-block">
+            <div class="kicker">Collections</div>
+            <div id="vault-collections" class="grid" data-vault-collections></div>
           </div>
-          <div class="sidebar-block">
-            <h3 id="vault-tags">Tags</h3>
-            <div class="vault-filters" data-vault-tags></div>
+          <div class="rail-block">
+            <div class="kicker">Tags</div>
+            <div id="vault-tags" class="vault-filters" data-vault-tags></div>
           </div>
         </aside>
 
-        <div class="vault-results" id="vault-results">
+        <div class="vault-board" id="vault-results">
           <div class="vault-results-head">
             <div>
               <div class="kicker">Results</div>
@@ -140,7 +159,7 @@
       <div class="grid two" data-stagger>
         <div class="card glass">
           <div class="kicker">Maintain</div>
-          <div class="h3">Add your own links</div>
+          <div class="h3">Local updates</div>
           <div class="linklist">
             <a href="/data/open-source/catalog.json">Catalog JSON</a>
             <a href="/data/open-source/categories.json">Categories</a>
