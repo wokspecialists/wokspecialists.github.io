@@ -395,22 +395,29 @@
           if (e.button && e.button !== 0) return;
           e.preventDefault();
           node.dataset.dragging = '1';
+          node.dataset.moved = '0';
           node.setPointerCapture(e.pointerId);
           const rect = grid.getBoundingClientRect();
           const startX = e.clientX - rect.left - Number(node.dataset.x || 0);
           const startY = e.clientY - rect.top - Number(node.dataset.y || 0);
+          const originX = e.clientX;
+          const originY = e.clientY;
           function move(ev){
             const x = ev.clientX - rect.left - startX;
             const y = ev.clientY - rect.top - startY;
             node.dataset.x = String(x);
             node.dataset.y = String(y);
             clampNodeToGrid(node, grid);
+            const dx = ev.clientX - originX;
+            const dy = ev.clientY - originY;
+            if (Math.hypot(dx, dy) > 4) node.dataset.moved = '1';
           }
           function up(){
             node.removeEventListener('pointermove', move);
             node.removeEventListener('pointerup', up);
             node.removeEventListener('pointercancel', up);
             delete node.dataset.dragging;
+            setTimeout(()=>{delete node.dataset.moved;}, 0);
           }
           node.addEventListener('pointermove', move);
           node.addEventListener('pointerup', up);
@@ -458,7 +465,7 @@
           hideTimer = window.setTimeout(hideMenu, 180);
         });
         node.addEventListener('click', (e)=>{
-          if (node.dataset.dragging) {
+          if (node.dataset.dragging || node.dataset.moved === '1') {
             e.preventDefault();
             e.stopPropagation();
           }
