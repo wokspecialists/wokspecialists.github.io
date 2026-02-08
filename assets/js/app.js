@@ -371,6 +371,40 @@
   }
   setupBattlefieldInteractions();
 
+  function setupBattlefieldHoverRipple(){
+    const grids = document.querySelectorAll('.battlefield-grid');
+    grids.forEach(grid=>{
+      if (grid.dataset.ripple) return;
+      const dots = Array.from(grid.querySelectorAll('.node-dot'));
+      if (!dots.length) return;
+      grid.addEventListener('mousemove', (e)=>{
+        const rect = grid.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+        dots.forEach(dot=>{
+          const drect = dot.getBoundingClientRect();
+          const dx = (drect.left + drect.width / 2) - e.clientX;
+          const dy = (drect.top + drect.height / 2) - e.clientY;
+          const dist = Math.hypot(dx, dy);
+          const power = Math.max(0, 1 - dist / 140);
+          const offset = power * 8;
+          dot.style.transform = `translate(${dx * -0.02}px, ${dy * -0.02}px) scale(${1 + power * 0.6})`;
+          dot.style.boxShadow = power > 0.05 ? `0 0 ${10 + power * 18}px rgba(255,255,255,.35)` : '';
+          dot.style.filter = power > 0.05 ? 'brightness(1.2)' : '';
+        });
+      });
+      grid.addEventListener('mouseleave', ()=>{
+        dots.forEach(dot=>{
+          dot.style.transform = '';
+          dot.style.boxShadow = '';
+          dot.style.filter = '';
+        });
+      });
+      grid.dataset.ripple = '1';
+    });
+  }
+  setupBattlefieldHoverRipple();
+
   function bootLiquidNet(){
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (document.querySelector('.liquid-net')) return;
