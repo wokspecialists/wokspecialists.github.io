@@ -113,6 +113,10 @@
     brand.appendChild(pill);
   }
 
+  if (document.body && !document.body.classList.contains('hscroll-site')) {
+    document.body.classList.add('hscroll-site');
+  }
+
   const main = document.querySelector('main');
   const pathEl = document.querySelector('.path');
   const isStartGate = location.pathname === '/' || location.pathname === '/start/' || location.pathname === '/start';

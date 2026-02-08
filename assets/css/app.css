@@ -180,6 +180,25 @@ body{
 @media (max-width:1100px){.grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){.grid.two,.grid.three,.grid.four{grid-template-columns:1fr}}
 
+.hscroll-site .grid{
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(260px, 360px);
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:8px;
+}
+.hscroll-site .grid > *{
+  scroll-snap-align:start;
+}
+.hscroll-site .grid::-webkit-scrollbar{height:8px}
+.hscroll-site .grid::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:999px}
+
+@media (max-width:900px){
+  .hscroll-site .grid{
+    grid-auto-columns:minmax(220px, 1fr);
+  }
+}
+
 /* Hero split */
 .hero-split{
   display:grid;
