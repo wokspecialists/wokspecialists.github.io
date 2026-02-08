@@ -1,73 +1,61 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Plans</title>
+  <title>Plans · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body>
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
-        <a data-nav href="/">Home</a>
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
-        <a data-nav href="/chopsticks/">Chopsticks</a>
-        <a data-nav href="/commands/">Commands</a>
-        <a data-nav href="/agents/">Agents</a>
-        <a data-nav href="/embed/">Embed Builder</a>
         <a data-nav href="/docs/">Docs</a>
         <a data-nav href="/status/">Status</a>
         <a data-nav href="/plans/">Plans</a>
         <a data-nav href="/company/">Company</a>
       </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
     </div>
   </header>
   <main class="wrap">
-    <div class="kicker">Plans</div>
-    <div class="h1">Plans</div>
-    <div class="muted">Define tiers even if price is 0 today. This clarifies the platform.</div>
-
-    <div class="hr"></div>
-
-    <div class="grid three">
-      <section class="card">
-        <h2>Free</h2>
-        <div class="muted">Core bot + basic features.</div>
-        <div class="hr"></div>
-        <ul>
-          <li>VoiceMaster</li>
-          <li>Music</li>
-          <li>Limited agents</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Pro</h2>
-        <div class="muted">More agents + advanced controls.</div>
-        <div class="hr"></div>
-        <ul>
-          <li>More agents</li>
-          <li>Priority updates</li>
-          <li>Advanced voice controls</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Self-host</h2>
-        <div class="muted">Operator-focused deployment.</div>
-        <div class="hr"></div>
-        <ul>
-          <li>Run your own stack</li>
-          <li>Status endpoint</li>
-          <li>Custom scaling</li>
-        </ul>
-      </section>
-    </div>
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Plans</span></div>
+    <section class="section" data-reveal>
+      <div class="kicker">Plans</div>
+      <div class="display">Roadmap and next steps.</div>
+      <div class="muted">The north star for all product lines.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/projects/">Projects</a>
+        <a class="btn" href="/status/">Status</a>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="grid three" data-stagger>
+        <article class="card">
+          <h3>Stability</h3>
+          <div class="muted">Hardening queues and voice flows.</div>
+        </article>
+        <article class="card">
+          <h3>Discovery</h3>
+          <div class="muted">Deepen the Vault and Atlas.</div>
+        </article>
+        <article class="card">
+          <h3>Scale</h3>
+          <div class="muted">Multi-region and reliability.</div>
+        </article>
+      </div>
+    </section>
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+      <div>Wok Specialists.</div>
     </footer>
   </main>
   <script src="/assets/js/app.js"></script>

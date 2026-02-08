@@ -1,0 +1,19 @@
+[
+  {"id":"learning","label":"Learning","summary":"Courses, tutorials, reference, study tools"},
+  {"id":"guides","label":"Guides","summary":"Playbooks, checklists, and how-tos"},
+  {"id":"reading","label":"Reading","summary":"Books, articles, docs, archives"},
+  {"id":"media","label":"Media","summary":"Audio, video, archives, public domain"},
+  {"id":"streaming","label":"Streaming","summary":"Legal streaming platforms and viewers"},
+  {"id":"torrenting","label":"Torrenting","summary":"Legal torrent clients and tooling"},
+  {"id":"tools","label":"Tools","summary":"Utility apps, system tools, productivity"},
+  {"id":"ai","label":"AI","summary":"Open models, toolchains, inference"},
+  {"id":"developer","label":"Developer","summary":"Dev tools, docs, packages, hosting"},
+  {"id":"design","label":"Design","summary":"Graphics, UI, fonts, assets"},
+  {"id":"security","label":"Security","summary":"Security tools, guides, testing"},
+  {"id":"privacy","label":"Privacy","summary":"Privacy tools, checks, trackers"},
+  {"id":"social","label":"Social","summary":"Federated and open social platforms"},
+  {"id":"mobile","label":"Mobile","summary":"Mobile apps, stores, utilities"},
+  {"id":"gaming","label":"Gaming","summary":"Free/open games, engines, communities"},
+  {"id":"data","label":"Data","summary":"Datasets, APIs, maps, statistics"},
+  {"id":"infrastructure","label":"Infrastructure","summary":"Networking, hosting, ops"}
+]

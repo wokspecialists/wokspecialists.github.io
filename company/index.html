@@ -1,48 +1,62 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Company</title>
+  <title>Company · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body>
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
-        <a data-nav href="/">Home</a>
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
-        <a data-nav href="/chopsticks/">Chopsticks</a>
-        <a data-nav href="/commands/">Commands</a>
-        <a data-nav href="/agents/">Agents</a>
-        <a data-nav href="/embed/">Embed Builder</a>
         <a data-nav href="/docs/">Docs</a>
         <a data-nav href="/status/">Status</a>
         <a data-nav href="/plans/">Plans</a>
         <a data-nav href="/company/">Company</a>
       </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
     </div>
   </header>
   <main class="wrap">
-    <div class="kicker">Company</div>
-    <div class="h1">Wok Specialists</div>
-    <div class="muted">Owned and operated by Wok Tech LLC. Builds projects across code, design, art, and systems.</div>
-
-    <div class="hr"></div>
-
-    <section class="card">
-      <h2>Focus</h2>
-      <ul>
-        <li>Discord bots</li>
-        <li>Tools</li>
-        <li>Games</li>
-        <li>Art systems</li>
-      </ul>
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Company</span></div>
+    <section class="section" data-reveal>
+      <div class="kicker">Company</div>
+      <div class="display">Structure, direction, and long-term vision.</div>
+      <div class="muted">What we build, how we work, and where we’re headed.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/plans/">Roadmap</a>
+        <a class="btn" href="/status/">Status</a>
+        <a class="btn" href="/support/">Support</a>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="grid three" data-stagger>
+        <article class="card">
+          <h3>Principles</h3>
+          <div class="muted">Clarity, stability, and open access.</div>
+        </article>
+        <article class="card">
+          <h3>Status & Plans</h3>
+          <div class="muted">Roadmap, uptime, and updates.</div>
+        </article>
+        <article class="card">
+          <h3>People</h3>
+          <div class="muted">Open contributions and feedback loops.</div>
+        </article>
+      </div>
     </section>
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+      <div>Wok Specialists.</div>
     </footer>
   </main>
   <script src="/assets/js/app.js"></script>

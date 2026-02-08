@@ -1,76 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Wok Specialists</title>
+  <title>Start · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body>
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
-      <nav class="links">
-        <a data-nav href="/">Home</a>
-        <a data-nav href="/projects/">Projects</a>
-        <a data-nav href="/chopsticks/">Chopsticks</a>
-        <a data-nav href="/commands/">Commands</a>
-        <a data-nav href="/agents/">Agents</a>
-        <a data-nav href="/embed/">Embed Builder</a>
-        <a data-nav href="/docs/">Docs</a>
-        <a data-nav href="/status/">Status</a>
-        <a data-nav href="/plans/">Plans</a>
-        <a data-nav href="/company/">Company</a>
-      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
     </div>
   </header>
+
   <main class="wrap">
-    <div class="kicker">Wok Specialists · Wok Tech LLC</div>
-    <div class="h1">Projects built for real daily use.</div>
-    <div class="muted">Chopsticks is a multitool Discord bot: VoiceMaster + Music + Agents.</div>
+    <section class="hero" data-reveal>
+      <div class="kicker">Entrance</div>
+      <div class="display">Choose your path</div>
+      <div class="muted">In development. Pick a route and go.</div>
+      <div class="hero-actions">
+        <a class="btn primary" href="/home/">Enter Site</a>
+        <a class="btn" href="/projects/">Projects</a>
+        <a class="btn" href="/chopsticks/">Chopsticks</a>
+      </div>
+    </section>
 
-    <div class="hr"></div>
-
-    <div class="grid two">
-      <section class="card">
-        <h2>Server Admin</h2>
-        <div class="muted">Install fast. Operate safely. Minimal steps.</div>
-        <div class="btnrow">
-          <a class="btn primary" href="/chopsticks/">Chopsticks overview</a>
-          <a class="btn" href="/docs/">Quickstart</a>
-          <a class="btn" href="/status/">Status</a>
-        </div>
-        <div class="hr"></div>
-        <div class="muted">Core flows</div>
-        <ul>
-          <li>VoiceMaster: join-to-create custom voice channels</li>
-          <li>Music: Lavalink-backed playback</li>
-          <li>Agents: run multiple bot agents for concurrency</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Power User / Dev</h2>
-        <div class="muted">Docs, architecture, self-hosting and scaling surfaces.</div>
-        <div class="btnrow">
-          <a class="btn primary" href="/commands/">Command directory</a>
-          <a class="btn" href="/agents/">Agents surface</a>
-          <a class="btn" href="/embed/">Embed Builder</a>
-        </div>
-        <div class="hr"></div>
-        <div class="muted">Operator surfaces</div>
-        <ul>
-          <li>Searchable commands + examples</li>
-          <li>Agent pool catalog + batch invite builder</li>
-          <li>Embed Builder: payload + code export</li>
-        </ul>
-      </section>
-    </div>
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+      <div>Wok Specialists. In development.</div>
     </footer>
   </main>
+
   <script src="/assets/js/app.js"></script>
 </body>
 </html>

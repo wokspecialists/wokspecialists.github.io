@@ -1,88 +1,78 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Chopsticks</title>
+  <title>Chopsticks · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body>
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
-        <a data-nav href="/">Home</a>
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
-        <a data-nav href="/chopsticks/">Chopsticks</a>
-        <a data-nav href="/commands/">Commands</a>
-        <a data-nav href="/agents/">Agents</a>
-        <a data-nav href="/embed/">Embed Builder</a>
         <a data-nav href="/docs/">Docs</a>
         <a data-nav href="/status/">Status</a>
         <a data-nav href="/plans/">Plans</a>
         <a data-nav href="/company/">Company</a>
       </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
     </div>
   </header>
   <main class="wrap">
-    <div class="kicker">Product</div>
-    <div class="h1">Chopsticks</div>
-    <div class="muted">Multitool Discord bot focused on voice experiences: VoiceMaster + Music + Agents.</div>
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Chopsticks</span></div>
 
-    <div class="hr"></div>
-
-    <div class="grid three">
-      <section class="card">
-        <h2>VoiceMaster</h2>
-        <div class="muted">Join-to-create voice channels with profile-driven control.</div>
-        <div class="hr"></div>
-        <div class="badge">Daily use</div>
-        <ul>
-          <li>Custom voice channels on-demand</li>
-          <li>Per-guild profiles</li>
-          <li>Permission-aware controls</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Music</h2>
-        <div class="muted">Lavalink-backed playback with queue control.</div>
-        <div class="hr"></div>
-        <div class="badge">Core</div>
-        <ul>
-          <li>/play, /pause, /skip, /queue</li>
-          <li>Multi-channel via Agents</li>
-          <li>Predictable session rules</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Agents</h2>
-        <div class="muted">Deploy multiple agents to increase concurrency and isolate sessions.</div>
-        <div class="hr"></div>
-        <div class="badge">Scaling</div>
-        <ul>
-          <li>Multiple agent clients</li>
-          <li>Parallel voice sessions</li>
-          <li>Operational surface in /agents</li>
-        </ul>
-      </section>
-    </div>
-
-    <div class="hr"></div>
-
-    <section class="card">
-      <h2>Install</h2>
-      <div class="muted">Invite, configure, run Lavalink, then use commands.</div>
+    <section class="section" data-reveal>
+      <div class="kicker">Chopsticks</div>
+      <div class="display">Discord multitool bot</div>
+      <div class="muted">VoiceMaster plus deployable agents for multi‑channel tasks.</div>
       <div class="btnrow">
-        <a class="btn primary" href="/docs/">Docs</a>
-        <a class="btn" href="/commands/">Commands</a>
-        <a class="btn" href="/agents/">Agents</a>
+        <a class="btn primary" href="/commands/">Commands</a>
+        <a class="btn" href="/chopsticks/docs/">Docs</a>
+        <a class="btn" href="/embed/">Embed Tool</a>
+        <a class="btn lime" href="/chopsticks/agents/">Agents</a>
       </div>
     </section>
+
+    <section class="section" data-reveal>
+      <div class="grid three" data-stagger>
+        <article class="card">
+          <h3>VoiceMaster</h3>
+          <div class="muted">Auto room creation and control.</div>
+        </article>
+        <article class="card">
+          <h3>Queue Discipline</h3>
+          <div class="muted">Predictable transitions and guardrails.</div>
+        </article>
+        <article class="card">
+          <h3>Deployable Agents</h3>
+          <div class="muted">Run parallel tasks in multiple channels.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="card glass">
+        <div class="kicker">Bot Pool</div>
+        <div class="h2">Agents live under Projects</div>
+        <div class="muted">Manage availability and invites from the project hub.</div>
+        <div class="btnrow">
+          <a class="btn" href="/projects/#bot-pool">Open Bot Pool</a>
+          <a class="btn" href="/chopsticks/agents/">Agents</a>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+      <div>Wok Specialists. In development.</div>
     </footer>
   </main>
   <script src="/assets/js/app.js"></script>

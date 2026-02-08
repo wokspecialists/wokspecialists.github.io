@@ -1,88 +1,62 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Agents</title>
+  <title>Agents · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body>
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
-        <a data-nav href="/">Home</a>
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
-        <a data-nav href="/chopsticks/">Chopsticks</a>
-        <a data-nav href="/commands/">Commands</a>
-        <a data-nav href="/agents/">Agents</a>
-        <a data-nav href="/embed/">Embed Builder</a>
         <a data-nav href="/docs/">Docs</a>
         <a data-nav href="/status/">Status</a>
         <a data-nav href="/plans/">Plans</a>
         <a data-nav href="/company/">Company</a>
       </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
     </div>
   </header>
   <main class="wrap">
-    <div class="kicker">Scaling</div>
-    <div class="h1">Agents</div>
-    <div class="muted">Deploy multiple agents to increase concurrency and isolate voice sessions.</div>
-
-    <div class="hr"></div>
-
-    <div class="grid two">
-      <section class="card">
-        <h2>Agent Catalog</h2>
-        <div class="muted">List your available agents here.</div>
-        <div class="hr"></div>
-        <table class="table">
-          <thead><tr><th>Agent</th><th>Status</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td>Agent 0001</td><td><span class="badge">available</span></td><td>General purpose</td></tr>
-            <tr><td>Agent 0002</td><td><span class="badge">available</span></td><td>General purpose</td></tr>
-            <tr><td>Agent 0003</td><td><span class="badge">available</span></td><td>General purpose</td></tr>
-            <tr><td>Agent 0004</td><td><span class="badge">available</span></td><td>General purpose</td></tr>
-            <tr><td>Agent 0005</td><td><span class="badge">available</span></td><td>General purpose</td></tr>
-            <tr><td>More</td><td><span class="badge">coming soon</span></td><td>Specialized roles</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section class="card">
-        <h2>Batch Invite Builder</h2>
-        <div class="muted">Paste client IDs. Generates invite URLs.</div>
-        <div class="hr"></div>
-        <textarea id="ids" class="input" style="min-height:160px" placeholder="one clientId per line"></textarea>
-        <div class="btnrow">
-          <button class="btn primary" id="gen">Generate</button>
-          <button class="btn" id="clr">Clear</button>
-        </div>
-        <div class="hr"></div>
-        <div id="out" class="muted"></div>
-      </section>
-    </div>
-
-    <script>
-      const base="https://discord.com/api/oauth2/authorize";
-      const scope=encodeURIComponent("bot applications.commands");
-      const perms="36700160";
-      const ids=document.getElementById("ids");
-      const out=document.getElementById("out");
-      document.getElementById("clr").onclick=()=>{ids.value="";out.textContent="";};
-      document.getElementById("gen").onclick=()=>{
-        const list=ids.value.split(/\\r?\\n/).map(s=>s.trim()).filter(Boolean);
-        if(!list.length){out.textContent="No client IDs provided.";return;}
-        const lines=list.map(id=>{
-          const url=\`\${base}?client_id=\${encodeURIComponent(id)}&permissions=\${perms}&scope=\${scope}\`;
-          return \`<div><code>\${id}</code><div><a class="btn" href="\${url}">Invite</a></div></div>\`;
-        }).join("<div class=\\"hr\\"></div>");
-        out.innerHTML=lines;
-      };
-    </script>
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Agents</span></div>
+    <section class="section" data-reveal>
+      <div class="kicker">Agents</div>
+      <div class="display">Multi-client orchestration for reliable queues.</div>
+      <div class="muted">Agents keep sessions stable, handle handoffs, and protect uptime during spikes.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/chopsticks/">Chopsticks</a>
+        <a class="btn" href="/status/">Status</a>
+        <a class="btn" href="/docs/">Docs</a>
+      </div>
+    </section>
+    <section class="section" data-reveal>
+      <div class="grid three" data-stagger>
+        <article class="card">
+          <h3>Queue Control</h3>
+          <div class="muted">Predictable transitions and guardrails.</div>
+        </article>
+        <article class="card">
+          <h3>Voice Logic</h3>
+          <div class="muted">Room creation and cleanup automation.</div>
+        </article>
+        <article class="card">
+          <h3>Recovery</h3>
+          <div class="muted">Fallbacks that keep sessions alive.</div>
+        </article>
+      </div>
+    </section>
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+      <div>Wok Specialists.</div>
     </footer>
   </main>
   <script src="/assets/js/app.js"></script>

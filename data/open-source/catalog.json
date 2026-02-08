@@ -1,0 +1,278 @@
+[
+  {"id":"nmap","title":"Nmap","url":"https://nmap.org/","category":"security","tags":["network","scanner"],"note":"Network discovery and auditing"},
+  {"id":"ghidra","title":"Ghidra","url":"https://ghidra-sre.org/","category":"security","tags":["reverse-engineering","sre"],"note":"Reverse engineering framework"},
+  {"id":"wireshark","title":"Wireshark","url":"https://www.wireshark.org/","category":"security","tags":["network","pcap"],"note":"Packet analyzer"},
+  {"id":"lynis","title":"Lynis","url":"https://cisofy.com/lynis/","category":"security","tags":["audit","linux"],"note":"System security auditing"},
+  {"id":"certbot","title":"Certbot","url":"https://certbot.eff.org/","category":"security","tags":["tls","lets-encrypt"],"note":"TLS certificate automation"},
+  {"id":"openssh","title":"OpenSSH","url":"https://www.openssh.com/","category":"security","tags":["ssh","network"],"note":"OpenSSH project (asset link for now)"},
+  {"id":"openssl","title":"OpenSSL","url":"https://www.openssl.org/","category":"security","tags":["crypto","tls"],"note":"OpenSSL project (asset link for now)"},
+  {"id":"tor","title":"Tor Project","url":"https://www.torproject.org/","category":"privacy","tags":["anonymity","browser"],"note":"Privacy network and browser"},
+  {"id":"tails","title":"Tails","url":"https://tails.net/","category":"privacy","tags":["os","anonymity"],"note":"Live OS for privacy"},
+  {"id":"qubes","title":"Qubes OS","url":"https://www.qubes-os.org/","category":"privacy","tags":["os","sandbox"],"note":"Security-oriented OS"},
+  {"id":"i2p","title":"I2P","url":"https://geti2p.net/","category":"privacy","tags":["anonymity","network"],"note":"Anonymous network"},
+  {"id":"privacyguides","title":"Privacy Guides","url":"https://www.privacyguides.org/","category":"privacy","tags":["guides","security"],"note":"Community privacy guides"},
+  {"id":"eff-ssd","title":"EFF SSD","url":"https://ssd.eff.org/","category":"privacy","tags":["guides","security"],"note":"Surveillance self-defense"},
+  {"id":"hibp","title":"Have I Been Pwned","url":"https://haveibeenpwned.com/","category":"privacy","tags":["breach","security"],"note":"Breach lookup"},
+
+  {"id":"github","title":"GitHub","url":"https://github.com/","category":"developer","tags":["hosting","git"],"note":"Code hosting"},
+  {"id":"gitlab","title":"GitLab","url":"https://about.gitlab.com/","category":"developer","tags":["hosting","devops"],"note":"DevOps platform"},
+  {"id":"codeberg","title":"Codeberg","url":"https://codeberg.org/","category":"developer","tags":["hosting","git"],"note":"Community code host"},
+  {"id":"forgejo","title":"Forgejo","url":"https://forgejo.org/","category":"developer","tags":["hosting","git"],"note":"Self-hosted forge"},
+  {"id":"devdocs","title":"DevDocs","url":"https://devdocs.io/","category":"developer","tags":["docs","reference"],"note":"Offline-friendly docs"},
+  {"id":"mdn","title":"MDN Web Docs","url":"https://developer.mozilla.org/","category":"developer","tags":["docs","web"],"note":"Web platform reference"},
+  {"id":"docs-github","title":"GitHub Docs","url":"https://docs.github.com/","category":"developer","tags":["docs"],"note":"Platform documentation"},
+  {"id":"docs-gitlab","title":"GitLab Docs","url":"https://docs.gitlab.com/user/snippets/","category":"developer","tags":["docs"],"note":"Platform documentation"},
+  {"id":"vscode","title":"VS Code","url":"https://code.visualstudio.com/","category":"developer","tags":["editor","ide"],"note":"Editor"},
+  {"id":"vscodium","title":"VSCodium","url":"https://vscodium.com/","category":"developer","tags":["editor","oss"],"note":"Open source build of VS Code"},
+  {"id":"distrobox","title":"Distrobox","url":"https://distrobox.it/","category":"developer","tags":["containers","linux"],"note":"Containerized dev environments"},
+  {"id":"podman","title":"Podman","url":"https://github.com/containers/podman","category":"developer","tags":["containers"],"note":"Containers without daemon"},
+  {"id":"docker","title":"Docker Hub","url":"https://hub.docker.com/","category":"developer","tags":["containers"],"note":"Container registry"},
+  {"id":"caddy","title":"Caddy","url":"https://caddyserver.com/","category":"infrastructure","tags":["web","server"],"note":"Automatic HTTPS server"},
+  {"id":"nginx","title":"nginx","url":"https://github.com/An-anonymous-coder/Open-Source-Everything/blob/main/Assets/Software/nginx.png","category":"infrastructure","tags":["web","server"],"note":"Web server (asset link for now)"},
+  {"id":"openvpn","title":"OpenVPN","url":"https://openvpn.net/","category":"infrastructure","tags":["vpn"],"note":"VPN platform"},
+  {"id":"wireguard","title":"WireGuard","url":"https://www.wireguard.com/","category":"infrastructure","tags":["vpn"],"note":"Modern VPN protocol"},
+  {"id":"tailscale","title":"Tailscale","url":"https://tailscale.com/","category":"infrastructure","tags":["vpn","mesh"],"note":"Zero-config mesh"},
+  {"id":"headscale","title":"Headscale","url":"https://github.com/juanfont/headscale","category":"infrastructure","tags":["vpn","mesh"],"note":"Self-hosted Tailscale control"},
+
+  {"id":"gnome-builder","title":"GNOME Builder","url":"https://apps.gnome.org/Builder/","category":"developer","tags":["ide","gnome"],"note":"GNOME IDE"},
+  {"id":"gnome-disks","title":"GNOME Disks","url":"https://apps.gnome.org/DiskUtility/","category":"tools","tags":["disk","utility"],"note":"Disk utility"},
+  {"id":"gnome-clocks","title":"GNOME Clocks","url":"https://apps.gnome.org/en/Clocks/","category":"tools","tags":["time","utility"],"note":"Clock utility"},
+  {"id":"gnome-papers","title":"GNOME Papers","url":"https://apps.gnome.org/Papers/","category":"tools","tags":["pdf","viewer"],"note":"Document viewer"},
+  {"id":"gnome-pikabackup","title":"GNOME Pika Backup","url":"https://apps.gnome.org/PikaBackup/","category":"tools","tags":["backup"],"note":"Backup utility"},
+  {"id":"gnome-system-monitor","title":"GNOME System Monitor","url":"https://apps.gnome.org/SystemMonitor/","category":"tools","tags":["monitor","system"],"note":"System monitor"},
+  {"id":"k3b","title":"K3b","url":"https://apps.kde.org/k3b/","category":"tools","tags":["burn","kde"],"note":"CD/DVD authoring"},
+
+  {"id":"calibre","title":"calibre","url":"https://calibre-ebook.com/","category":"tools","tags":["ebooks","library"],"note":"Ebook manager"},
+  {"id":"cryptomator","title":"Cryptomator","url":"https://cryptomator.org/","category":"privacy","tags":["encryption","storage"],"note":"Client-side encryption"},
+  {"id":"cryptpad","title":"CryptPad","url":"https://cryptpad.org/","category":"privacy","tags":["collaboration","docs"],"note":"Encrypted collaboration"},
+  {"id":"filezilla","title":"FileZilla","url":"https://filezilla-project.org/","category":"tools","tags":["ftp","transfer"],"note":"FTP client"},
+  {"id":"flameshot","title":"Flameshot","url":"https://flameshot.org/","category":"tools","tags":["screenshot"],"note":"Screenshot tool"},
+  {"id":"exiftool","title":"ExifTool","url":"https://exiftool.org/","category":"tools","tags":["metadata","image"],"note":"Metadata editor"},
+  {"id":"etchdroid","title":"EtchDroid","url":"https://etchdroid.app/","category":"tools","tags":["android","usb"],"note":"USB writer for Android"},
+
+  {"id":"gimp","title":"GIMP","url":"https://www.gimp.org/","category":"design","tags":["image","editing"],"note":"Image editor"},
+  {"id":"inkscape","title":"Inkscape","url":"https://inkscape.org/","category":"design","tags":["vector"],"note":"Vector editor"},
+  {"id":"blender","title":"Blender","url":"https://www.blender.org/","category":"design","tags":["3d","animation"],"note":"3D creation suite"},
+  {"id":"krita","title":"Krita","url":"https://krita.org/en/","category":"design","tags":["painting","illustration"],"note":"Digital painting"},
+  {"id":"penpot","title":"Penpot","url":"https://penpot.app/","category":"design","tags":["ui","design"],"note":"Open design tool"},
+  {"id":"fontforge","title":"FontForge","url":"https://fontforge.org/","category":"design","tags":["fonts"],"note":"Font editor"},
+  {"id":"fontawesome","title":"Font Awesome","url":"https://fontawesome.com/","category":"design","tags":["icons"],"note":"Icon library"},
+
+  {"id":"audacity","title":"Audacity","url":"https://github.com/audacity/audacity","category":"media","tags":["audio","editing"],"note":"Audio editor"},
+  {"id":"lmms","title":"LMMS","url":"https://lmms.io/","category":"media","tags":["audio","production"],"note":"Music production"},
+  {"id":"friture","title":"Friture","url":"https://friture.org/","category":"media","tags":["audio","analysis"],"note":"Audio analysis tools"},
+  {"id":"antenna-pod","title":"AntennaPod","url":"https://antennapod.org/","category":"media","tags":["podcasts"],"note":"Podcast manager"},
+  {"id":"jellyfin","title":"Jellyfin","url":"https://jellyfin.org/","category":"media","tags":["media-server"],"note":"Open media server"},
+  {"id":"kodi","title":"Kodi","url":"https://kodi.tv/","category":"media","tags":["media-center"],"note":"Media center"},
+  {"id":"obs","title":"OBS Studio","url":"https://github.com/obsproject/obs-studio","category":"media","tags":["recording","streaming"],"note":"Recording and streaming"},
+  {"id":"ffmpeg","title":"FFmpeg","url":"https://ffmpeg.org/","category":"media","tags":["video","processing"],"note":"Media toolkit"},
+  {"id":"handbrake","title":"HandBrake","url":"https://handbrake.fr/","category":"media","tags":["video","transcode"],"note":"Video transcoder"},
+  {"id":"shotcut","title":"Shotcut","url":"https://www.shotcut.org/","category":"media","tags":["video","editing"],"note":"Video editor"},
+  {"id":"kdenlive","title":"Kdenlive","url":"https://kdenlive.org/en/","category":"media","tags":["video","editing"],"note":"Video editor"},
+  {"id":"mpv","title":"mpv","url":"https://mpv.io/","category":"media","tags":["player"],"note":"Media player"},
+  {"id":"vlc","title":"VLC","url":"https://www.videolan.org/","category":"media","tags":["player"],"note":"Media player"},
+  {"id":"excalidraw","title":"Excalidraw","url":"https://excalidraw.com/","category":"tools","tags":["whiteboard"],"note":"Sketching board"},
+
+  {"id":"openstreetmap","title":"OpenStreetMap","url":"https://www.openstreetmap.org/","category":"data","tags":["maps"],"note":"Open map data"},
+  {"id":"openverse","title":"Openverse","url":"https://openverse.org/","category":"media","tags":["cc","assets"],"note":"Creative Commons search"},
+  {"id":"internet-archive","title":"Internet Archive","url":"https://archive.org/","category":"reading","tags":["archive","public-domain"],"note":"Open archive"},
+  {"id":"project-gutenberg","title":"Project Gutenberg","url":"https://www.gutenberg.org/","category":"reading","tags":["books","public-domain"],"note":"Public domain books"},
+  {"id":"open-library","title":"Open Library","url":"https://openlibrary.org/","category":"reading","tags":["books"],"note":"Library catalog"},
+  {"id":"zotero","title":"Zotero","url":"https://www.zotero.org/","category":"reading","tags":["research","citations"],"note":"Research manager"},
+
+  {"id":"mastodon","title":"Mastodon","url":"https://joinmastodon.org/","category":"social","tags":["fediverse"],"note":"Federated social network"},
+  {"id":"lemmy","title":"Lemmy","url":"https://join-lemmy.org/","category":"social","tags":["fediverse"],"note":"Federated discussion"},
+  {"id":"pixelfed","title":"Pixelfed","url":"https://pixelfed.org/","category":"social","tags":["photos","fediverse"],"note":"Federated photo sharing"},
+  {"id":"peertube","title":"PeerTube","url":"https://joinpeertube.org/","category":"social","tags":["video","fediverse"],"note":"Federated video"},
+  {"id":"matrix","title":"Matrix","url":"https://matrix.org/","category":"social","tags":["messaging"],"note":"Open messaging network"},
+  {"id":"signal","title":"Signal","url":"https://signal.org/","category":"privacy","tags":["messaging"],"note":"Encrypted messenger"},
+  {"id":"simplex","title":"SimpleX Chat","url":"https://simplex.chat/","category":"privacy","tags":["messaging"],"note":"Private messenger"},
+
+  {"id":"fdroid","title":"F-Droid","url":"https://f-droid.org/","category":"mobile","tags":["android","apps"],"note":"Open app store"},
+  {"id":"accrescent","title":"Accrescent","url":"https://accrescent.app/","category":"mobile","tags":["android","apps"],"note":"App distribution"},
+  {"id":"gadgetbridge","title":"Gadgetbridge","url":"https://gadgetbridge.org/","category":"mobile","tags":["wearables"],"note":"Wearable companion"},
+  {"id":"opentracks","title":"OpenTracks","url":"https://f-droid.org/en/packages/de.dennisguse.opentracks/","category":"mobile","tags":["fitness"],"note":"Fitness tracker"},
+
+  {"id":"qbittorrent","title":"qBittorrent","url":"https://www.qbittorrent.org/","category":"torrenting","tags":["client"],"note":"Torrent client"},
+  {"id":"transmission","title":"Transmission","url":"https://transmissionbt.com/","category":"torrenting","tags":["client"],"note":"Torrent client"},
+  {"id":"webtorrent","title":"WebTorrent","url":"https://github.com/webtorrent/webtorrent","category":"torrenting","tags":["client"],"note":"Web torrent client"},
+
+  {"id":"pluto","title":"Pluto TV","url":"https://pluto.tv/","category":"streaming","tags":["legal","free"],"note":"Free streaming with ads"},
+  {"id":"tubi","title":"Tubi","url":"https://corporate.tubitv.com/","category":"streaming","tags":["legal","free"],"note":"Free streaming with ads"},
+  {"id":"kanopy","title":"Kanopy","url":"https://kanopy.com/","category":"streaming","tags":["library"],"note":"Library streaming"},
+  {"id":"puffer","title":"Puffer","url":"https://puffer.stanford.edu/","category":"streaming","tags":["research"],"note":"Research streaming platform"},
+
+  {"id":"0ad","title":"0 A.D.","url":"https://play0ad.com/","category":"gaming","tags":["strategy"],"note":"Open RTS game"},
+  {"id":"supertuxkart","title":"SuperTuxKart","url":"https://supertuxkart.net/","category":"gaming","tags":["racing"],"note":"Open racing game"},
+  {"id":"openttd","title":"OpenTTD","url":"https://github.com/OpenTTD/OpenTTD","category":"gaming","tags":["simulation"],"note":"Open transport simulation"},
+  {"id":"openra","title":"OpenRA","url":"https://github.com/OpenRA/OpenRA","category":"gaming","tags":["strategy"],"note":"Open RTS engine"},
+  {"id":"freeciv","title":"Freeciv","url":"https://github.com/freeciv","category":"gaming","tags":["strategy"],"note":"Open civilization game"},
+  {"id":"luanti","title":"Luanti (Minetest)","url":"https://github.com/luanti-org","category":"gaming","tags":["sandbox"],"note":"Voxel sandbox"},
+  {"id":"godot","title":"Godot Engine","url":"https://github.com/godotengine/godot","category":"gaming","tags":["engine"],"note":"Game engine"},
+  {"id":"openmw","title":"OpenMW","url":"https://github.com/OpenMW/openmw","category":"gaming","tags":["engine"],"note":"Open RPG engine"},
+
+  {"id":"openwrt","title":"OpenWrt","url":"https://openwrt.org/","category":"infrastructure","tags":["router","firmware"],"note":"Router firmware"},
+  {"id":"coreboot","title":"coreboot","url":"https://coreboot.org/","category":"infrastructure","tags":["firmware"],"note":"Open firmware"},
+  {"id":"libreboot","title":"Libreboot","url":"https://libreboot.org/","category":"infrastructure","tags":["firmware"],"note":"Free firmware distribution"},
+
+  {"id":"duckduckgo","title":"DuckDuckGo","url":"https://duckduckgo.com/","category":"privacy","tags":["search"],"note":"Privacy search engine"},
+  {"id":"searxng","title":"SearXNG","url":"https://docs.searxng.org/","category":"privacy","tags":["search","metasearch"],"note":"Self-hosted metasearch"},
+  {"id":"mojeek","title":"Mojeek","url":"https://www.mojeek.com/","category":"privacy","tags":["search"],"note":"Independent search"},
+
+  {"id":"opensource-guide","title":"Open Source Guides","url":"https://opensource.guide/","category":"guides","tags":["open-source","contributing"],"note":"Open source playbooks"},
+  {"id":"defensive-computing-checklist","title":"Defensive Computing Checklist","url":"https://defensivecomputingchecklist.com/","category":"guides","tags":["security","checklist"],"note":"Security checklist"},
+  {"id":"avoid-the-hack","title":"Avoid the Hack","url":"https://avoidthehack.com/","category":"guides","tags":["security","basics"],"note":"Security basics guide"},
+  {"id":"thenewoil","title":"The New Oil","url":"https://thenewoil.org/","category":"guides","tags":["privacy","opsec"],"note":"Privacy and OPSEC guide"},
+
+  {"id":"data-gov","title":"Data.gov","url":"https://data.gov/","category":"data","tags":["datasets"],"note":"US open data"},
+  {"id":"data-census","title":"US Census","url":"https://data.census.gov/","category":"data","tags":["statistics"],"note":"US Census data"},
+  {"id":"world-bank","title":"World Bank Data","url":"https://databank.worldbank.org/","category":"data","tags":["statistics"],"note":"Global data"},
+  {"id":"un-data","title":"UN Data","url":"https://data.un.org/","category":"data","tags":["statistics"],"note":"UN datasets"},
+
+  {"id":"ollama","title":"Ollama","url":"https://ollama.com/","category":"ai","tags":["inference","models"],"note":"Local model runner"},
+  {"id":"whisper","title":"Whisper","url":"https://github.com/openai/whisper","category":"ai","tags":["speech","asr"],"note":"Speech recognition model"},
+  {"id":"whispercpp","title":"whisper.cpp","url":"https://github.com/ggerganov/whisper.cpp","category":"ai","tags":["speech","asr"],"note":"C++ port for local inference"},
+  {"id":"huggingface","title":"Hugging Face","url":"https://huggingface.co/","category":"ai","tags":["models","datasets"],"note":"Model and dataset hub"},
+  {"id":"duckai","title":"Duck.ai","url":"https://duck.ai/","category":"ai","tags":["chat","search"],"note":"Privacy-first AI chat"},
+  {"id":"cerebrascoder","title":"CerebrasCoder","url":"https://cerebrascoder.com/","category":"ai","tags":["coding","chat"],"note":"Coding assistant"}
+
+  ,{"id":"joplin","title":"Joplin","url":"https://joplinapp.org/","category":"tools","tags":["notes","productivity"],"note":"Open note app"}
+  ,{"id":"obsidian","title":"Obsidian","url":"https://obsidian.md/","category":"tools","tags":["notes","knowledge"],"note":"Local knowledge base"}
+  ,{"id":"logseq","title":"Logseq","url":"https://logseq.com/","category":"tools","tags":["notes","knowledge"],"note":"Local-first knowledge app"}
+  ,{"id":"standardnotes","title":"Standard Notes","url":"https://standardnotes.com/","category":"privacy","tags":["notes","encryption"],"note":"Encrypted notes"}
+  ,{"id":"keepassxc","title":"KeePassXC","url":"https://keepassxc.org/","category":"privacy","tags":["passwords"],"note":"Password manager"}
+  ,{"id":"bitwarden","title":"Bitwarden","url":"https://github.com/bitwarden","category":"privacy","tags":["passwords"],"note":"Password manager"}
+  ,{"id":"veracrypt","title":"VeraCrypt","url":"https://www.veracrypt.fr/","category":"privacy","tags":["encryption","disk"],"note":"Disk encryption"}
+  ,{"id":"picocrypt","title":"Picocrypt","url":"https://github.com/Picocrypt/Picocrypt","category":"privacy","tags":["encryption"],"note":"File encryption"}
+  ,{"id":"onionshare","title":"OnionShare","url":"https://onionshare.org/","category":"privacy","tags":["sharing","tor"],"note":"Anonymous file sharing"}
+  ,{"id":"syncthing","title":"Syncthing","url":"https://syncthing.net/","category":"tools","tags":["sync","files"],"note":"Continuous file sync"}
+  ,{"id":"rsync","title":"rsync","url":"https://rsync.samba.org/","category":"tools","tags":["sync","backup"],"note":"File sync tool"}
+  ,{"id":"borgbackup","title":"BorgBackup","url":"https://www.borgbackup.org/","category":"tools","tags":["backup"],"note":"Deduplicating backups"}
+  ,{"id":"restic","title":"restic","url":"https://restic.net/","category":"tools","tags":["backup"],"note":"Backup tool"}
+  ,{"id":"nextcloud","title":"Nextcloud","url":"https://nextcloud.com/","category":"tools","tags":["cloud","sync"],"note":"Self-hosted cloud"}
+  ,{"id":"owncloud","title":"ownCloud","url":"https://owncloud.com/","category":"tools","tags":["cloud","sync"],"note":"Self-hosted cloud"}
+  ,{"id":"gitea","title":"Gitea","url":"https://about.gitea.com/","category":"developer","tags":["git","hosting"],"note":"Lightweight git forge"}
+  ,{"id":"git","title":"Git","url":"https://git-scm.com/","category":"developer","tags":["git","scm"],"note":"Version control"}
+  ,{"id":"nodejs","title":"Node.js","url":"https://nodejs.org/","category":"developer","tags":["runtime","javascript"],"note":"JavaScript runtime"}
+  ,{"id":"python","title":"Python","url":"https://www.python.org/","category":"developer","tags":["language"],"note":"Programming language"}
+  ,{"id":"rust","title":"Rust","url":"https://www.rust-lang.org/","category":"developer","tags":["language"],"note":"Programming language"}
+  ,{"id":"go","title":"Go","url":"https://go.dev/","category":"developer","tags":["language"],"note":"Programming language"}
+  ,{"id":"zig","title":"Zig","url":"https://ziglang.org/","category":"developer","tags":["language"],"note":"Programming language"}
+  ,{"id":"deno","title":"Deno","url":"https://deno.com/","category":"developer","tags":["runtime"],"note":"JS/TS runtime"}
+  ,{"id":"bun","title":"Bun","url":"https://bun.sh/","category":"developer","tags":["runtime"],"note":"JS runtime and toolkit"}
+  ,{"id":"astro","title":"Astro","url":"https://astro.build/","category":"developer","tags":["web","framework"],"note":"Web framework"}
+  ,{"id":"nextjs","title":"Next.js","url":"https://nextjs.org/","category":"developer","tags":["web","framework"],"note":"React framework"}
+  ,{"id":"svelte","title":"Svelte","url":"https://svelte.dev/","category":"developer","tags":["web","framework"],"note":"Web framework"}
+  ,{"id":"vue","title":"Vue","url":"https://vuejs.org/","category":"developer","tags":["web","framework"],"note":"Web framework"}
+  ,{"id":"react","title":"React","url":"https://react.dev/","category":"developer","tags":["web","framework"],"note":"UI library"}
+  ,{"id":"tailwind","title":"Tailwind CSS","url":"https://tailwindcss.com/","category":"developer","tags":["css","ui"],"note":"Utility CSS"}
+  ,{"id":"vite","title":"Vite","url":"https://vitejs.dev/","category":"developer","tags":["build","tooling"],"note":"Build tool"}
+  ,{"id":"storybook","title":"Storybook","url":"https://storybook.js.org/","category":"developer","tags":["ui","docs"],"note":"UI component workshop"}
+  ,{"id":"webpack","title":"Webpack","url":"https://webpack.js.org/","category":"developer","tags":["build"],"note":"Bundler"}
+  ,{"id":"rollup","title":"Rollup","url":"https://rollupjs.org/","category":"developer","tags":["build"],"note":"Bundler"}
+  ,{"id":"esbuild","title":"esbuild","url":"https://esbuild.github.io/","category":"developer","tags":["build"],"note":"Bundler"}
+  ,{"id":"pnpm","title":"pnpm","url":"https://pnpm.io/","category":"developer","tags":["package"],"note":"Package manager"}
+  ,{"id":"yarn","title":"Yarn","url":"https://yarnpkg.com/","category":"developer","tags":["package"],"note":"Package manager"}
+  ,{"id":"npm","title":"npm","url":"https://www.npmjs.com/","category":"developer","tags":["package"],"note":"Package registry"}
+  ,{"id":"pip","title":"PyPI","url":"https://pypi.org/","category":"developer","tags":["package"],"note":"Python package index"}
+  ,{"id":"cargo","title":"Cargo","url":"https://doc.rust-lang.org/cargo/","category":"developer","tags":["package"],"note":"Rust package manager"}
+
+  ,{"id":"linux","title":"Linux Kernel","url":"https://kernel.org/","category":"infrastructure","tags":["os","kernel"],"note":"Kernel project"}
+  ,{"id":"arch","title":"Arch Linux","url":"https://archlinux.org/","category":"infrastructure","tags":["os"],"note":"Linux distribution"}
+  ,{"id":"debian","title":"Debian","url":"https://www.debian.org/","category":"infrastructure","tags":["os"],"note":"Linux distribution"}
+  ,{"id":"ubuntu","title":"Ubuntu","url":"https://ubuntu.com/","category":"infrastructure","tags":["os"],"note":"Linux distribution"}
+  ,{"id":"fedora","title":"Fedora","url":"https://fedoraproject.org/","category":"infrastructure","tags":["os"],"note":"Linux distribution"}
+  ,{"id":"alpine","title":"Alpine Linux","url":"https://alpinelinux.org/","category":"infrastructure","tags":["os"],"note":"Lightweight Linux"}
+  ,{"id":"freebsd","title":"FreeBSD","url":"https://www.freebsd.org/","category":"infrastructure","tags":["os"],"note":"Unix-like OS"}
+  ,{"id":"openbsd","title":"OpenBSD","url":"https://www.openbsd.org/","category":"infrastructure","tags":["os","security"],"note":"Security-focused BSD"}
+  ,{"id":"netbsd","title":"NetBSD","url":"https://www.netbsd.org/","category":"infrastructure","tags":["os"],"note":"Portable BSD"}
+
+  ,{"id":"kicad","title":"KiCad","url":"https://www.kicad.org/","category":"design","tags":["eda","pcb"],"note":"PCB design suite"}
+  ,{"id":"freecad","title":"FreeCAD","url":"https://www.freecad.org/","category":"design","tags":["cad","3d"],"note":"Parametric CAD"}
+  ,{"id":"openscad","title":"OpenSCAD","url":"https://openscad.org/","category":"design","tags":["cad","3d"],"note":"Programmatic CAD"}
+  ,{"id":"darktable","title":"darktable","url":"https://www.darktable.org/","category":"design","tags":["photo","raw"],"note":"Photo workflow"}
+  ,{"id":"rawtherapee","title":"RawTherapee","url":"https://www.rawtherapee.com/","category":"design","tags":["photo","raw"],"note":"RAW processing"}
+  ,{"id":"pinta","title":"Pinta","url":"https://www.pinta-project.com/","category":"design","tags":["image"],"note":"Image editor"}
+  ,{"id":"scribus","title":"Scribus","url":"https://www.scribus.net/","category":"design","tags":["publishing"],"note":"Desktop publishing"}
+  ,{"id":"gpodder","title":"gPodder","url":"https://gpodder.github.io/","category":"media","tags":["podcasts"],"note":"Podcast manager"}
+  ,{"id":"funkwhale","title":"Funkwhale","url":"https://funkwhale.audio/","category":"media","tags":["audio","streaming"],"note":"Federated music"}
+  ,{"id":"navidrome","title":"Navidrome","url":"https://www.navidrome.org/","category":"media","tags":["audio","server"],"note":"Music server"}
+  ,{"id":"photoprism","title":"PhotoPrism","url":"https://www.photoprism.app/","category":"tools","tags":["photos","server"],"note":"Photo management"}
+  ,{"id":"immich","title":"Immich","url":"https://immich.app/","category":"tools","tags":["photos","server"],"note":"Self-hosted photos"}
+  ,{"id":"filebrowser","title":"File Browser","url":"https://filebrowser.org/","category":"tools","tags":["files","web"],"note":"Web file manager"}
+  ,{"id":"synfig","title":"Synfig Studio","url":"https://www.synfig.org/","category":"media","tags":["animation"],"note":"2D animation"}
+  ,{"id":"opentoonz","title":"OpenToonz","url":"https://opentoonz.github.io/e/","category":"media","tags":["animation"],"note":"2D animation"}
+  ,{"id":"olive","title":"Olive","url":"https://www.olivevideoeditor.org/","category":"media","tags":["video","editing"],"note":"Video editor"}
+  ,{"id":"audacity-site","title":"Audacity (site)","url":"https://www.audacityteam.org/","category":"media","tags":["audio"],"note":"Audacity project site"}
+  ,{"id":"libreoffice","title":"LibreOffice","url":"https://www.libreoffice.org/","category":"tools","tags":["office","productivity"],"note":"Office suite"}
+  ,{"id":"onlyoffice","title":"ONLYOFFICE","url":"https://www.onlyoffice.com/","category":"tools","tags":["office","docs"],"note":"Office suite"}
+
+  ,{"id":"wikipedia","title":"Wikipedia","url":"https://www.wikipedia.org/","category":"reading","tags":["encyclopedia"],"note":"Free encyclopedia"}
+  ,{"id":"wiktionary","title":"Wiktionary","url":"https://www.wiktionary.org/","category":"reading","tags":["dictionary"],"note":"Free dictionary"}
+  ,{"id":"wikisource","title":"Wikisource","url":"https://wikisource.org/","category":"reading","tags":["texts","public-domain"],"note":"Free texts"}
+  ,{"id":"openalex","title":"OpenAlex","url":"https://openalex.org/","category":"reading","tags":["research","metadata"],"note":"Scholarly metadata"}
+  ,{"id":"arxiv","title":"arXiv","url":"https://arxiv.org/","category":"reading","tags":["research","papers"],"note":"Preprint archive"}
+  ,{"id":"doaj","title":"DOAJ","url":"https://doaj.org/","category":"reading","tags":["journals"],"note":"Open access journals"}
+  ,{"id":"semantic-scholar","title":"Semantic Scholar","url":"https://www.semanticscholar.org/","category":"reading","tags":["research"],"note":"Scholarly search"}
+
+  ,{"id":"khanacademy","title":"Khan Academy","url":"https://www.khanacademy.org/","category":"learning","tags":["courses","math"],"note":"Learning platform"}
+  ,{"id":"edx","title":"edX","url":"https://www.edx.org/","category":"learning","tags":["courses"],"note":"Online courses"}
+  ,{"id":"coursera","title":"Coursera","url":"https://www.coursera.org/","category":"learning","tags":["courses"],"note":"Online courses"}
+  ,{"id":"ocw","title":"MIT OpenCourseWare","url":"https://ocw.mit.edu/","category":"learning","tags":["courses"],"note":"Open courseware"}
+  ,{"id":"freecodecamp","title":"freeCodeCamp","url":"https://www.freecodecamp.org/","category":"learning","tags":["code","courses"],"note":"Coding curriculum"}
+  ,{"id":"exercism","title":"Exercism","url":"https://exercism.org/","category":"learning","tags":["practice"],"note":"Coding practice"}
+  ,{"id":"cs50","title":"CS50","url":"https://cs50.harvard.edu/x/","category":"learning","tags":["cs"],"note":"Harvard CS course"}
+  ,{"id":"algo-visualizer","title":"Algorithm Visualizer","url":"https://algorithm-visualizer.org/","category":"learning","tags":["cs","algorithms"],"note":"Visual learning"}
+
+  ,{"id":"aria2","title":"aria2","url":"https://aria2.github.io/","category":"torrenting","tags":["client","download"],"note":"CLI downloader"}
+  ,{"id":"rtorrent","title":"rTorrent","url":"https://rakshasa.github.io/rtorrent/","category":"torrenting","tags":["client"],"note":"CLI torrent client"}
+  ,{"id":"deluge","title":"Deluge","url":"https://deluge-torrent.org/","category":"torrenting","tags":["client"],"note":"Torrent client"}
+
+  ,{"id":"fedi","title":"Fediverse","url":"https://joinfediverse.wiki/","category":"social","tags":["federation"],"note":"Fediverse overview"},
+  {"id":"bluesky","title":"Bluesky","url":"https://bsky.app/","category":"social","tags":["social"],"note":"Social platform"},
+  {"id":"discourse","title":"Discourse","url":"https://www.discourse.org/","category":"social","tags":["forums"],"note":"Forum software"},
+  {"id":"lemmyverse","title":"Lemmyverse","url":"https://lemmyverse.net/","category":"social","tags":["directory"],"note":"Lemmy instances"},
+  {"id":"joinmatrix","title":"Matrix Servers","url":"https://joinmatrix.org/servers/","category":"social","tags":["directory"],"note":"Matrix servers"}
+
+  ,{"id":"librewolf","title":"LibreWolf","url":"https://librewolf.net/","category":"privacy","tags":["browser"],"note":"Privacy-focused browser"}
+  ,{"id":"firefox","title":"Firefox","url":"https://www.mozilla.org/firefox/","category":"privacy","tags":["browser"],"note":"Open browser"}
+  ,{"id":"brave","title":"Brave","url":"https://brave.com/","category":"privacy","tags":["browser"],"note":"Privacy browser"}
+  ,{"id":"tor-browser","title":"Tor Browser","url":"https://www.torproject.org/","category":"privacy","tags":["browser","tor"],"note":"Anonymous browser"}
+  ,{"id":"duckduckgo-search","title":"DuckDuckGo Search","url":"https://duckduckgo.com/","category":"privacy","tags":["search"],"note":"Private search"}
+
+  ,{"id":"kdeconnect","title":"KDE Connect","url":"https://kdeconnect.kde.org/","category":"tools","tags":["sync","mobile"],"note":"Device integration"}
+  ,{"id":"localsend","title":"LocalSend","url":"https://localsend.org/","category":"tools","tags":["transfer","lan"],"note":"Local file transfer"}
+  ,{"id":"rustdesk","title":"RustDesk","url":"https://rustdesk.com/","category":"tools","tags":["remote"],"note":"Remote desktop"}
+  ,{"id":"syncthing-fork","title":"Syncthing-Fork","url":"https://github.com/Catfriend1/syncthing-android","category":"mobile","tags":["sync"],"note":"Syncthing Android fork"}
+  ,{"id":"kdenlive-site","title":"Kdenlive","url":"https://kdenlive.org/","category":"media","tags":["video","editing"],"note":"Video editor"}
+  ,{"id":"musescore","title":"MuseScore Studio","url":"https://musescore.org/","category":"media","tags":["music","notation"],"note":"Music notation"}
+  ,{"id":"tenacity","title":"Tenacity","url":"https://tenacityaudio.org/","category":"media","tags":["audio","editing"],"note":"Audio editor"}
+  ,{"id":"lmms-site","title":"LMMS","url":"https://lmms.io/","category":"media","tags":["audio","production"],"note":"Music production"}
+  ,{"id":"audius","title":"Audius","url":"https://audius.co/","category":"media","tags":["music","streaming"],"note":"Music platform"}
+
+  ,{"id":"openverse-site","title":"Openverse","url":"https://openverse.org/","category":"media","tags":["assets","cc"],"note":"Creative Commons search"}
+  ,{"id":"unsplash","title":"Unsplash","url":"https://unsplash.com/","category":"design","tags":["photos"],"note":"Free photos"}
+  ,{"id":"pexels","title":"Pexels","url":"https://www.pexels.com/","category":"design","tags":["photos"],"note":"Free photos"}
+  ,{"id":"pixabay","title":"Pixabay","url":"https://pixabay.com/","category":"design","tags":["photos","assets"],"note":"Free assets"}
+  ,{"id":"openclipart","title":"Openclipart","url":"https://openclipart.org/","category":"design","tags":["vectors"],"note":"Open clipart"}
+  ,{"id":"openfontlibrary","title":"Open Font Library","url":"https://fontlibrary.org/","category":"design","tags":["fonts"],"note":"Open fonts"}
+
+  ,{"id":"gimp-site","title":"GIMP","url":"https://www.gimp.org/","category":"design","tags":["image"],"note":"Image editor"}
+  ,{"id":"inkscape-site","title":"Inkscape","url":"https://inkscape.org/","category":"design","tags":["vector"],"note":"Vector editor"}
+  ,{"id":"krita-site","title":"Krita","url":"https://krita.org/","category":"design","tags":["painting"],"note":"Digital painting"}
+
+  ,{"id":"w3c","title":"W3C","url":"https://www.w3.org/","category":"developer","tags":["standards"],"note":"Web standards"}
+  ,{"id":"owasp","title":"OWASP","url":"https://owasp.org/","category":"security","tags":["security","guides"],"note":"Security community"}
+  ,{"id":"nvd","title":"NVD","url":"https://nvd.nist.gov/","category":"security","tags":["cve","database"],"note":"Vulnerability database"}
+  ,{"id":"cve","title":"CVE","url":"https://www.cve.org/","category":"security","tags":["cve","database"],"note":"CVE identifiers"}
+  ,{"id":"mitre-attack","title":"MITRE ATT&CK","url":"https://attack.mitre.org/","category":"security","tags":["framework"],"note":"Threat framework"}
+
+  ,{"id":"openai-whisper","title":"Whisper (OpenAI)","url":"https://github.com/openai/whisper","category":"ai","tags":["speech"],"note":"Speech recognition"}
+  ,{"id":"huggingface-datasets","title":"Hugging Face Datasets","url":"https://huggingface.co/datasets","category":"ai","tags":["datasets"],"note":"Dataset hub"}
+  ,{"id":"openml","title":"OpenML","url":"https://www.openml.org/","category":"ai","tags":["datasets"],"note":"ML datasets"}
+
+  ,{"id":"archive-movies","title":"Internet Archive Movies","url":"https://archive.org/details/moviesandfilms","category":"media","tags":["archive","public-domain"],"note":"Film archive"}
+  ,{"id":"archive-audio","title":"Internet Archive Audio","url":"https://archive.org/details/audio","category":"media","tags":["archive","audio"],"note":"Audio archive"}
+  ,{"id":"musopen","title":"Musopen","url":"https://musopen.org/","category":"media","tags":["music","public-domain"],"note":"Public domain music"}
+  ,{"id":"project-gutenberg-site","title":"Project Gutenberg","url":"https://www.gutenberg.org/","category":"reading","tags":["books"],"note":"Public domain books"}
+]

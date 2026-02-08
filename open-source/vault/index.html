@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Open Source Catalog · Wok Specialists</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
+</head>
+<body class="site bg-noise">
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><span>Open Source Catalog</span></div>
+
+    <section class="section" data-reveal>
+      <div class="vault-hero">
+        <div class="kicker">Vault</div>
+        <div class="display">Open Source Catalog</div>
+        <div class="muted">The catalog lives inside the Vault. Search, filter, and explore. In development.</div>
+        <div class="hero-actions">
+          <a class="btn" href="/open-source/">Vault Gate</a>
+          <a class="btn" href="/open-source/import/">Bulk Import</a>
+        </div>
+        <div class="chip-row" data-vault-counts></div>
+      </div>
+    </section>
+
+    <section class="section" id="vault-app" data-reveal>
+      <div class="vault-toolbar">
+        <input class="input" data-vault-search type="search" placeholder="Search tools, platforms, or tags"/>
+        <div class="vault-count" data-vault-count>0 items</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="vault">
+        <aside class="vault-panel">
+          <h3>Categories</h3>
+          <div class="vault-filters" data-vault-categories></div>
+          <div class="divider"></div>
+          <h3>Collections</h3>
+          <div class="grid" data-vault-collections></div>
+          <div class="divider"></div>
+          <h3>Tags</h3>
+          <div class="vault-filters" data-vault-tags></div>
+        </aside>
+
+        <div class="vault-results" data-vault-results></div>
+
+        <aside class="vault-detail" data-vault-detail>
+          <div class="muted">Select an item for details.</div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="card glass">
+        <div class="muted">Add your own links</div>
+        <div class="linklist">
+          <a href="/open-source/import/">Bulk Import Tool</a>
+          <a href="/data/open-source/catalog.json">Catalog JSON</a>
+          <a href="/data/open-source/categories.json">Categories</a>
+          <a href="/data/open-source/collections.json">Collections</a>
+          <a href="/data/open-source/README.md">Catalog Guide</a>
+        </div>
+        <div class="muted" style="margin-top:8px">Add entries in the JSON files to scale the vault.</div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists. In development.</div>
+    </footer>
+  </main>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/vault.js"></script>
+</body>
+</html>

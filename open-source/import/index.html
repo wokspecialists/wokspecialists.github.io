@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Vault Importer · Wok Specialists</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
+</head>
+<body class="site bg-noise">
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><span>Importer</span></div>
+
+    <section class="section" data-reveal>
+      <div class="category-hero">
+        <div class="kicker">Vault Tools</div>
+        <div class="display">Bulk Importer</div>
+        <div class="muted">Paste CSV/TSV or JSON and export clean catalog entries.</div>
+        <div class="btnrow">
+          <a class="btn primary" href="/open-source/vault/">Vault Catalog</a>
+          <a class="btn" href="/data/open-source/README.md">Schema</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="grid two" data-stagger>
+        <article class="card">
+          <h3>Input</h3>
+          <div class="muted">Headers: `id,title,url,category,tags,note`</div>
+          <input class="input" type="file" id="file-input"/>
+          <textarea class="input" id="raw-input" rows="10" placeholder="Paste CSV/TSV or JSON array here"></textarea>
+          <div class="btnrow">
+            <button class="btn primary" id="parse-btn" type="button">Parse</button>
+            <button class="btn" id="clear-btn" type="button">Clear</button>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Preview</h3>
+          <div class="muted" id="summary">No data yet.</div>
+          <pre class="card" id="preview" style="max-height:360px;overflow:auto"></pre>
+          <div class="btnrow">
+            <button class="btn primary" id="download-btn" type="button">Download JSON</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists. In development.</div>
+    </footer>
+  </main>
+
+  <script src="/assets/js/app.js"></script>
+  <script src="/assets/js/import.js"></script>
+</body>
+</html>

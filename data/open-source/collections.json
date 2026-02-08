@@ -1,0 +1,11 @@
+[
+  {"id":"core-stack","title":"Core Stack","summary":"The baseline set for a modern open stack.","items":["github","gitlab","codeberg","forgejo","devdocs","mdn","vscode","nmap","wireshark","ffmpeg","obs"]},
+  {"id":"privacy-baseline","title":"Privacy Baseline","summary":"A minimal privacy-first setup.","items":["tor","tails","qubes","i2p","privacyguides","eff-ssd","signal","simplex","duckduckgo","searxng"]},
+  {"id":"creator-studio","title":"Creator Studio","summary":"Open-source tools for makers and creators.","items":["blender","krita","gimp","inkscape","penpot","fontforge","audacity","lmms","kdenlive","shotcut","handbrake"]},
+  {"id":"media-server","title":"Media Server","summary":"Home media and streaming tools.","items":["jellyfin","kodi","mpv","vlc","ffmpeg","handbrake"]},
+  {"id":"open-gaming","title":"Open Gaming","summary":"Free and open game engines and classics.","items":["godot","0ad","openra","openttd","freeciv","luanti","openmw"]},
+  {"id":"dev-stack","title":"Developer Stack","summary":"Editors, docs, and core dev tooling.","items":["vscode","vscodium","devdocs","mdn","github","gitlab","codeberg","forgejo","podman","distrobox"]},
+  {"id":"privacy-core","title":"Privacy Core","summary":"Search, messaging, and privacy tools.","items":["duckduckgo","searxng","signal","simplex","privacyguides","eff-ssd"]},
+  {"id":"media-creation","title":"Media Creation","summary":"Audio and video production.","items":["audacity","lmms","kdenlive","shotcut","ffmpeg","handbrake","obs"]},
+  {"id":"mobile-foss","title":"Mobile FOSS","summary":"Open mobile stores and apps.","items":["fdroid","accrescent","gadgetbridge","opentracks"]}
+]

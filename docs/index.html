@@ -1,60 +1,90 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Docs</title>
+  <title>Docs · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body>
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
-        <a data-nav href="/">Home</a>
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
-        <a data-nav href="/chopsticks/">Chopsticks</a>
-        <a data-nav href="/commands/">Commands</a>
-        <a data-nav href="/agents/">Agents</a>
-        <a data-nav href="/embed/">Embed Builder</a>
         <a data-nav href="/docs/">Docs</a>
         <a data-nav href="/status/">Status</a>
         <a data-nav href="/plans/">Plans</a>
         <a data-nav href="/company/">Company</a>
       </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
     </div>
   </header>
   <main class="wrap">
-    <div class="kicker">Docs</div>
-    <div class="h1">Documentation</div>
-    <div class="muted">Split by persona. Keep pages short. Link to deep dives.</div>
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Docs</span></div>
 
-    <div class="hr"></div>
+    <section class="section" data-reveal>
+      <div class="category-hero">
+        <div class="kicker">Docs</div>
+        <div class="display">Documentation Center</div>
+        <div class="muted">Clear, short, and in development.</div>
+        <div class="btnrow">
+          <a class="btn primary" href="/chopsticks/docs/">Chopsticks Docs</a>
+          <a class="btn" href="/docs/guides/">Guides</a>
+          <a class="btn" href="/docs/reference/">Reference</a>
+        </div>
+      </div>
+    </section>
 
-    <div class="grid two">
-      <section class="card">
-        <h2>Admin Quickstart</h2>
-        <ul>
-          <li>Invite bot</li>
-          <li>Enable VoiceMaster</li>
-          <li>Run Lavalink</li>
-          <li>Use music commands</li>
-        </ul>
-      </section>
+    <section class="section" data-reveal>
+      <div class="grid three" data-stagger>
+        <article class="card sun">
+          <h3>Chopsticks</h3>
+          <div class="muted">Commands, setup, and agents.</div>
+          <div class="linklist">
+            <a href="/chopsticks/docs/">Docs</a>
+            <a href="/commands/">Commands</a>
+            <a href="/chopsticks/agents/">Agents</a>
+          </div>
+        </article>
+        <article class="card cyan">
+          <h3>Project Docs</h3>
+          <div class="muted">Work in progress for other builds.</div>
+          <div class="linklist">
+            <a href="/projects/">Projects</a>
+            <a href="/plans/">Roadmap</a>
+          </div>
+        </article>
+        <article class="card flare">
+          <h3>Reference</h3>
+          <div class="muted">Specs and shared notes.</div>
+          <div class="linklist">
+            <a href="/docs/reference/">Reference</a>
+            <a href="/docs/guides/">Guides</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2>Self-hosting</h2>
-        <ul>
-          <li>Environment variables</li>
-          <li>Agents process</li>
-          <li>Health checks</li>
-          <li>Backups</li>
-        </ul>
-      </section>
-    </div>
+    <section class="section" data-reveal>
+      <div class="card glass">
+        <div class="muted">Docs are actively changing. Keep links short and stable.</div>
+        <div class="btnrow">
+          <a class="btn" href="/status/">Status</a>
+          <a class="btn" href="/plans/">Plans</a>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+      <div>Wok Specialists. In development.</div>
     </footer>
   </main>
   <script src="/assets/js/app.js"></script>

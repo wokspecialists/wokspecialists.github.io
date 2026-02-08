@@ -1,47 +1,63 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contribute — Wok Specialists</title>
-  <meta name="description" content="How to contribute to Wok Specialists projects." />
-  <link rel="stylesheet" href="/styles.css" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Contribute · Wok Specialists</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body>
-  <div data-mount="header"></div>
-
+<body class="site bg-noise">
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
+    </div>
+  </header>
   <main class="wrap">
-    <section class="hero">
-      <div class="card">
-        <h1 class="h1">Contribute</h1>
-        <p class="p dim">Small team. Clear PRs. Short feedback loops.</p>
-        <div class="row row-wrap mt">
-          <a class="btn btn-blue" href="https://github.com/Wok-Specialists" target="_blank" rel="noopener noreferrer">GitHub org</a>
-          <a class="btn btn-ghost" href="/chopsticks/docs/">Chopsticks docs</a>
-        </div>
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Contribute</span></div>
+    <section class="section" data-reveal>
+      <div class="kicker">Contribute</div>
+      <div class="display">Help expand the Vault and improve the studio.</div>
+      <div class="muted">Submit new resources, fix data, and propose improvements.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/open-source/">Vault</a>
+        <a class="btn" href="/support/">Support</a>
       </div>
     </section>
-
-    <section class="section">
-      <div class="card card-soft">
-        <h2 class="h2">What we accept</h2>
-        <ul class="caps">
-          <li>Docs improvements and clarifications</li>
-          <li>Site polish and accessibility fixes</li>
-          <li>Bug fixes with minimal surface area</li>
-        </ul>
-        <div class="hr"></div>
-        <h2 class="h2">How to submit</h2>
-        <ol class="caps">
-          <li>Fork the repo.</li>
-          <li>Make one focused change.</li>
-          <li>Open a PR with a short description and screenshots if UI.</li>
-        </ol>
+    <section class="section" data-reveal>
+      <div class="grid three" data-stagger>
+        <article class="card">
+          <h3>Submit Resources</h3>
+          <div class="muted">Add new tools or guides.</div>
+        </article>
+        <article class="card">
+          <h3>Improve Data</h3>
+          <div class="muted">Fix categories, tags, and notes.</div>
+        </article>
+        <article class="card">
+          <h3>Report Issues</h3>
+          <div class="muted">Flag broken links or outdated info.</div>
+        </article>
       </div>
     </section>
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists.</div>
+    </footer>
   </main>
-
-  <div data-mount="footer"></div>
-  <script type="module" src="/app.js"></script>
+  <script src="/assets/js/app.js"></script>
 </body>
 </html>

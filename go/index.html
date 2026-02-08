@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Redirect · Wok Specialists</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
+</head>
+<body class="site bg-noise">
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <nav class="links">
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/docs/">Docs</a>
+        <a data-nav href="/status/">Status</a>
+        <a data-nav href="/plans/">Plans</a>
+        <a data-nav href="/company/">Company</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Redirect</span></div>
+    <section class="section">
+      <div class="hero-card" id="redirect-shell">
+        <div class="kicker">Transparent Redirect</div>
+        <h1 class="display">Leaving Wok Specialists</h1>
+        <div class="muted">You are heading to an external resource. We show the destination before sending you.</div>
+        <div class="card glass" data-redirect="">
+          <div class="muted">Destination</div>
+          <div class="h3" data-redirect-label>Resolving…</div>
+          <div class="muted">Redirecting in <span data-redirect-count>4</span> seconds.</div>
+          <div class="btnrow">
+            <a class="btn primary" data-redirect-link href="#">Continue</a>
+            <a class="btn" href="/open-source/">Back to Vault</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="hr"></div>
+      <div>Wok Specialists.</div>
+    </footer>
+  </main>
+
+  <script>
+    (async function(){
+      const params = new URLSearchParams(location.search);
+      const id = params.get('id');
+      const to = params.get('to');
+      let target = to || '';
+      if (!target && id) {
+        try {
+          const catalog = await fetch('/data/open-source/catalog.json').then(r=>r.json());
+          const item = catalog.find(i=>i.id === id);
+          if (item) target = item.url;
+        } catch {}
+      }
+      if (!target) target = '/open-source/';
+      const box = document.querySelector('[data-redirect]');
+      if (box) box.setAttribute('data-redirect', target);
+    })();
+  </script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

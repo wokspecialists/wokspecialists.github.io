@@ -1,55 +1,121 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Projects</title>
+  <title>Projects · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body>
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
       <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
-        <a data-nav href="/">Home</a>
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/atlas/">Signal Map</a>
+        <a data-nav href="/studio/">Studio</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
-        <a data-nav href="/chopsticks/">Chopsticks</a>
-        <a data-nav href="/commands/">Commands</a>
-        <a data-nav href="/agents/">Agents</a>
-        <a data-nav href="/embed/">Embed Builder</a>
         <a data-nav href="/docs/">Docs</a>
         <a data-nav href="/status/">Status</a>
         <a data-nav href="/plans/">Plans</a>
         <a data-nav href="/company/">Company</a>
       </nav>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
     </div>
   </header>
   <main class="wrap">
-    <div class="kicker">Projects</div>
-    <div class="h1">Project Index</div>
-    <div class="muted">Public-facing list of active work.</div>
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Projects</span></div>
 
-    <div class="hr"></div>
+    <section class="section" data-reveal>
+      <div class="kicker">Projects</div>
+      <div class="display">Active builds</div>
+      <div class="muted">Work in progress across the studio.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/studio/">Studio</a>
+        <a class="btn" href="/plans/">Roadmap</a>
+      </div>
+    </section>
 
-    <div class="grid two">
-      <section class="card">
-        <h2>Chopsticks</h2>
-        <div class="muted">Discord multitool: VoiceMaster + Music + Agents.</div>
-        <div class="btnrow">
-          <a class="btn primary" href="/chopsticks/">Overview</a>
-          <a class="btn" href="/docs/">Docs</a>
-          <a class="btn" href="/status/">Status</a>
+    <section class="section" data-reveal>
+      <div class="grid three" data-stagger>
+        <article class="card">
+          <h3>Chopsticks</h3>
+          <div class="muted">Discord multitool bot with deployable agents.</div>
+          <div class="linklist">
+            <a href="/chopsticks/">Overview</a>
+            <a href="/chopsticks/docs/">Docs</a>
+            <a href="/commands/">Commands</a>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Vault</h3>
+          <div class="muted">Open source catalog inside the vault.</div>
+          <div class="linklist">
+            <a href="/open-source/">Vault Gate</a>
+            <a href="/open-source/vault/">Open Source Catalog</a>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Embed Builder</h3>
+          <div class="muted">Utility for structured embeds.</div>
+          <div class="linklist">
+            <a href="/embed/">Open Builder</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" data-reveal data-agent-section id="bot-pool">
+      <div class="kicker">Chopsticks · Bot Pool</div>
+      <div class="agent-pool">
+        <div class="split">
+          <div>
+            <div class="h2">35 agents total</div>
+          </div>
+          <div class="agent-stats">
+            <div class="agent-stat"><strong>25</strong>Available</div>
+            <div class="agent-stat"><strong>10</strong>Unavailable</div>
+          </div>
         </div>
-      </section>
+        <div class="btnrow" style="margin-top:10px">
+          <button class="btn" type="button" data-agent-filter="all">All</button>
+          <button class="btn" type="button" data-agent-filter="available">Available</button>
+          <button class="btn" type="button" data-agent-filter="unavailable">Unavailable</button>
+          <button class="btn" type="button" data-agent-filter="special">Special</button>
+        </div>
+        <div class="btnrow" style="margin-top:10px">
+          <a class="btn" href="/chopsticks/">Chopsticks Overview</a>
+          <a class="btn" href="/chopsticks/agents/">Agents</a>
+        </div>
+        <div class="agent-grid" data-agent-grid data-agent-total="35" data-agent-unavailable="0003,0007,0011,0014,0018,0022,0026,0030,0033,0035" data-agent-base="/chopsticks/agents/invite/?agent="></div>
+        <div class="muted" style="margin-top:12px">Invite links (copy/paste):</div>
+        <textarea class="agent-list" data-agent-list readonly></textarea>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2>Coming</h2>
-        <div class="muted">Discord bots, games, art tooling.</div>
-      </section>
-    </div>
+    <section class="section" data-reveal>
+      <div class="kicker">Special Agents</div>
+      <div class="card">
+        <div class="agent-special" data-agent-special>
+          <div class="agent-avatar">UR</div>
+          <div>
+            <div class="h3">Uncle Roger <span class="muted" style="font-size:12px">Agent</span></div>
+            <div class="muted">Pre‑alpha. Custom personality and voice routing. Not available for deployment.</div>
+            <div class="linklist">
+              <span>Personalized callouts</span>
+              <span>Custom response layers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists — owned and operated by Wok Tech LLC.</div>
+      <div>Wok Specialists. In development.</div>
     </footer>
   </main>
   <script src="/assets/js/app.js"></script>

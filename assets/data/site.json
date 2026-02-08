@@ -1,12 +1,9 @@
 {
-  "org": {"name":"Wok Specialists","owner":"Wok Tech LLC"},
+  "org": {"name":"Wok Specialists","owner":"Wok Specialists"},
   "nav": [
     {"href":"/","label":"Home"},
+    {"href":"/studio/","label":"Studio"},
     {"href":"/projects/","label":"Projects"},
-    {"href":"/chopsticks/","label":"Chopsticks"},
-    {"href":"/commands/","label":"Commands"},
-    {"href":"/agents/","label":"Agents"},
-    {"href":"/embed/","label":"Embed Builder"},
     {"href":"/docs/","label":"Docs"},
     {"href":"/status/","label":"Status"},
     {"href":"/plans/","label":"Plans"},
