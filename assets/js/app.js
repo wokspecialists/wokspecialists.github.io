@@ -244,6 +244,8 @@
       grid.appendChild(frag);
       grid.dataset.built = '1';
     });
+    layoutBattlefieldNodes();
+    enableNodeDragging();
   }
   buildAgentNodes();
 
@@ -279,135 +281,119 @@
   }
   buildAgentPools();
 
-  function setupBattlefieldInteractions(){
+  function layoutBattlefieldNodes(){
     const grids = document.querySelectorAll('.battlefield-grid');
     grids.forEach(grid=>{
-      if (grid.dataset.interactive) return;
-      let scale = 1;
-      let x = 0;
-      let y = 0;
-      let dragging = false;
-      let startX = 0;
-      let startY = 0;
-      const pointers = new Map();
-      let pinchStartDist = 0;
-      let pinchStartScale = 1;
-      let snapRaf = 0;
-
-      function apply(){
-        grid.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-      }
-
-      function clampTransform(){
-        const rect = grid.getBoundingClientRect();
-        const maxScale = 1.4;
-        const minScale = 0.85;
-        scale = Math.max(minScale, Math.min(maxScale, scale));
-        const maxX = rect.width * 0.08;
-        const maxY = rect.height * 0.08;
-        x = Math.max(-maxX, Math.min(maxX, x));
-        y = Math.max(-maxY, Math.min(maxY, y));
-      }
-
-      function snapBack(){
-        if (snapRaf) cancelAnimationFrame(snapRaf);
-        const targetScale = 1;
-        const targetX = 0;
-        const targetY = 0;
-        const startScale = scale;
-        const startX = x;
-        const startY = y;
-        const start = performance.now();
-        const duration = 240;
-        function tick(now){
-          const t = Math.min(1, (now - start) / duration);
-          const ease = t * (2 - t);
-          scale = startScale + (targetScale - startScale) * ease;
-          x = startX + (targetX - startX) * ease;
-          y = startY + (targetY - startY) * ease;
-          apply();
-          if (t < 1) snapRaf = requestAnimationFrame(tick);
-          else snapRaf = 0;
-        }
-        snapRaf = requestAnimationFrame(tick);
-      }
-
-      function distance(a, b){
-        const dx = a.x - b.x;
-        const dy = a.y - b.y;
-        return Math.hypot(dx, dy);
-      }
-
-      grid.addEventListener('pointerdown', (e)=>{
-        pointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
-        if (pointers.size === 2) {
-          const pts = Array.from(pointers.values());
-          pinchStartDist = distance(pts[0], pts[1]);
-          pinchStartScale = scale;
-        }
-        if (pointers.size > 1) return;
-        if (e.button && e.button !== 0) return;
-        dragging = true;
-        startX = e.clientX - x;
-        startY = e.clientY - y;
-        grid.classList.add('dragging');
-        grid.setPointerCapture(e.pointerId);
+      const rect = grid.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const nodes = Array.from(grid.querySelectorAll('.node-dot'));
+      const pad = 10;
+      nodes.forEach(node=>{
+        if (node.dataset.placed) return;
+        const x = pad + Math.random() * (rect.width - pad * 2);
+        const y = pad + Math.random() * (rect.height - pad * 2);
+        node.style.left = `${x}px`;
+        node.style.top = `${y}px`;
+        node.dataset.x = String(x);
+        node.dataset.y = String(y);
+        node.dataset.placed = '1';
       });
-
-      grid.addEventListener('pointermove', (e)=>{
-        if (!pointers.has(e.pointerId)) return;
-        pointers.set(e.pointerId, {x:e.clientX, y:e.clientY});
-        if (pointers.size === 2) {
-          const pts = Array.from(pointers.values());
-          const dist = distance(pts[0], pts[1]);
-          if (pinchStartDist > 0) {
-            scale = pinchStartScale * (dist / pinchStartDist);
-            clampTransform();
-            apply();
+      // simple relaxation to reduce clumping
+      for (let iter = 0; iter < 16; iter += 1) {
+        for (let i = 0; i < nodes.length; i += 1) {
+          const a = nodes[i];
+          let ax = Number(a.dataset.x || 0);
+          let ay = Number(a.dataset.y || 0);
+          for (let j = i + 1; j < nodes.length; j += 1) {
+            const b = nodes[j];
+            let bx = Number(b.dataset.x || 0);
+            let by = Number(b.dataset.y || 0);
+            const dx = ax - bx;
+            const dy = ay - by;
+            const dist = Math.hypot(dx, dy) || 1;
+            if (dist < 14) {
+              const push = (14 - dist) * 0.5;
+              const nx = dx / dist;
+              const ny = dy / dist;
+              ax += nx * push;
+              ay += ny * push;
+              bx -= nx * push;
+              by -= ny * push;
+              a.dataset.x = String(ax);
+              a.dataset.y = String(ay);
+              b.dataset.x = String(bx);
+              b.dataset.y = String(by);
+            }
           }
-          return;
+          clampNodeToGrid(a, grid);
         }
-        if (!dragging) return;
-        x = e.clientX - startX;
-        y = e.clientY - startY;
-        clampTransform();
-        apply();
-      });
-
-      grid.addEventListener('pointerup', (e)=>{
-        pointers.delete(e.pointerId);
-        if (dragging) {
-          dragging = false;
-          grid.classList.remove('dragging');
-          try { grid.releasePointerCapture(e.pointerId); } catch {}
-        }
-        snapBack();
-      });
-      grid.addEventListener('pointercancel', (e)=>{
-        pointers.delete(e.pointerId);
-        dragging = false;
-        grid.classList.remove('dragging');
-        snapBack();
-      });
-
-      grid.addEventListener('wheel', (e)=>{
-        e.preventDefault();
-        const delta = -e.deltaY;
-        const factor = delta > 0 ? 1.08 : 0.92;
-        scale = scale * factor;
-        clampTransform();
-        apply();
-        snapBack();
-      }, {passive:false});
-
-      grid.addEventListener('dblclick', ()=>{
-        snapBack();
-      });
-
-      grid.dataset.interactive = '1';
+      }
     });
   }
-  setupBattlefieldInteractions();
+
+  function clampNodeToGrid(node, grid){
+    const rect = grid.getBoundingClientRect();
+    const pad = 6;
+    const x = Math.max(pad, Math.min(rect.width - pad, Number(node.dataset.x || 0)));
+    const y = Math.max(pad, Math.min(rect.height - pad, Number(node.dataset.y || 0)));
+    node.dataset.x = String(x);
+    node.dataset.y = String(y);
+    node.style.left = `${x}px`;
+    node.style.top = `${y}px`;
+  }
+
+  function enableNodeDragging(){
+    const grids = document.querySelectorAll('.battlefield-grid');
+    grids.forEach(grid=>{
+      if (grid.dataset.nodeDrag) return;
+      const nodes = Array.from(grid.querySelectorAll('.node-dot'));
+      nodes.forEach(node=>{
+        node.addEventListener('pointerdown', (e)=>{
+          if (e.button && e.button !== 0) return;
+          e.preventDefault();
+          node.setPointerCapture(e.pointerId);
+          const rect = grid.getBoundingClientRect();
+          const startX = e.clientX - rect.left - Number(node.dataset.x || 0);
+          const startY = e.clientY - rect.top - Number(node.dataset.y || 0);
+          function move(ev){
+            const x = ev.clientX - rect.left - startX;
+            const y = ev.clientY - rect.top - startY;
+            node.dataset.x = String(x);
+            node.dataset.y = String(y);
+            clampNodeToGrid(node, grid);
+          }
+          function up(){
+            node.removeEventListener('pointermove', move);
+            node.removeEventListener('pointerup', up);
+            node.removeEventListener('pointercancel', up);
+          }
+          node.addEventListener('pointermove', move);
+          node.addEventListener('pointerup', up);
+          node.addEventListener('pointercancel', up);
+        });
+      });
+      grid.dataset.nodeDrag = '1';
+    });
+  }
+
+  function relayoutOnResize(){
+    const grids = document.querySelectorAll('.battlefield-grid');
+    grids.forEach(grid=>{
+      const nodes = Array.from(grid.querySelectorAll('.node-dot'));
+      nodes.forEach(node=>{
+        node.dataset.placed = '0';
+      });
+    });
+    layoutBattlefieldNodes();
+  }
+  let resizeTimer = 0;
+  window.addEventListener('resize', ()=>{
+    if (resizeTimer) cancelAnimationFrame(resizeTimer);
+    resizeTimer = requestAnimationFrame(relayoutOnResize);
+  });
+  window.addEventListener('load', ()=>{
+    requestAnimationFrame(relayoutOnResize);
+  });
 
   function setupBattlefieldHoverRipple(){
     const grids = document.querySelectorAll('.battlefield-grid');

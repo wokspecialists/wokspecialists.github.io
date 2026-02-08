@@ -286,17 +286,14 @@ body{
   color:var(--muted);
 }
 .battlefield-grid{
-  display:grid;
-  grid-template-columns:repeat(12, minmax(0, 1fr));
-  gap:8px;
-  justify-items:center;
-  align-items:center;
   position:relative;
+  display:block;
+  height:220px;
   transform-origin:center;
   touch-action:none;
-  cursor:grab;
+  cursor:default;
 }
-.battlefield-grid.dragging{cursor:grabbing}
+@media (max-width:700px){.battlefield-grid{height:180px}}
 .battlefield-grid::after{
   content:"";
   position:absolute;
@@ -322,7 +319,12 @@ body{
   box-shadow:0 0 0 1px rgba(0,0,0,.2);
   display:inline-block;
   transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  position:absolute;
+  left:0;
+  top:0;
+  cursor:grab;
 }
+.node-dot:active{cursor:grabbing}
 .node-dot.green{background:#22c55e}
 .node-dot.red{background:#ef4444}
 .node-dot.gold{background:#f59e0b}
