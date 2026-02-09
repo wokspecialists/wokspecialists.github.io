@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Open Source Catalog · Wok Specialists</title>
+  <title>Open Source Room · Vault</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body class="site bg-noise vault-page">
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span><span class="brand-sub">Manual</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,159 +22,74 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><a href="/open-source/catalog/">Rooms</a><span>/</span><span>Open Source</span></div>
+  <main class="wrap project-shell page" data-project-theme="vault">
+    <div class="path"><a href="/open-source/">Vault</a> / <a href="/open-source/open-source/">Open Source Room</a></div>
 
-    <section class="section" id="vault-app" data-reveal>
-      <div class="vault-shell">
-        <div class="vault-scroll-hint">Scroll sideways to move through the catalog.</div>
-        <div class="vault-hscroll">
-          <section class="vault-panel" id="vault-overview">
-            <div class="vault-hero-core">
-              <div class="kicker">Vault Room 01</div>
-              <div class="display">Open Source Catalog</div>
-              <div class="muted">A dense index of tools and resources. Search fast, filter clean, open what you need.</div>
-              <div class="hero-actions">
-                <a class="btn primary" href="/open-source/catalog/">Vault Rooms</a>
-                <a class="btn" href="/open-source/">Vault Gate</a>
-              </div>
-            </div>
-            <div class="stat-row">
-              <div class="stat">
-                <strong data-vault-total>0</strong>
-                <span>Total Items</span>
-              </div>
-              <div class="stat">
-                <strong data-vault-meta="categories">0</strong>
-                <span>Categories</span>
-              </div>
-              <div class="stat">
-                <strong data-vault-meta="collections">0</strong>
-                <span>Collections</span>
-              </div>
-              <div class="stat">
-                <strong data-vault-meta="tags">0</strong>
-                <span>Tags</span>
-              </div>
-            </div>
-            <div class="vault-hero-tiles">
-              <div class="tile">
-                <div class="kicker">Focus</div>
-                <div class="h3">Streaming · Tools · Torrenting</div>
-                <div class="muted">Fast slices into the largest categories.</div>
-              </div>
-              <div class="tile">
-                <div class="kicker">Quick Routes</div>
-                <div class="linklist">
-                  <a href="/open-source/open-source/#category/streaming">Streaming</a>
-                  <a href="/open-source/open-source/#category/tools">Tools</a>
-                  <a href="/open-source/open-source/#category/torrenting">Torrenting</a>
-                  <a href="/open-source/open-source/#category/media">Media</a>
-                  <a href="/open-source/open-source/#category/gaming">Gaming</a>
-                </div>
-              </div>
-              <div class="tile warning">
-                <div class="kicker">Warning</div>
-                <div class="h3">Third‑party directory. No safeguards.</div>
-                <div class="muted">Wok Specialists does not own, host, or control linked resources and is not affiliated, sponsored, or endorsed by any listed site.</div>
-                <div class="muted">Inclusion does not imply approval. Availability, accuracy, legality, or safety is not guaranteed.</div>
-                <div class="muted">Use at your own risk and comply with local laws and each site’s terms.</div>
-              </div>
-            </div>
-          </section>
-
-          <section class="vault-panel" id="vault-command">
-            <div class="vault-command">
-              <div class="search-stack">
-                <label class="kicker" for="vault-search">Search</label>
-                <input id="vault-search" class="input" data-vault-search type="search" placeholder="Search tools, platforms, tags"/>
-                <div class="toolbar-hint">Press <span class="kbd">/</span> to search</div>
-              </div>
-              <div class="command-actions">
-                <div class="btnrow">
-                  <button class="btn ghost" type="button" data-vault-clear><i class="fa-solid fa-eraser icon"></i>Clear</button>
-                  <button class="btn" type="button" data-vault-reset><i class="fa-solid fa-rotate-left icon"></i>Reset</button>
-                </div>
-                <div class="view-toggle">
-                  <button class="btn" type="button" data-vault-view="grid"><i class="fa-solid fa-border-all icon"></i>Grid</button>
-                  <button class="btn" type="button" data-vault-view="list"><i class="fa-solid fa-list icon"></i>List</button>
-                </div>
-              </div>
-            </div>
-            <div class="vault-subnav">
-              <div class="chip-row">
-                <a href="#vault-categories">Categories</a>
-                <a href="#vault-collections">Collections</a>
-                <a href="#vault-tags">Tags</a>
-                <a href="#vault-results">Results</a>
-              </div>
-              <div class="vault-count" data-vault-count>0 items</div>
-            </div>
-          </section>
-
-          <section class="vault-panel" id="vault-filters">
-            <details class="rail-block" open>
-              <summary>Categories</summary>
-              <div class="rail-body">
-                <div id="vault-categories" class="vault-filters" data-vault-categories></div>
-              </div>
-            </details>
-            <details class="rail-block" open>
-              <summary>Collections</summary>
-              <div class="rail-body">
-                <div id="vault-collections" class="grid" data-vault-collections></div>
-              </div>
-            </details>
-            <details class="rail-block" open>
-              <summary>Tags</summary>
-              <div class="rail-body">
-                <div id="vault-tags" class="vault-filters" data-vault-tags></div>
-              </div>
-            </details>
-            <details class="rail-block">
-              <summary>Local Updates</summary>
-              <div class="rail-body">
-                <div class="linklist">
-                  <a href="/data/open-source/catalog.json">Catalog JSON</a>
-                  <a href="/data/open-source/categories.json">Categories</a>
-                  <a href="/data/open-source/collections.json">Collections</a>
-                  <a href="/data/open-source/README.md">Catalog Guide</a>
-                </div>
-                <div class="muted" style="margin-top:6px">Edit locally to scale the vault.</div>
-              </div>
-            </details>
-          </section>
-
-          <section class="vault-panel wide" id="vault-results">
-            <div class="vault-results-head">
-              <div>
-                <div class="kicker">Results</div>
-                <div class="h3">Filtered list</div>
-              </div>
-              <div class="vault-count" data-vault-count>0 items</div>
-            </div>
-            <div class="vault-results-grid" data-vault-results></div>
-          </section>
-
-          <section class="vault-panel" id="vault-detail" data-vault-detail>
-            <div class="muted">Select an item for details.</div>
-          </section>
-        </div>
+    <section class="hero" data-reveal>
+      <div class="kicker">Vault Room</div>
+      <div class="display">Open Source Room</div>
+      <div class="muted">Curated entry point for open tools, projects, and communities.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/open-source/catalog/">Open Source Catalog</a>
+        <a class="btn" href="/open-source/">Back to Vault</a>
       </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Room Stack</div>
+      <div class="linklist">
+        <span>Streaming</span>
+        <span>Tools</span>
+        <span>Torrenting</span>
+        <span>Media</span>
+        <span>Gaming</span>
+        <span>Security</span>
+        <span>Audio</span>
+        <span>Video</span>
+        <span>Text Tools</span>
+      </div>
+      <div class="muted">This room expands with every new batch.</div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Catalog</div>
+      <div class="muted">Browse every indexed resource and jump to the source.</div>
+      <div class="btnrow">
+        <a class="btn" href="/open-source/catalog/">Open Catalog</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Add links</div>
+      <div class="muted">Add more entries via the JSON data files.</div>
+      <div class="btnrow">
+        <a class="btn" href="/docs/">Docs</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Room index</div>
+      <div class="muted">Use the catalog console to move between rooms with minimal scrolling.</div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Independent links</div>
+      <div class="muted">Everything in this room is external. Wok Specialists is not affiliated with any listed project.</div>
     </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Vault · Open Source Room</div>
     </footer>
   </main>
 
   <script src="/assets/js/app.js"></script>
-  <script src="/assets/js/vault.js"></script>
 </body>
 </html>

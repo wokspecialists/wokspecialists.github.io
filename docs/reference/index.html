@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,44 +9,44 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
-        <a data-nav href="/studio/">Studio</a>
-        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/docs/">Docs</a>
-        <a data-nav href="/technology/">Technology</a>
-        <a data-nav href="/plans/">Plans</a>
-        <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/docs/">Docs</a><span>/</span><span>Reference</span></div>
-    <section class="section" data-reveal>
+
+    <section class="hero" data-reveal>
       <div class="kicker">Docs</div>
       <div class="display">Reference</div>
-      <div class="muted">Command behavior, limits, and system rules.</div>
+      <div class="muted">Specs, components, and build references.</div>
       <div class="btnrow">
-        <a class="btn primary" href="/commands/">Commands</a>
+        <a class="btn primary" href="/docs/guides/">Guides</a>
         <a class="btn" href="/docs/flows/">Flows</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="card">
-        <div class="muted">Core references</div>
-        <div class="linklist">
-          <a href="/commands/">Command directory</a>
-          <a href="/technology/status/">Status surface</a>
-          <a href="/plans/">Plans</a>
-        </div>
+      <div class="h3">Components</div>
+      <div class="linklist">
+        <span>Agent specs</span>
+        <span>Bot integrations</span>
+        <span>Operational layers</span>
       </div>
+      <div class="muted">Roles, routing, permissions, and uptime workflows.</div>
     </section>
+
     <footer>
       <div class="hr"></div>
       <div>Wok Specialists.</div>

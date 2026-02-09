@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span><span class="brand-sub">Manual</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,88 +22,68 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap page">
+    <div class="path"><a href="/home/">Home</a></div>
+
     <section class="hero" data-reveal>
-      <div class="kicker">Wok Specialists</div>
-      <div class="display">Three active builds.</div>
-      <div class="muted">Chopsticks is live. Vault and Embed Builder are growing.</div>
-      <div class="hero-actions">
+      <div class="kicker">Home</div>
+      <div class="display">Wok Specialists</div>
+      <div class="btnrow">
         <a class="btn primary" href="/projects/">Projects</a>
-        <a class="btn" href="/chopsticks/">Chopsticks</a>
-        <a class="btn" href="/embed/">Embed Builder</a>
-        <a class="btn" href="/open-source/">Vault Gate</a>
+        <a class="btn contribute" href="/contribute/">Contribute</a>
+      </div>
+      <div class="node-counts">
+        <span class="pill"><span class="status-dot dev"></span>Manual status</span>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid two" data-stagger>
-        <div class="card flare">
-          <div class="kicker">Active Build</div>
-          <div class="h2"><span class="logo-inline"><img class="logo-hero" src="/assets/images/chopsticks.png" alt="Chopsticks logo"/><span>Chopsticks</span></span></div>
-          <div class="muted">Multi‑agent music across many channels at once.</div>
-          <div class="btnrow">
-            <a class="btn primary" href="/chopsticks/">Overview</a>
-            <a class="btn" href="/projects/#bot-pool">Agent Pool</a>
-            <a class="btn" href="/chopsticks/docs/">Docs</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="kicker">Agent Field</div>
-          <div class="agent-battlefield">
-            <div class="battlefield-label">Live mix</div>
-            <div class="battlefield-grid" data-nodes-seq="g,g,r,g,s,g,r,g,g,g,r,g,g,r,g,r,g,g,r,g,g,g,r,g,g,g,r,g,g,g,r,g,g,g,r,g" data-node-link="/projects/#bot-pool"></div>
-            <div class="legend">
-              <span><span class="node-dot green"></span>Available</span>
-              <span><span class="node-dot red"></span>Unavailable</span>
-              <span><span class="node-dot gold"></span>Special</span>
-            </div>
-          </div>
-          <div class="muted" style="margin-top:10px">35 total · 10 unavailable · 1 special.</div>
-        </div>
+      <div class="h3">Focus</div>
+      <div class="linklist">
+        <a href="/studio/bots/">Discord Bots</a>
+        <a href="/embed/">Embed Builder</a>
+        <a href="/support/">Support</a>
+        <a href="/docs/">Docs</a>
+      </div>
+    </section>
+
+    <section class="section chopsticks-spotlight" data-reveal data-theme="chopsticks">
+      <div class="h3">
+        <span class="logo-inline">
+          <img src="https://cdn.simpleicons.org/discord/5865F2" alt=""/>
+          <img src="/assets/images/chopsticks.png" alt=""/>
+          <span>Chopsticks</span>
+        </span>
+      </div>
+      <div class="muted">Discord bot with shared agents. Music and voice control are live.</div>
+      <div class="agent-battlefield mini-window" data-size="mini" data-pool-label="Agent Pool One" data-pool-host="goot27">
+        <div class="battlefield-grid" data-nodes-flow="1" data-nodes-order="ordered" data-nodes-density="dense" data-nodes-total="35" data-nodes-unavailable="0003,0007,0011,0014,0018,0022,0026,0030,0033,0035" data-nodes-future="60" data-nodes-special-map="36:Uncle Roger,37:Soytiet Agent" data-node-base="/chopsticks/agents/#agent/" data-node-invite-base="/chopsticks/agents/invite/?agent="></div>
+      </div>
+      <div class="btnrow">
+        <a class="btn primary" href="/chopsticks/">Overview</a>
+        <a class="btn" href="/chopsticks/agents/">Agent Pool</a>
+        <a class="btn" href="/chopsticks/docs/">Docs</a>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card sun">
-          <div class="kicker">Bots</div>
-          <div class="h3">Chopsticks</div>
-          <div class="muted">Multi‑agent sessions, VoiceMaster, and pooled access.</div>
-          <div class="linklist">
-            <a href="/chopsticks/">Overview</a>
-            <a href="/projects/#bot-pool">Bot Pool</a>
-          </div>
-        </article>
-        <article class="card cyan">
-          <div class="kicker">Vault</div>
-          <div class="h3">Open Source Room</div>
-          <div class="muted">Streaming, tools, torrenting, media, gaming.</div>
-          <div class="linklist">
-            <a href="/open-source/">Vault Gate</a>
-            <a href="/open-source/open-source/">Open Source</a>
-          </div>
-        </article>
-        <article class="card lime">
-          <div class="kicker">Tools</div>
-          <div class="h3">Embed Builder</div>
-          <div class="muted">Fast, clean embeds for bots and announcements.</div>
-          <div class="linklist">
-            <a href="/embed/">Open Builder</a>
-            <a href="/projects/">Projects</a>
-          </div>
-        </article>
+      <div class="h3">Support</div>
+      <div class="muted">Support ongoing work.</div>
+      <div class="btnrow">
+        <a class="btn" href="/support/">Support</a>
       </div>
     </section>
-
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Wok Specialists · Manual</div>
     </footer>
   </main>
 

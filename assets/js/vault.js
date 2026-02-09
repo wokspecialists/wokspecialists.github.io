@@ -49,7 +49,7 @@
   const searchInput = app.querySelector('[data-vault-search]');
   function jumpToResults(){
     if (!window.matchMedia('(max-width: 1100px)').matches) return;
-    const results = app.querySelector('#vault-results');
+    const results = app.querySelector('[data-vault-results]');
     if (results) results.scrollIntoView({behavior:'smooth', block:'start'});
   }
   if (searchInput) {
@@ -162,7 +162,7 @@
     for (const cat of categories) {
       const count = counts[cat.id] || 0;
       const a = document.createElement('a');
-      a.href = `/open-source/open-source/#category/${cat.id}`;
+      a.href = `/open-source/catalog/#room-${cat.id}`;
       a.textContent = `${cat.label} (${count})`;
       wrap.appendChild(a);
     }
@@ -293,7 +293,7 @@
     resultsWrap.dataset.view = mode;
     viewButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-vault-view') === mode));
   }
-  const savedView = localStorage.getItem(viewKey) || 'grid';
+  const savedView = localStorage.getItem(viewKey) || 'rail';
   applyView(savedView);
   viewButtons.forEach(btn => {
     btn.addEventListener('click', () => {

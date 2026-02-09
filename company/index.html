@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Company · Wok Specialists</title>
+  <title>Community · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,58 +22,56 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Company</span></div>
-    <section class="section" data-reveal>
-      <div class="kicker">Company</div>
-      <div class="display">Structure, direction, and long-term vision.</div>
-      <div class="muted">What we build, how we work, and where we’re headed.</div>
+    <section class="hero" data-reveal>
+      <div class="kicker">Community</div>
+      <div class="display">Build with us</div>
+      <div class="muted">Small team, open roadmap, and public build notes.</div>
       <div class="btnrow">
-        <a class="btn primary" href="/plans/">Roadmap</a>
-        <a class="btn" href="/technology/status/">Status</a>
+        <a class="btn contribute" href="/contribute/">Contribute</a>
         <a class="btn" href="/support/">Support</a>
+        <a class="btn" href="/plans/">Roadmap</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Principles</h3>
-          <div class="muted">Clarity, stability, and open access.</div>
-        </article>
-        <article class="card">
-          <h3>Status & Plans</h3>
-          <div class="muted">Roadmap, uptime, and updates.</div>
-        </article>
-        <article class="card">
-          <h3>People</h3>
-          <div class="muted">Open contributions and feedback loops.</div>
-        </article>
+      <div class="h3">Membership</div>
+      <div class="muted">Keep up with drops, builds, and calls for help.</div>
+      <div class="linklist">
+        <a href="/support/#membership">Member access</a>
+        <a href="/projects/">Projects</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="grid two" data-stagger>
-        <article class="card">
-          <div class="kicker">Contact</div>
-          <div class="h3">Start a conversation</div>
-          <div class="muted">Partnerships, collaboration, and community signals.</div>
-          <div class="linklist">
-            <a href="/support/">Support</a>
-            <a href="/contribute/">Contribute</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="kicker">Membership</div>
-          <div class="h3">Join the circle</div>
-          <div class="muted">Community‑led updates and build notes.</div>
-          <div class="linklist">
-            <a href="/support/#membership">Member access</a>
-            <a href="/projects/">Projects</a>
-          </div>
-        </article>
+      <div class="h3">Contact</div>
+      <div class="muted">Collab, feedback, or just say hi.</div>
+      <div class="linklist">
+        <a href="/support/">Support</a>
+        <a href="/contribute/">Contribute</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Status</div>
+      <div class="muted">Track what is shipping and what is paused.</div>
+      <div class="btnrow">
+        <a class="btn" href="/technology/status/">Status</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Docs</div>
+      <div class="muted">Guides, references, and build notes.</div>
+      <div class="btnrow">
+        <a class="btn" href="/docs/">Docs</a>
       </div>
     </section>
     <footer>

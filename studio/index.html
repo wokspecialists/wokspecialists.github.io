@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,16 +22,18 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Studio</span></div>
-    <section class="section" data-reveal>
+    <section class="hero" data-reveal>
       <div class="kicker">Studio</div>
-      <div class="display">A directory of every Wok Specialists product line.</div>
-      <div class="muted">Each line owns its own surface. The front door stays calm, the studio goes deep.</div>
+      <div class="display">Project map</div>
+      <div class="muted">Entry points for every build in the studio.</div>
       <div class="btnrow">
         <a class="btn primary" href="/projects/">Project index</a>
         <a class="btn" href="/plans/">Plans</a>
@@ -40,60 +42,47 @@
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card flare">
-          <h3>Bots</h3>
-          <div class="muted">Bots, tools, and utilities in active development.</div>
-          <div class="linklist">
-            <a href="/studio/bots/">Bots directory</a>
-            <a href="/chopsticks/">Chopsticks</a>
-          </div>
-        </article>
-        <article class="card cyan">
-          <h3>Vault</h3>
-          <div class="muted">The public resource vault.</div>
-          <div class="linklist">
-            <a href="/open-source/">Vault Gate</a>
-            <a href="/open-source/open-source/">Catalog</a>
-          </div>
-        </article>
-        <article class="card sun">
-          <h3>Tools</h3>
-          <div class="muted">Utilities that live off the front page.</div>
-          <div class="linklist">
-            <a href="/studio/tools/">Tools directory</a>
-            <a href="/embed/">Embed Builder</a>
-          </div>
-        </article>
+      <div class="h3">Operators</div>
+      <div class="muted">Operator surfaces and pooled agents.</div>
+      <div class="linklist">
+        <a href="/studio/bots/">Directory</a>
+        <a href="/chopsticks/">Chopsticks</a>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Labs</h3>
-          <div class="muted">Prototype ground for new interfaces.</div>
-          <div class="linklist">
-            <a href="/projects/">Current work</a>
-            <a href="/plans/">Planned experiments</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Operations</h3>
-          <div class="muted">Docs, status, and service health.</div>
-          <div class="linklist">
-            <a href="/docs/">Docs</a>
-            <a href="/technology/status/">Status</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Company</h3>
-          <div class="muted">Ownership and long-term structure.</div>
-          <div class="linklist">
-            <a href="/company/">Company</a>
-            <a href="/plans/">Plans</a>
-          </div>
-        </article>
+      <div class="h3">Tools</div>
+      <div class="muted">Tools and utilities.</div>
+      <div class="linklist">
+        <a href="/studio/tools/">Tools directory</a>
+        <a href="/embed/">Embed Builder</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Vault</div>
+      <div class="muted">Public resource vault.</div>
+      <div class="linklist">
+        <a href="/open-source/">Vault</a>
+        <a href="/open-source/catalog/">Catalog</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Operations</div>
+      <div class="muted">Docs and status.</div>
+      <div class="linklist">
+        <a href="/docs/">Docs</a>
+        <a href="/technology/status/">Status</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Company</div>
+      <div class="muted">People and structure.</div>
+      <div class="linklist">
+        <a href="/company/">Company</a>
+        <a href="/plans/">Plans</a>
       </div>
     </section>
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,17 +22,19 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Technology</span></div>
 
-    <section class="section" data-reveal>
+    <section class="hero" data-reveal>
       <div class="kicker">Technology</div>
-      <div class="display">Systems & Operations</div>
+      <div class="display">Systems in progress</div>
       <div class="muted">Status, uptime, and platform health live here.</div>
       <div class="btnrow">
         <a class="btn primary" href="/technology/status/">System Status</a>
@@ -41,34 +43,25 @@
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Status</h3>
-          <div class="muted">Operational health and service updates.</div>
-          <div class="linklist">
-            <a href="/technology/status/">View status</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Infrastructure</h3>
-          <div class="muted">Where systems live and how they scale.</div>
-          <div class="linklist">
-            <a href="/open-source/open-source/#category/infrastructure">Infrastructure stack</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Security</h3>
-          <div class="muted">Baselines and operational safety.</div>
-          <div class="linklist">
-            <a href="/open-source/open-source/#category/security">Security stack</a>
-          </div>
-        </article>
+      <div class="h3">Infrastructure</div>
+      <div class="muted">Where systems live and how they scale.</div>
+      <div class="linklist">
+        <a href="/open-source/catalog/#room-infrastructure">Infrastructure stack</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Security</div>
+      <div class="muted">Operational safety and monitoring.</div>
+      <div class="linklist">
+        <a href="/open-source/catalog/#room-security">Security stack</a>
+        <a href="/technology/status/">Status</a>
       </div>
     </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Wok Specialists. Manual stage.</div>
     </footer>
   </main>
 

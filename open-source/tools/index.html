@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,47 +22,43 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><span>Tools</span></div>
 
-    <section class="section" data-reveal>
-      <div class="category-hero">
+    <section class="hero" data-reveal>
         <div class="kicker">Vault</div>
         <div class="display">Tools</div>
-        <div class="muted">Quick landing page. Use the vault view for the full list.</div>
+        
         <div class="btnrow">
-          <a class="btn primary" href="/open-source/open-source/#category/tools">Open in Vault</a>
-          <a class="btn" href="/open-source/">Vault Gate</a>
+          <a class="btn primary" href="/open-source/catalog/#room-tools">Open in Vault</a>
+          <a class="btn" href="/open-source/">Vault</a>
         </div>
-      </div>
+      </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Top links</div>
+      <div class="link-rail" data-category-top></div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="card glass">
-        <div class="muted">Top links</div>
-        <div class="linklist" data-category-top></div>
-      </div>
-    </section>
-
-    <section class="section" data-reveal>
-      <div class="card">
-        <div class="muted">Collections</div>
-        <div class="linklist">
-          <a href="/open-source/open-source/#collection/core-stack">Core Stack</a>
-          <a href="/open-source/open-source/#collection/privacy-baseline">Privacy Baseline</a>
-          <a href="/open-source/open-source/#collection/creator-studio">Creator Studio</a>
+      <div class="h3">Collections</div>
+      <div class="linklist">
+          <a href="/open-source/catalog/#room-core-stack">Core Stack</a>
+          <a href="/open-source/catalog/#room-privacy-baseline">Privacy Baseline</a>
+          <a href="/open-source/catalog/#room-creator-studio">Creator Studio</a>
         </div>
-      </div>
-    </section>
+      </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Wok Specialists. Manual stage.</div>
     </footer>
   </main>
 

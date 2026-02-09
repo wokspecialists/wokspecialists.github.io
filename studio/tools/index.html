@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,13 +22,15 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/studio/">Studio</a><span>/</span><span>Tools</span></div>
-    <section class="section" data-reveal>
+    <section class="hero" data-reveal>
       <div class="kicker">Studio</div>
       <div class="display">Tools</div>
       <div class="muted">Small utilities that support the ecosystem.</div>
@@ -39,28 +41,26 @@
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Embed Builder</h3>
-          <div class="muted">Compose structured embeds for bots.</div>
-          <div class="linklist">
-            <a href="/embed/">Open Embed Builder</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Command Reference</h3>
-          <div class="muted">Command lists and behaviors.</div>
-          <div class="linklist">
-            <a href="/commands/">Commands</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Status Surface</h3>
-          <div class="muted">Operational status and uptime.</div>
-          <div class="linklist">
-            <a href="/technology/">Status</a>
-          </div>
-        </article>
+      <div class="h3">Embed Builder</div>
+      <div class="muted">Compose structured embeds for operator commands and announcements.</div>
+      <div class="linklist">
+        <a href="/embed/">Open Embed Builder</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Command Reference</div>
+      <div class="muted">Command lists and behaviors.</div>
+      <div class="linklist">
+        <a href="/commands/">Commands</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Status Surface</div>
+      <div class="muted">Operational status and uptime.</div>
+      <div class="linklist">
+        <a href="/technology/">Status</a>
       </div>
     </section>
 

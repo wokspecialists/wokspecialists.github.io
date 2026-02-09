@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise" data-import-api="http://localhost:8787">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,26 +22,26 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><span>Importer</span></div>
 
-    <section class="section" data-reveal>
-      <div class="category-hero">
+    <section class="hero" data-reveal>
         <div class="kicker">Vault Tools</div>
         <div class="display">Bulk Importer</div>
         <div class="muted">Admin‑approved access only. Requires a local importer gate.</div>
         <div class="muted">Run the local gate from `backend/README.md` before requesting access.</div>
         <div class="btnrow">
-          <a class="btn primary" href="/open-source/open-source/">Vault Catalog</a>
+          <a class="btn primary" href="/open-source/catalog/">Vault Catalog</a>
           <a class="btn" href="/data/open-source/README.md">Schema</a>
         </div>
-      </div>
-    </section>
+      </section>
 
     <section class="section" data-reveal>
       <div class="grid two" data-stagger>
@@ -85,19 +85,18 @@
           </div>
         </article>
         <article class="card">
-          <h3>Preview</h3>
+          <h3>Manual</h3>
           <div class="muted" id="summary">No data yet.</div>
-          <pre class="card" id="preview" style="max-height:360px;overflow:auto"></pre>
+          <pre class="card" id="manual" style="max-height:360px;overflow:auto"></pre>
           <div class="btnrow">
             <button class="btn primary" id="download-btn" type="button">Download JSON</button>
           </div>
         </article>
-      </div>
-    </section>
+      </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Wok Specialists. Manual stage.</div>
     </footer>
   </main>
 

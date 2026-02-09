@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,36 +22,47 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Plans</span></div>
-    <section class="section" data-reveal>
+    <section class="hero" data-reveal>
       <div class="kicker">Plans</div>
-      <div class="display">Roadmap and next steps.</div>
-      <div class="muted">The north star for all product lines.</div>
+      <div class="display">Early roadmap</div>
+      <div class="muted">Early roadmap for every line.</div>
       <div class="btnrow">
         <a class="btn primary" href="/projects/">Projects</a>
         <a class="btn" href="/technology/status/">Status</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Stability</h3>
-          <div class="muted">Hardening queues and voice flows.</div>
-        </article>
-        <article class="card">
-          <h3>Discovery</h3>
-          <div class="muted">Deepen the Vault and Atlas.</div>
-        </article>
-        <article class="card">
-          <h3>Scale</h3>
-          <div class="muted">Multi-region and reliability.</div>
-        </article>
-      </div>
+      <div class="h3">Stability</div>
+      <div class="muted">Queues, voice flows, and access control.</div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Discovery</div>
+      <div class="muted">Deepen rooms and Atlas paths.</div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Scale</div>
+      <div class="muted">Reliability and performance.</div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Automation</div>
+      <div class="muted">Status updates and tooling.</div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Docs</div>
+      <div class="muted">Expand guides and reference.</div>
     </section>
     <footer>
       <div class="hr"></div>

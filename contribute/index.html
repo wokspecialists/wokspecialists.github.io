@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,70 +22,67 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Contribute</span></div>
-    <section class="section" data-reveal>
+    <section class="hero" data-reveal>
       <div class="kicker">Contribute</div>
-      <div class="display">Build with the studio.</div>
-      <div class="muted">Resources, fixes, and ideas are the fastest way to grow.</div>
+      <div class="display">Contribute</div>
+      <div class="muted">We need builders. Resources, fixes, and ideas are the fastest way to grow.</div>
       <div class="btnrow">
-        <a class="btn primary" href="/open-source/">Vault</a>
+        <a class="btn contribute" href="/open-source/">Vault</a>
         <a class="btn" href="/support/">Support</a>
         <a class="btn" href="/projects/">Projects</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="cta-grid" data-stagger>
-        <article class="card cta-card">
-          <h3><i class="fa-solid fa-folder-plus icon"></i>Submit Resources</h3>
-          <div class="muted">Add new tools, guides, or platforms to the catalog.</div>
-          <div class="linklist">
-            <a href="/data/open-source/README.md">Vault Guide</a>
-            <a href="/data/open-source/README.md">Catalog Guide</a>
-          </div>
-        </article>
-        <article class="card cta-card">
-          <h3><i class="fa-solid fa-database icon"></i>Improve Data</h3>
-          <div class="muted">Fix categories, tags, naming, or metadata.</div>
-          <div class="linklist">
-            <a href="/data/open-source/catalog.json">Catalog JSON</a>
-            <a href="/data/open-source/categories.json">Categories</a>
-          </div>
-        </article>
-        <article class="card cta-card">
-          <h3><i class="fa-solid fa-bug icon"></i>Report Issues</h3>
-          <div class="muted">Broken links, missing items, and accuracy problems.</div>
-          <div class="linklist">
-            <a href="https://github.com/your-org/vault/issues">Open issue tracker</a>
-            <a href="/support/">Support</a>
-          </div>
-        </article>
+      <div class="h3">Submit resources</div>
+      <div class="muted">Add new tools, guides, or platforms to the catalog.</div>
+      <div class="linklist">
+        <a href="/data/open-source/README.md">Vault Guide</a>
+        <a href="/data/open-source/README.md">Catalog Guide</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="grid two" data-stagger>
-        <article class="card">
-          <div class="kicker">Fork Repos</div>
-          <div class="h3">Start your branch</div>
-          <div class="muted">Fork a project and send improvements back.</div>
-          <div class="linklist">
-            <a href="https://github.com/your-org/chopsticks">Chopsticks Repo</a>
-            <a href="https://github.com/your-org/embed-builder">Embed Builder Repo</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="kicker">Community Notes</div>
-          <div class="h3">Join the build log</div>
-          <div class="muted">Share progress, ideas, or research.</div>
-          <div class="linklist">
-            <a href="/support/">Membership</a>
-            <a href="/company/">Company</a>
-          </div>
-        </article>
+      <div class="h3">Improve data</div>
+      <div class="muted">Fix categories, tags, naming, or metadata.</div>
+      <div class="linklist">
+        <a href="/data/open-source/catalog.json">Catalog JSON</a>
+        <a href="/data/open-source/categories.json">Categories</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Report issues</div>
+      <div class="muted">Broken links, missing items, and accuracy problems.</div>
+      <div class="linklist">
+        <a href="https://github.com/your-org/vault/issues">Open issue tracker</a>
+        <a href="/support/">Support</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Fork repos</div>
+      <div class="muted">Fork a project and send improvements back.</div>
+      <div class="linklist">
+        <a href="https://github.com/your-org/chopsticks">Chopsticks Repo</a>
+        <a href="https://github.com/your-org/embed-builder">Embed Builder Repo</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Community notes</div>
+      <div class="muted">Share progress, ideas, or research.</div>
+      <div class="linklist">
+        <a href="/support/">Membership</a>
+        <a href="/company/">Company</a>
       </div>
     </section>
     <footer>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -7,31 +7,38 @@
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
 <body class="site bg-noise">
-  <header class="nav">
-    <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
-      <div class="nav-actions">
-        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+  <main class="wrap start-gate page">
+    <section class="gate-stage" data-reveal>
+      <div class="gate-marquee">
+        <span>Wok Specialists</span>
+        <span>Start</span>
+        <span>Entry</span>
+        <span>Open</span>
       </div>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero" data-reveal>
-      <div class="kicker">Entrance</div>
-      <div class="display">Choose your path</div>
-      <div class="muted">In development. Pick a route and go.</div>
-      <div class="hero-actions">
-        <a class="btn primary" href="/home/">Enter Site</a>
-        <a class="btn" href="/projects/">Projects</a>
-        <a class="btn" href="/chopsticks/">Chopsticks</a>
+      <div class="gate-grid">
+        <div>
+          <div class="gate-arcade">Start</div>
+          <div class="muted">Choose a section. This is the entry point.</div>
+          <div class="muted">Manual stage.</div>
+          <div class="gate-actions" style="margin-top:12px">
+            <a class="btn primary" href="/home/" data-site-enter>Enter Home</a>
+            <a class="btn" href="/projects/" data-site-enter>See Projects</a>
+            <a class="btn" href="/chopsticks/" data-site-enter>Chopsticks</a>
+          </div>
+          <div class="node-counts" style="margin-top:12px">
+            <span class="pill"><span class="status-dot off"></span>Systems offline</span>
+            <span class="pill"><span class="status-dot dev"></span>Builds in development</span>
+          </div>
+          <div class="muted">This gate only appears at the main link.</div>
+        </div>
+        <div class="gate-callout">
+          <div class="kicker">Overview</div>
+          <div class="h3">Bots, tools, and the open-source catalog.</div>
+          <div class="muted">This is the entry point. Everything else is inside.</div>
+          <div class="muted">Press <strong>/</strong> to search the site instantly.</div>
+        </div>
       </div>
     </section>
-
-    <footer>
-      <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
-    </footer>
   </main>
 
   <script src="/assets/js/app.js"></script>

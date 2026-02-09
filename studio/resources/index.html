@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,44 +22,45 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/studio/">Studio</a><span>/</span><span>Resources</span></div>
-    <section class="section" data-reveal>
+    <section class="hero" data-reveal>
       <div class="kicker">Studio</div>
       <div class="display">Resources</div>
       <div class="muted">The Vault lives here. It is a public catalog with deep paths.</div>
       <div class="btnrow">
         <a class="btn primary" href="/open-source/">Vault</a>
-        <a class="btn" href="/open-source/open-source/">Vault Catalog</a>
+        <a class="btn" href="/open-source/catalog/">Vault Catalog</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Learning</h3>
-          <div class="muted">Courses, docs, and study tools.</div>
-          <div class="linklist">
-            <a href="/open-source/learning/">Learning</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Media</h3>
-          <div class="muted">Audio, video, and archives.</div>
-          <div class="linklist">
-            <a href="/open-source/media/">Media</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Tools</h3>
-          <div class="muted">Utilities and software stack.</div>
-          <div class="linklist">
-            <a href="/open-source/tools/">Tools</a>
-          </div>
-        </article>
+      <div class="h3">Learning</div>
+      <div class="muted">Courses, docs, and study tools.</div>
+      <div class="linklist">
+        <a href="/open-source/learning/">Learning</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Media</div>
+      <div class="muted">Audio, video, and archives.</div>
+      <div class="linklist">
+        <a href="/open-source/media/">Media</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Tools</div>
+      <div class="muted">Utilities and software stack.</div>
+      <div class="linklist">
+        <a href="/open-source/tools/">Tools</a>
       </div>
     </section>
     <footer>

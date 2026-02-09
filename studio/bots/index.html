@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Studio · Bots</title>
+  <title>Studio · Discord Bots</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,16 +22,18 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><a href="/studio/">Studio</a><span>/</span><span>Bots</span></div>
-    <section class="section" data-reveal>
+  <main class="wrap page">
+    <div class="path"><a href="/home/">Home</a><span>/</span><a href="/studio/">Studio</a><span>/</span><span>Discord Bots</span></div>
+    <section class="hero" data-reveal>
       <div class="kicker">Studio</div>
-      <div class="display">Bots</div>
-      <div class="muted">Bot products and automation lines.</div>
+      <div class="display"><img class="icon lg" src="https://cdn.simpleicons.org/discord/5865F2" alt=""/> Discord Bots</div>
+      <div class="muted">Discord bot surfaces, pooled agents, and automation lines.</div>
       <div class="btnrow">
         <a class="btn primary" href="/chopsticks/">Chopsticks</a>
         <a class="btn" href="/chopsticks/agents/">Agents</a>
@@ -40,30 +42,28 @@
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Chopsticks</h3>
-          <div class="muted">Music, queue discipline, and voice management.</div>
-          <div class="linklist">
-            <a href="/chopsticks/">Overview</a>
-            <a href="/chopsticks/docs/">Docs</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>VoiceMaster</h3>
-          <div class="muted">Channel automation and cleanup.</div>
-          <div class="linklist">
-            <a href="/docs/flows/">Flows</a>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Agents</h3>
-          <div class="muted">Deployable agents inside Chopsticks.</div>
-          <div class="linklist">
-            <a href="/chopsticks/agents/">Agents</a>
-            <a href="/technology/">Status</a>
-          </div>
-        </article>
+      <div class="h3">Chopsticks</div>
+      <div class="muted">Multi-role control surface with pooled agents and routing.</div>
+      <div class="linklist">
+        <a href="/chopsticks/">Overview</a>
+        <a href="/chopsticks/docs/">Docs</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Voice routing</div>
+      <div class="muted">Channel automation, cleanup, and active session routing.</div>
+      <div class="linklist">
+        <a href="/docs/flows/">Flows</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Agents</div>
+      <div class="muted">Agents deployed and directed by Chopsticks.</div>
+      <div class="linklist">
+        <a href="/chopsticks/agents/">Agents</a>
+        <a href="/technology/">Status</a>
       </div>
     </section>
 

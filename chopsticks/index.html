@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span><span class="brand-sub">Manual</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,136 +22,129 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><span>Chopsticks</span></div>
 
-    <section class="section" data-reveal>
-      <div class="hero-split">
-        <div class="hero-card">
-          <div class="kicker">Bot</div>
-          <div class="display">
-            <span class="logo-inline">
-              <img class="logo-hero" src="/assets/images/chopsticks.png" alt="Chopsticks logo"/>
-              <span>Chopsticks</span>
-            </span>
-          </div>
-          <div class="muted">Deploy agents to multiple channels at once. Music is the first live use.</div>
-          <div class="btnrow">
-            <a class="btn primary" href="/projects/#bot-pool">Agent Pool</a>
-            <a class="btn" href="/chopsticks/docs/">Docs</a>
-            <a class="btn" href="/commands/">Commands</a>
-          </div>
-        </div>
-        <div class="hero-card hero-side">
-          <div class="kicker">Live Field</div>
-          <div class="stat-row">
-            <div class="stat">
-              <strong>35</strong>
-              <span>Total Agents</span>
-            </div>
-            <div class="stat">
-              <strong>24</strong>
-              <span>Available</span>
-            </div>
-            <div class="stat">
-              <strong>10</strong>
-              <span>Unavailable</span>
-            </div>
-            <div class="stat">
-              <strong>1</strong>
-              <span>Special</span>
-            </div>
-          </div>
-          <div class="muted">One agent per channel. More agents = more simultaneous sessions.</div>
-          <div class="agent-battlefield" aria-label="Agent availability battlefield">
-            <div class="battlefield-label">Agent Field</div>
-            <div class="battlefield-grid" data-nodes-seq="g,g,r,g,s,g,r,g,g,g,r,g,g,r,g,r,g,g,r,g,g,g,r,g,g,g,r,g,g,g,r,g,g,g,r,g" data-node-link="/projects/#bot-pool"></div>
-            <div class="legend">
-              <span><span class="node-dot green"></span>Available</span>
-              <span><span class="node-dot red"></span>Unavailable</span>
-              <span><span class="node-dot gold"></span>Special</span>
-            </div>
-          </div>
-          <div class="muted">Special agents are pre‑alpha.</div>
-        </div>
+  <main class="wrap project-shell page" data-project-theme="chopsticks">
+    <div class="path"><a href="/projects/">Projects</a> / <a href="/chopsticks/">Chopsticks</a></div>
+
+    <section class="hero" id="overview" data-reveal>
+      <div class="kicker">Chopsticks</div>
+      <div class="display">Chopsticks</div>
+      <div class="muted">Chopsticks is a Discord bot: one control surface that replaces separate bots using pooled agents deployed across Discord servers.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/chopsticks/agents/">Agent Pool</a>
+        <a class="btn" href="/chopsticks/docs/">Docs</a>
+        <a class="btn" href="/support/">Support</a>
+      </div>
+      <div class="node-counts">
+        <span class="pill"><span class="status-dot live"></span>35 agents online</span>
+        <span class="pill"><span class="status-dot off"></span>10 busy</span>
+        <span class="pill"><span class="status-dot dev"></span>Special agents in build</span>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>VoiceMaster</h3>
-          <div class="muted">Auto room creation and control for voice channels.</div>
-        </article>
-        <article class="card">
-          <h3>Agent System</h3>
-          <div class="muted">Each agent is its own bot instance you can deploy to a channel.</div>
-        </article>
-        <article class="card">
-          <h3>Music First</h3>
-          <div class="muted">Built for multi‑channel music on public servers.</div>
-        </article>
+      <div class="h3">Kitchen use</div>
+      <div class="muted">Chopsticks grips tasks fast, swaps modes without dropping context, and moves between channels like one tool with many tips.</div>
+      <div class="linklist">
+        <span>Pool agents per channel</span>
+        <span>Voice rooms and routing</span>
+        <span>Media queues</span>
+        <span>Baseline moderation tasks</span>
+        <span>Scheduling and utilities</span>
+        <span>Usage telemetry</span>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid two" data-stagger>
-        <div class="card">
-          <div class="kicker">Regular Bot</div>
-          <div class="h3">One channel at a time</div>
-          <div class="muted">Most music bots run a single session per server.</div>
+      <div class="h3">Control surface</div>
+      <div class="muted">Route, queue, assign, and hand off agents with one operator layer.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/chopsticks/agents/">Open Agent Pool</a>
+        <a class="btn" href="/chopsticks/docs/">Chopsticks Docs</a>
+        <button class="btn ghost" type="button" data-open-cmd>Type <span class="muted">/</span></button>
+      </div>
+    </section>
+
+    <section class="section" id="pool" data-reveal>
+      <div class="h3">Agent Pool</div>
+      <div class="muted">The pool is shared capacity. Agents can be assigned to multiple channels at once.</div>
+      <div class="agent-battlefield" data-size="full" data-pool-label="Agent Pool One" data-pool-host="goot27">
+        <div class="battlefield-label">Agent Pool One</div>
+        <div class="battlefield-sub muted">hosted by goot27</div>
+        <div class="battlefield-grid" data-nodes-flow="1" data-nodes-order="ordered" data-nodes-density="dense" data-nodes-total="35" data-nodes-unavailable="0003,0007,0011,0014,0018,0022,0026,0030,0033,0035" data-nodes-future="120" data-nodes-special-map="36:Uncle Roger,37:Soytiet Agent" data-node-base="/chopsticks/agents/#agent/" data-node-invite-base="/chopsticks/agents/invite/?agent="></div>
+        <div class="legend">
+          <span><span class="node-dot green"></span>Active</span>
+          <span><span class="node-dot red"></span>Busy</span>
+          <span><span class="node-dot gold"></span>Custom</span>
+          <span><span class="node-dot gray"></span>Open</span>
         </div>
-        <div class="card">
-          <div class="kicker">Chopsticks</div>
-          <div class="h3">Many agents, many channels</div>
-          <div class="muted">Deploy multiple agents in parallel.</div>
+        <div class="node-counts" data-node-counts>
+          <span class="pill"><span data-count="green">0</span> available</span>
+          <span class="pill"><span data-count="red">0</span> unavailable</span>
+          <span class="pill"><span data-count="gold">0</span> custom</span>
+          <span class="pill"><span data-count="gray">0</span> open</span>
         </div>
+      </div>
+      <div class="btnrow">
+        <a class="btn primary" href="/chopsticks/agents/">Open Agent Pool</a>
+        <a class="btn" href="/support/contact/">Create + add your agent</a>
+      </div>
+    </section>
+
+    <section class="section" id="deploy" data-reveal>
+      <div class="h3">Deploy flow</div>
+      <div class="muted">Queue → Assign → Route. Chopsticks keeps sessions isolated while agents rotate through workloads.</div>
+      <div class="linklist">
+        <span>Per-channel control</span>
+        <span>Agent handoff</span>
+        <span>Session isolation</span>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid two">
-        <div class="card">
-          <div class="kicker">Hosting</div>
-          <div class="h3">Hosted by Goot27</div>
-          <div class="muted">Contributor and member of Wok Specialists.</div>
-          <div class="linklist">
-            <a href="https://github.com/your-org/chopsticks">Repo</a>
-            <a href="https://github.com/your-org/chopsticks/issues">Issues</a>
-          </div>
-        </div>
-        <div class="card glass">
-          <div class="kicker">Embed Builder</div>
-          <div class="h3">Build embeds fast</div>
-          <div class="muted">Use the embed tool for clean message layouts.</div>
-          <div class="btnrow">
-            <a class="btn" href="/embed/">Open Embed Tool</a>
-          </div>
-        </div>
+      <div class="h3">Special agents</div>
+      <div class="muted">Special agents run with higher bandwidth and priority routing.</div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Contribute your bots</div>
+      <div class="muted">Add your bots as agents in the public pool, lock their display profile, and earn a contributor tag. Other users will see basic info only.</div>
+      <div class="btnrow">
+        <a class="btn" href="/support/contact/">Create + add your bots</a>
+        <a class="btn ghost" href="/support/">Support hub</a>
+      </div>
+    </section>
+
+    <section class="section" id="support" data-reveal>
+      <div class="h3">Support</div>
+      <div class="muted">Requests and hosting are routed through Support Contact.</div>
+      <div class="btnrow">
+        <a class="btn" href="/support/contact/">Open request</a>
+        <a class="btn ghost" href="/support/">Support hub</a>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="card glass">
-        <div class="kicker">Agent Access</div>
-        <div class="h2">Bot Pool + Agent Index</div>
-        <div class="muted">Invite, reserve, and manage agent availability from the project hub.</div>
-        <div class="btnrow">
-          <a class="btn" href="/projects/#bot-pool">Open Bot Pool</a>
-          <a class="btn" href="/chopsticks/agents/">Agent Index</a>
-        </div>
+      <div class="h3">Docs</div>
+      <div class="muted">Keep the core surface and agent pool aligned.</div>
+      <div class="btnrow">
+        <a class="btn" href="/chopsticks/docs/">Open docs</a>
+        <a class="btn ghost" href="/docs/">Wok Docs</a>
       </div>
     </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Wok Specialists · Chopsticks</div>
     </footer>
   </main>
+
   <script src="/assets/js/app.js"></script>
 </body>
 </html>

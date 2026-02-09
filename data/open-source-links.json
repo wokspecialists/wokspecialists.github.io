@@ -1,0 +1,77 @@
+{
+  "updated": "2026-02-08",
+  "categories": [
+    {
+      "id": "streaming",
+      "label": "Streaming",
+      "description": "Live TV, on-demand, and free streaming platforms.",
+      "items": [
+        {"name": "Pluto TV", "url": "https://pluto.tv/", "tags": ["live", "free"]},
+        {"name": "Tubi", "url": "https://athome.fandango.com/content/browse/free", "tags": ["free", "movies"]},
+        {"name": "Puffer", "url": "https://puffer.stanford.edu/", "tags": ["research", "live"]},
+        {"name": "Kanopy", "url": "https://kanopy.com/", "tags": ["library", "films"]},
+        {"name": "Xumo", "url": "https://play.xumo.com/networks", "tags": ["live", "free"]}
+      ]
+    },
+    {
+      "id": "tools",
+      "label": "Tools",
+      "description": "Utilities, downloads, and productivity tooling.",
+      "items": [
+        {"name": "ExifTool", "url": "https://exiftool.org/", "tags": ["metadata", "photo"]},
+        {"name": "DevDocs", "url": "https://devdocs.io/", "tags": ["docs", "developer"]},
+        {"name": "HandBrake", "url": "https://handbrake.fr/", "tags": ["video", "encode"]},
+        {"name": "Flameshot", "url": "https://flameshot.org/", "tags": ["screenshots"]},
+        {"name": "7-Zip", "url": "https://www.7-zip.org/", "tags": ["archive"]}
+      ]
+    },
+    {
+      "id": "torrenting",
+      "label": "Torrenting",
+      "description": "Clients, aggregators, and tooling.",
+      "items": [
+        {"name": "qBittorrent", "url": "https://www.qbittorrent.org/", "tags": ["client"]},
+        {"name": "Transmission", "url": "https://transmissionbt.com/", "tags": ["client"]},
+        {"name": "Prowlarr", "url": "https://prowlarr.com/", "tags": ["indexers"]},
+        {"name": "Jackett", "url": "https://github.com/Jackett/Jackett", "tags": ["indexers"]},
+        {"name": "WebTorrent", "url": "https://github.com/webtorrent/webtorrent", "tags": ["web"]}
+      ]
+    },
+    {
+      "id": "media",
+      "label": "Media",
+      "description": "Players, servers, and media libraries.",
+      "items": [
+        {"name": "Jellyfin", "url": "https://jellyfin.org/", "tags": ["server"]},
+        {"name": "Plex", "url": "https://www.plex.tv/", "tags": ["server"]},
+        {"name": "Kodi", "url": "https://kodi.tv/", "tags": ["player"]},
+        {"name": "VLC", "url": "https://www.videolan.org/", "tags": ["player"]},
+        {"name": "MPV", "url": "https://mpv.io/", "tags": ["player"]}
+      ]
+    },
+    {
+      "id": "gaming",
+      "label": "Gaming",
+      "description": "Games, engines, and community tools.",
+      "items": [
+        {"name": "itch.io", "url": "https://itch.io/", "tags": ["indie"]},
+        {"name": "OpenTTD", "url": "https://www.openttd.org/", "tags": ["strategy"]},
+        {"name": "Lichess", "url": "https://lichess.org/", "tags": ["chess"]},
+        {"name": "OpenRA", "url": "https://www.openra.net/", "tags": ["rts"]},
+        {"name": "FreeCiv", "url": "https://www.freeciv.org/", "tags": ["strategy"]}
+      ]
+    },
+    {
+      "id": "privacy",
+      "label": "Privacy",
+      "description": "Privacy-first services and audits.",
+      "items": [
+        {"name": "Privacy Guides", "url": "https://www.privacyguides.org/", "tags": ["guides"]},
+        {"name": "EFF Cover Your Tracks", "url": "https://coveryourtracks.eff.org/", "tags": ["fingerprint"]},
+        {"name": "Exodus Privacy", "url": "https://exodus-privacy.eu.org/", "tags": ["android"]},
+        {"name": "Have I Been Pwned", "url": "https://haveibeenpwned.com/", "tags": ["breach"]},
+        {"name": "Tails", "url": "https://tails.net/", "tags": ["os"]}
+      ]
+    }
+  ]
+}

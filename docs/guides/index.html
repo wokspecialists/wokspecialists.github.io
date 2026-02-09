@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,50 +9,44 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
-        <a data-nav href="/studio/">Studio</a>
-        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/docs/">Docs</a>
-        <a data-nav href="/technology/">Technology</a>
-        <a data-nav href="/plans/">Plans</a>
-        <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><a href="/docs/">Docs</a><span>/</span><span>Guides</span></div>
-    <section class="section" data-reveal>
+
+    <section class="hero" data-reveal>
       <div class="kicker">Docs</div>
       <div class="display">Guides</div>
-      <div class="muted">Step-by-step paths and playbooks.</div>
+      <div class="muted">Step‑by‑step paths and playbooks.</div>
       <div class="btnrow">
         <a class="btn primary" href="/docs/flows/">Flows</a>
         <a class="btn" href="/docs/reference/">Reference</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Setup</h3>
-          <div class="muted">Install, configure, and connect.</div>
-        </article>
-        <article class="card">
-          <h3>Operations</h3>
-          <div class="muted">Daily workflows and moderation.</div>
-        </article>
-        <article class="card">
-          <h3>Automation</h3>
-          <div class="muted">Commands and automation patterns.</div>
-        </article>
+      <div class="h3">Guide tracks</div>
+      <div class="linklist">
+        <span>Install & Configure</span>
+        <span>Daily Ops</span>
+        <span>Automation Patterns</span>
       </div>
+      <div class="muted">Bootstrap agents, run playbooks, and set defaults.</div>
     </section>
+
     <footer>
       <div class="hr"></div>
       <div>Wok Specialists.</div>

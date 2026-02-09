@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,73 +22,72 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Support</span></div>
-    <section class="section" data-reveal>
+    <section class="hero" data-reveal>
       <div class="kicker">Support</div>
-      <div class="display">Keep the studio moving.</div>
+      <div class="display">Support the build</div>
       <div class="muted">Community, contributions, and shared momentum.</div>
       <div class="btnrow">
         <a class="btn primary" href="#membership">Join</a>
-        <a class="btn" href="/contribute/">Contribute</a>
+        <a class="btn contribute" href="/contribute/">Contribute</a>
         <a class="btn" href="#donate">Donate</a>
       </div>
     </section>
-    <section class="section" data-reveal id="membership">
-      <div class="kicker">Member Access</div>
-      <div class="display">Join the studio circle.</div>
-      <div class="muted">Membership is community first: updates, early notes, and collaboration.</div>
-      <div class="cta-grid" data-stagger>
-        <article class="card cta-card">
-          <h3><i class="fa-solid fa-users icon"></i>Join Community</h3>
-          <div class="muted">Stay close to active builds and progress.</div>
-          <div class="linklist">
-            <a href="/company/">Studio overview</a>
-            <a href="/projects/">Active projects</a>
-          </div>
-        </article>
-        <article class="card cta-card">
-          <h3><i class="fa-solid fa-code-branch icon"></i>Contribute</h3>
-          <div class="muted">Fixes, links, and documentation improvements.</div>
-          <div class="linklist">
-            <a href="/contribute/">Contribution guide</a>
-            <a href="/open-source/">Vault Gate</a>
-          </div>
-        </article>
-        <article class="card cta-card" id="donate">
-          <h3><i class="fa-solid fa-hand-holding-heart icon"></i>Donate</h3>
-          <div class="muted">Support infrastructure, hosting, and uptime.</div>
-          <div class="linklist">
-            <a href="/support/">Donation links</a>
-            <a href="/technology/status/">Service status</a>
-          </div>
-        </article>
+
+    <section class="section" data-reveal>
+      <div class="h3">Issue Desk</div>
+      <div class="muted">Broken links, missing data, or incorrect labels.</div>
+      <div class="linklist">
+        <a href="/contribute/">How to report</a>
+        <a href="https://github.com/your-org/vault/issues">Open issue tracker</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="grid two" data-stagger>
-        <article class="card">
-          <div class="kicker">Issue Desk</div>
-          <div class="h3">Report problems</div>
-          <div class="muted">Broken links, missing data, or incorrect labels.</div>
-          <div class="linklist">
-            <a href="/contribute/">How to report</a>
-            <a href="https://github.com/your-org/vault/issues">Open issue tracker</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="kicker">Contact</div>
-          <div class="h3">Talk to the team</div>
-          <div class="muted">Partnerships, collaboration, and community signals.</div>
-          <div class="linklist">
-            <a href="/company/">Company</a>
-            <a href="/projects/">Projects</a>
-          </div>
-        </article>
+      <div class="h3">Contact</div>
+      <div class="muted">All requests route through trusted support.</div>
+      <div class="linklist">
+        <a href="/support/contact/">Support Contact</a>
+        <a href="/company/">Community</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Requests</div>
+      <div class="muted">Tokens are never submitted on the site. Support will verify first and provide a secure handoff path.</div>
+    </section>
+
+    <section class="section" data-reveal id="membership">
+      <div class="h3">Join Community</div>
+      <div class="muted">Stay close to active builds and progress.</div>
+      <div class="linklist">
+        <a href="/company/">Studio overview</a>
+        <a href="/projects/">Active projects</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Contribute</div>
+      <div class="muted">Fixes, links, and documentation improvements.</div>
+      <div class="linklist">
+        <a href="/contribute/">Contribution guide</a>
+        <a href="/open-source/">Vault</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal id="donate">
+      <div class="h3">Donate</div>
+      <div class="muted">Support infrastructure, hosting, and uptime.</div>
+      <div class="linklist">
+        <a href="/support/">Donation links</a>
+        <a href="/technology/status/">Service status</a>
       </div>
     </section>
     <footer>

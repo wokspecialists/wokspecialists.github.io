@@ -15,7 +15,7 @@
   const parseBtn = document.getElementById('parse-btn');
   const clearBtn = document.getElementById('clear-btn');
   const downloadBtn = document.getElementById('download-btn');
-  const preview = document.getElementById('preview');
+  const manualOutput = document.getElementById('manual');
   const summary = document.getElementById('summary');
 
   const apiBase = localStorage.getItem('importApi') || document.body.dataset.importApi || 'http://localhost:8787';
@@ -70,7 +70,9 @@
 
   function render(){
     summary.textContent = parsed.length ? `${parsed.length} items parsed` : 'No data yet.';
-    preview.textContent = parsed.length ? JSON.stringify(parsed.slice(0, 12), null, 2) : '';
+    if (manualOutput) {
+      manualOutput.textContent = parsed.length ? JSON.stringify(parsed.slice(0, 12), null, 2) : '';
+    }
   }
 
   parseBtn.addEventListener('click', ()=>{

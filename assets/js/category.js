@@ -22,7 +22,13 @@
       return;
     }
     target.innerHTML = top.map(item => {
-      return `<a href="${go(item.url)}" data-logo="on">${item.title}</a>`;
+      let domain = '';
+      try { domain = new URL(item.url).hostname.replace(/^www\\./, ''); } catch {}
+      const logo = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : '';
+      return `<a href="${go(item.url)}" data-logo="on">
+        ${logo ? `<span class="mini-logo" style="background-image:url('${logo}')"></span>` : ''}
+        <span>${item.title}</span>
+      </a>`;
     }).join('');
   }).catch(() => {
     target.innerHTML = '<div class="muted">Unable to load the catalog.</div>';

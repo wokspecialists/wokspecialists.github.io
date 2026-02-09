@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span><span class="brand-sub">Manual</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,160 +22,72 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><span>Projects</span></div>
 
-    <section class="section" data-reveal>
+  <main class="wrap project-shell page" data-project-theme="projects">
+    <div class="path"><a href="/projects/">Projects</a></div>
+
+    <section class="hero" data-reveal>
       <div class="kicker">Projects</div>
       <div class="display">Active builds</div>
-      <div class="muted">Three main projects right now: Chopsticks, Vault, and Embed Builder.</div>
-      <div class="muted">Chopsticks is the active build in development.</div>
+      <div class="muted">Discord bots, Vault, and more.</div>
       <div class="btnrow">
-        <a class="btn primary" href="/studio/">Studio</a>
-        <a class="btn" href="/plans/">Roadmap</a>
+        <a class="btn primary" href="/studio/bots/">Discord Bots</a>
+        <a class="btn" href="/open-source/">Vault</a>
+        <a class="btn" href="/embed/">Embed Builder</a>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three project-grid" data-stagger>
-        <article class="card project-card active">
-          <div class="project-head">
-            <div>
-              <div class="kicker">Bot</div>
-              <h3><span class="logo-inline"><img src="/assets/images/chopsticks.png" alt="Chopsticks logo"/><span>Chopsticks</span></span></h3>
-            </div>
-            <div class="project-status">Operational · in development</div>
-          </div>
-          <div class="muted">Multi‑agent music sessions across many channels.</div>
-          <div class="muted">Hosted by Goot27 (member).</div>
-          <div class="linklist">
-            <a href="/chopsticks/">Overview</a>
-            <a href="/chopsticks/docs/">Docs</a>
-            <a href="/commands/">Commands</a>
-            <a href="https://github.com/your-org/chopsticks">Repo</a>
-            <a href="https://github.com/your-org/chopsticks/issues">Issues</a>
-          </div>
-        </article>
-        <article class="card project-card">
-          <div class="project-head">
-            <div>
-              <div class="kicker">Vault</div>
-              <h3>Open Source</h3>
-            </div>
-            <div class="project-status">In development</div>
-          </div>
-          <div class="muted">Streaming, tools, torrenting, media, and more.</div>
-          <div class="linklist">
-            <a href="/open-source/">Vault Gate</a>
-            <a href="/open-source/catalog/">Vault Rooms</a>
-            <a href="/open-source/open-source/">Open Source Catalog</a>
-            <a href="https://github.com/your-org/vault">Repo</a>
-            <a href="https://github.com/your-org/vault/issues">Issues</a>
-          </div>
-        </article>
-        <article class="card project-card">
-          <div class="project-head">
-            <div>
-              <div class="kicker">Tool</div>
-              <h3>Embed Builder</h3>
-            </div>
-            <div class="project-status">In development</div>
-          </div>
-          <div class="muted">Utility for structured embeds.</div>
-          <div class="linklist">
-            <a href="/embed/">Open Builder</a>
-            <a href="https://github.com/your-org/embed-builder">Repo</a>
-            <a href="https://github.com/your-org/embed-builder/issues">Issues</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" data-reveal data-agent-section id="bot-pool">
-      <div class="kicker"><span class="logo-inline"><img src="/assets/images/chopsticks.png" alt="Chopsticks logo"/><span>Chopsticks</span></span> · Bot Pool</div>
-      <div class="agent-pool">
-        <div class="split">
-          <div>
-            <div class="h2">35 agent slots</div>
-            <div class="muted">Each agent is its own bot. More agents = more channels at once.</div>
-          </div>
-          <div class="agent-stats">
-            <div class="agent-stat available"><strong>24</strong>Available</div>
-            <div class="agent-stat unavailable"><strong>10</strong>Unavailable</div>
-          </div>
-        </div>
-        <div class="grid two" style="margin-top:12px">
-          <div class="card">
-            <div class="kicker">Regular Bot</div>
-            <div class="h3">One channel at a time</div>
-            <div class="muted">Most bots handle one room per server.</div>
-          </div>
-          <div class="card">
-            <div class="kicker">Chopsticks</div>
-            <div class="h3">Parallel channels</div>
-            <div class="muted">Deploy more agents to run more sessions.</div>
-          </div>
-        </div>
-        <div class="agent-window" data-agent-window style="margin-top:12px">
-          <div class="window-row">
-            <div class="window-label">Access Window</div>
-            <div class="window-value" data-agent-window-label>24h</div>
-          </div>
-          <div class="btnrow">
-            <button class="btn" type="button" data-agent-window-btn="24h">24h</button>
-            <button class="btn" type="button" data-agent-window-btn="7d">7d</button>
-            <button class="btn" type="button" data-agent-window-btn="30d">30d</button>
-          </div>
-          <div class="muted">Window selection is stored locally. Enforcement is in development.</div>
-        </div>
-        <div class="btnrow" style="margin-top:10px">
-          <button class="btn" type="button" data-agent-filter="all">All</button>
-          <button class="btn" type="button" data-agent-filter="available">Available</button>
-          <button class="btn" type="button" data-agent-filter="unavailable">Unavailable</button>
-          <button class="btn" type="button" data-agent-filter="special">Special</button>
-          <a class="btn" href="/chopsticks/">Chopsticks Overview</a>
-        </div>
-        <div class="agent-battlefield" style="margin-top:12px">
-          <div class="battlefield-label">Agent Field</div>
-          <div class="battlefield-grid" data-nodes-seq="g,g,r,g,s,g,r,g,g,g,r,g,g,r,g,r,g,g,r,g,g,g,r,g,g,g,r,g,g,g,r,g,g,g,r,g" data-node-link="/chopsticks/agents/"></div>
-          <div class="legend">
-            <span><span class="node-dot green"></span>Available</span>
-            <span><span class="node-dot red"></span>Unavailable</span>
-            <span><span class="node-dot gold"></span>Special</span>
-          </div>
-        </div>
-        <div class="agent-grid" data-agent-grid data-agent-total="35" data-agent-unavailable="0003,0007,0011,0014,0018,0022,0026,0030,0033,0035" data-agent-base="/chopsticks/agents/invite/?agent="></div>
-        <div class="muted" style="margin-top:12px">Invite links (copy/paste):</div>
-        <textarea class="agent-list" data-agent-list readonly></textarea>
+      <div class="h3"><img class="icon" src="https://cdn.simpleicons.org/discord/5865F2" alt=""/> Discord Bots</div>
+      <div class="muted">Chopsticks lives here. Discord‑first bots with pooled agents and routing.</div>
+      <div class="linklist">
+        <a href="/studio/bots/">Directory</a>
+        <a href="/chopsticks/">Chopsticks</a>
+        <a href="/chopsticks/agents/">Agent Pool</a>
+        <a href="/chopsticks/docs/">Docs</a>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="kicker">Special Agents</div>
-      <div class="card">
-        <div class="agent-special" data-agent-special>
-          <div class="agent-avatar">UR</div>
-          <div>
-            <div class="h3">Uncle Roger <span class="muted" style="font-size:12px">Agent</span></div>
-            <div class="muted">Pre‑alpha. Custom personality and voice routing. Not available for deployment.</div>
-            <div class="linklist">
-              <span>Personalized callouts</span>
-              <span>Custom response layers</span>
-            </div>
-          </div>
-        </div>
+      <div class="h3">Vault</div>
+      <div class="muted">Open source rooms and catalog.</div>
+      <div class="linklist">
+        <a href="/open-source/">Vault</a>
+        <a href="/open-source/open-source/">Open Source Room</a>
+        <a href="/open-source/catalog/">Catalog</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Embed Builder</div>
+      <div class="muted">Build structured messages for operators and announcements.</div>
+      <div class="linklist">
+        <a href="/embed/">Open</a>
+        <a href="/docs/">Docs</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Agent Pool</div>
+      <div class="muted">The live mesh lives under Chopsticks.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/chopsticks/agents/">Open Agent Pool</a>
+        <a class="btn" href="/chopsticks/">Chopsticks Overview</a>
       </div>
     </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Wok Specialists · Manual</div>
     </footer>
   </main>
+
   <script src="/assets/js/app.js"></script>
 </body>
 </html>

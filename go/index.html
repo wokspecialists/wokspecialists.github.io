@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,27 +22,24 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Redirect</span></div>
-    <section class="section">
-      <div class="hero-card" id="redirect-shell">
-        <div class="kicker">Transparent Redirect</div>
-        <h1 class="display">Leaving Wok Specialists</h1>
-        <div class="muted">You are heading to an external resource. We show the destination before sending you.</div>
-        <div class="card glass" data-redirect="">
-          <div class="muted">Destination</div>
-          <div class="h3" data-redirect-label>Resolving…</div>
-          <div class="muted">Redirecting in <span data-redirect-count>4</span> seconds.</div>
-          <div class="btnrow">
-            <a class="btn primary" data-redirect-link href="#">Continue</a>
-            <a class="btn" href="/open-source/">Back to Vault</a>
-          </div>
-        </div>
+    <section class="hero" data-redirect="">
+      <div class="kicker">Transparent Redirect</div>
+      <h1 class="display">Leaving Wok Specialists</h1>
+      <div class="muted">You are heading to an external resource. We show the destination before sending you.</div>
+      <div class="h3" data-redirect-label>Resolving…</div>
+      <div class="muted">Redirecting in <span data-redirect-count>4</span> seconds.</div>
+      <div class="btnrow">
+        <a class="btn primary" data-redirect-link href="#">Continue</a>
+        <a class="btn" href="/open-source/">Back to Vault</a>
       </div>
     </section>
     <footer>

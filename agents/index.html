@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Agents · Wok Specialists</title>
+  <title>Agent Directory · Wok Specialists</title>
+  <meta name="description" content="Agent directory for Chopsticks and pooled automation." />
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span><span class="brand-sub">Manual</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,43 +23,65 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><span>Agents</span></div>
-    <section class="section" data-reveal>
-      <div class="kicker">Agents</div>
-      <div class="display">Multi-client orchestration for reliable queues.</div>
-      <div class="muted">Agents keep sessions stable, handle handoffs, and protect uptime during spikes.</div>
+
+  <main class="wrap page">
+    <div class="path"><a href="/home/">Home</a><span>/</span><span>Agent Directory</span></div>
+
+    <section class="hero" data-reveal>
+      <div class="kicker">Directory</div>
+      <div class="display">Agent Directory</div>
+      <div class="muted">Manual stage. Scan the pool, filter status, and jump to invites.</div>
       <div class="btnrow">
         <a class="btn primary" href="/chopsticks/">Chopsticks</a>
-        <a class="btn" href="/technology/status/">Status</a>
-        <a class="btn" href="/docs/">Docs</a>
+        <a class="btn" href="/chopsticks/agents/">Agent Pool</a>
+        <a class="btn" href="/support/contact/">Contribute</a>
       </div>
     </section>
+
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <h3>Queue Control</h3>
-          <div class="muted">Predictable transitions and guardrails.</div>
-        </article>
-        <article class="card">
-          <h3>Voice Logic</h3>
-          <div class="muted">Room creation and cleanup automation.</div>
-        </article>
-        <article class="card">
-          <h3>Recovery</h3>
-          <div class="muted">Fallbacks that keep sessions alive.</div>
-        </article>
+      <div class="h3">Filters</div>
+      <div class="muted">Focus the pool by status. Directory updates are manual and staged.</div>
+      <div class="muted">Click a row to copy its invite link.</div>
+      <div class="stack-nav">
+        <button class="btn ghost" data-agent-filter="all" type="button">All</button>
+        <button class="btn ghost" data-agent-filter="available" type="button">Available</button>
+        <button class="btn ghost" data-agent-filter="unavailable" type="button">Busy</button>
+        <button class="btn ghost" data-agent-filter="custom" type="button">Custom</button>
       </div>
     </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Directory</div>
+      <div class="muted">Agent IDs map to invite slots. Special agents carry priority tags.</div>
+      <div class="agent-directory" data-agent-directory data-agent-total="35" data-agent-unavailable="0003,0007,0011,0014,0018,0022,0026,0030,0033,0035" data-agent-base="/chopsticks/agents/invite/?agent="></div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Mass invite</div>
+      <div class="muted">Generate invite links for available agents only. Choose a count, then open tabs.</div>
+      <div class="muted">Note: large bursts can be blocked by your browser. Start small.</div>
+      <div class="btnrow">
+        <input class="input" type="number" min="0" max="100" step="1" value="35" data-invite-count aria-label="Invite count"/>
+        <button class="btn" data-invite-generate data-mode="available" type="button">Generate</button>
+        <button class="btn" data-invite-open type="button">Open tabs</button>
+        <button class="btn" data-invite-copy type="button">Copy</button>
+        <button class="btn" data-invite-download type="button">Download</button>
+      </div>
+      <textarea class="input agent-list" data-agent-invite-list readonly rows="6" placeholder="Invite list will render here."></textarea>
+    </section>
+
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists.</div>
+      <div>Wok Specialists · Manual stage</div>
     </footer>
   </main>
+
   <script src="/assets/js/app.js"></script>
 </body>
 </html>

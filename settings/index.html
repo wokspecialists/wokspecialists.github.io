@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Settings · Wok Specialists</title>
+  <link rel="stylesheet" href="/assets/css/app.css"/>
+</head>
+<body class="site bg-noise">
+  <header class="nav">
+    <div class="row">
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <div class="links">
+        <a data-nav href="/home/">Home</a>
+        <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/atlas/">Atlas</a>
+        <a data-nav href="/open-source/">Vault</a>
+        <a data-nav href="/docs/">Docs</a>
+      </div>
+      <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
+        <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap page" data-settings>
+    <div class="path"><a href="/home/">Home</a> / <span>Settings</span></div>
+
+    <section class="hero" data-reveal>
+      <div class="kicker">Site Settings</div>
+      <div class="display">Control how the site feels</div>
+      <div class="muted">Local settings only — stored in this browser.</div>
+    </section>
+
+    <section class="section">
+      <div class="h3">Theme</div>
+      <div class="muted">Switch between visual stacks.</div>
+      <div class="btnrow">
+        <button class="btn" data-setting-theme="dark">Dark</button>
+        <button class="btn" data-setting-theme="light">Light</button>
+        <button class="btn" data-setting-theme="mono">Greyscale</button>
+        <button class="btn" data-setting-theme="amber">Amber</button>
+        <button class="btn" data-setting-theme="nikita">Nikita</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="h3">Format</div>
+      <div class="muted">Switch between the standard layout and a full list format.</div>
+      <div class="btnrow">
+        <button class="btn" data-setting-format="default">Standard</button>
+        <button class="btn" data-setting-format="list">List</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="h3">Motion</div>
+      <div class="muted">Reduce motion if you want a quieter experience.</div>
+      <div class="btnrow">
+        <button class="btn" data-setting-motion="auto">Auto</button>
+        <button class="btn" data-setting-motion="reduce">Reduce</button>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="h3">Density</div>
+      <div class="muted">Compact view reduces padding and card height.</div>
+      <button class="btn" data-setting-compact type="button">Toggle Compact Mode</button>
+    </section>
+
+    <section class="section">
+      <div class="h3">Background Net</div>
+      <div class="muted">Disable the animated network background.</div>
+      <button class="btn" data-setting-net type="button">Toggle Background Net</button>
+    </section>
+
+    <section class="section">
+      <div class="h3">Breadcrumb Trail</div>
+      <div class="muted">Hide or show the directory tracker.</div>
+      <button class="btn" data-setting-breadcrumbs type="button">Toggle Trail</button>
+    </section>
+
+    <footer>
+      <div class="hr"></div>
+      <div>Settings are local only. Reset by clearing site data.</div>
+    </footer>
+  </main>
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,19 +22,21 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Commands</span></div>
-    <section class="section" data-reveal>
-      <div class="kicker"><span class="logo-inline"><img src="/assets/images/chopsticks.png" alt="Chopsticks logo"/><span>Chopsticks</span></span></div>
-      <div class="display">Command Directory</div>
-      <div class="muted">Core commands for music and agent control.</div>
+    <section class="hero" data-reveal>
+      <div class="kicker">Site Search</div>
+      <div class="display">Command</div>
+      <div class="muted">Press <code>/</code> anywhere to open the site search.</div>
       <div class="btnrow">
-        <a class="btn" href="/chopsticks/">Overview</a>
-        <a class="btn" href="/chopsticks/docs/">Docs</a>
+        <a class="btn" href="/home/">Home</a>
+        <a class="btn" href="/projects/">Projects</a>
       </div>
     </section>
     <section class="section" data-reveal>

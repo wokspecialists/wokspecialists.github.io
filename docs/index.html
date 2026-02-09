@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,80 +9,64 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
-        <a data-nav href="/studio/">Studio</a>
-        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/docs/">Docs</a>
-        <a data-nav href="/technology/">Technology</a>
-        <a data-nav href="/plans/">Plans</a>
-        <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
-  <main class="wrap">
+  <main class="wrap page">
     <div class="path"><a href="/home/">Home</a><span>/</span><span>Docs</span></div>
 
-    <section class="section" data-reveal>
-      <div class="category-hero">
-        <div class="kicker">Docs</div>
-        <div class="display">Documentation Hub</div>
-        <div class="muted">Chopsticks docs are separate from the Wok Specialists docs.</div>
-        <div class="btnrow">
-          <a class="btn primary" href="/chopsticks/docs/">Chopsticks Docs</a>
-          <a class="btn" href="/docs/guides/">Guides</a>
-          <a class="btn" href="/docs/reference/">Reference</a>
-        </div>
+    <section class="hero" data-reveal>
+      <div class="kicker">Docs</div>
+      <div class="display">Wok Specialists Docs</div>
+      <div class="muted">System notes, workflows, and references. Chopsticks docs live in their own stack.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/docs/guides/">Guides</a>
+        <a class="btn" href="/docs/reference/">Reference</a>
+        <a class="btn" href="/chopsticks/docs/">Chopsticks Docs</a>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="deck-scroll">
-        <article class="card sun deck-panel">
-          <h3>Chopsticks</h3>
-          <div class="muted">Commands, setup, and agent usage.</div>
-          <div class="linklist">
-            <a href="/chopsticks/docs/">Docs</a>
-            <a href="/commands/">Commands</a>
-            <a href="/chopsticks/agents/">Agents</a>
-          </div>
-        </article>
-        <article class="card cyan deck-panel">
-          <h3>Wok Docs</h3>
-          <div class="muted">Guides and references for the studio.</div>
-          <div class="linklist">
-            <a href="/docs/guides/">Guides</a>
-            <a href="/docs/reference/">Reference</a>
-          </div>
-        </article>
-        <article class="card flare deck-panel">
-          <h3>Project Notes</h3>
-          <div class="muted">Early docs for new builds.</div>
-          <div class="linklist">
-            <a href="/projects/">Projects</a>
-            <a href="/plans/">Plans</a>
-          </div>
-        </article>
-        <article class="card glass deck-panel">
-          <div class="kicker">Note</div>
-          <div class="muted">Docs move fast. Use the latest links from Projects.</div>
-          <div class="btnrow">
-            <a class="btn" href="/projects/">Projects</a>
-            <a class="btn" href="/technology/status/">Status</a>
-          </div>
-        </article>
+      <div class="h3">Stacks</div>
+      <div class="linklist">
+        <a href="/docs/guides/">Guides</a>
+        <a href="/docs/flows/">Flows</a>
+        <a href="/docs/reference/">Reference</a>
+        <a href="/chopsticks/docs/">Chopsticks Docs</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Status</div>
+      <div class="muted">Operational status for Chopsticks, Vault, and Embed Builder.</div>
+      <div class="btnrow">
+        <a class="btn" href="/technology/status/">Status</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Plans</div>
+      <div class="muted">Staged upgrades and release planning.</div>
+      <div class="btnrow">
+        <a class="btn" href="/plans/">Plans</a>
       </div>
     </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Wok Specialists. Manual stage.</div>
     </footer>
   </main>
   <script src="/assets/js/app.js"></script>

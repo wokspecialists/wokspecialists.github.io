@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -9,7 +9,7 @@
 <body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span><span class="brand-sub">Manual</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,57 +22,45 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><span>Vault</span></div>
-    <section class="section" data-reveal>
-      <div class="vault-gate">
-        <div class="kicker">Vault</div>
-        <div class="display">Vault Gate</div>
-        <div class="muted">Enter once. Rooms and shortcuts appear after the gate.</div>
-        <div class="gate-actions">
-          <a class="btn primary" href="/open-source/catalog/" data-gate-enter="vault">Enter the Vault</a>
-          <a class="btn" href="/open-source/open-source/">Open Source Room</a>
-        </div>
+  <main class="wrap vault-gate project-shell page" data-project-theme="vault">
+    <div class="path"><a href="/open-source/">Vault</a></div>
+
+    <section class="hero" data-reveal>
+      <div class="kicker">Vault</div>
+      <div class="display">Vault</div>
+      <div class="muted">Rooms, catalogs, and resource stacks live here.</div>
+      <div class="btnrow">
+        <a class="btn primary" href="/open-source/open-source/" data-vault-enter data-gate-enter="vault">Open Source Room</a>
+        <a class="btn" href="/open-source/catalog/" data-vault-enter data-gate-enter="vault">Open Source Catalog</a>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="grid three" data-stagger>
-        <article class="card">
-          <div class="kicker">Room 01</div>
-          <div class="h3">Open Source</div>
-          <div class="muted">Streaming, tools, torrenting, media, gaming, and more.</div>
-          <div class="linklist">
-            <a href="/open-source/open-source/">Enter Room</a>
-          </div>
-        </article>
-        <article class="card glass">
-          <div class="kicker">Vault Systems</div>
-          <div class="h3">Catalog Engine</div>
-          <div class="muted">Search, filters, and redirects.</div>
-          <div class="linklist">
-            <a href="/open-source/catalog/">Vault Rooms</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="kicker">Scaling</div>
-          <div class="h3">Local Updates</div>
-          <div class="muted">Edit local JSON files to grow the room.</div>
-          <div class="linklist">
-            <a href="/data/open-source/catalog.json">Catalog JSON</a>
-          </div>
-        </article>
+      <div class="h3">Rooms</div>
+      <div class="linklist">
+        <span>Open Source Room</span>
+        <span>Catalog Console</span>
+        <span>Rooms coming soon</span>
       </div>
+      <div class="muted">Open source is the active room today.</div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Warning</div>
+      <div class="muted">Everything inside the Vault links to external projects. Wok Specialists is not affiliated with or endorsing any of them.</div>
+      <div class="muted">Proceed only if you understand this is a resource index.</div>
     </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Vault · Wok Specialists</div>
     </footer>
   </main>
 

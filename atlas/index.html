@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Atlas · Wok Specialists</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body class="site bg-noise">
+<body class="site bg-noise atlas-page">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span><span class="brand-sub">Manual</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
@@ -22,149 +22,96 @@
         <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><span>Atlas</span></div>
-    <section class="section" data-reveal>
-      <div class="grid two" data-stagger>
-        <div class="card flare">
-          <div class="kicker">Atlas</div>
-          <div class="display">Map of everything</div>
-          <div class="muted">Start with Projects. Branch into Bots, Vault, and Embed Builder.</div>
-          <div class="btnrow">
-            <a class="btn primary" href="/projects/">Projects</a>
-            <a class="btn" href="/chopsticks/">Chopsticks</a>
-            <a class="btn" href="/open-source/">Vault Gate</a>
-          </div>
-        </div>
-        <div class="card">
-          <div class="kicker">Active Builds</div>
-          <div class="h3">Bots · Vault · Embed Builder</div>
-          <div class="muted">Only one Vault room is open right now: Open Source.</div>
-          <div class="linklist">
-            <a href="/chopsticks/">Chopsticks</a>
-            <a href="/open-source/open-source/">Open Source Room</a>
-            <a href="/embed/">Embed Builder</a>
-          </div>
-        </div>
-      </div>
-    </section>
+  <main class="wrap page">
+    <div class="path"><a href="/atlas/">Atlas</a></div>
 
-    <section class="section atlas" data-reveal>
-      <div class="kicker">Main Areas</div>
-      <div class="atlas-grid" data-stagger>
-        <div class="node flare">
-          <div class="tag">Area</div>
-          <div class="h3">Projects</div>
-          <div class="muted">Current work and experiments.</div>
-          <div class="linklist">
-            <a href="/projects/">Project Index</a>
-            <a href="/plans/">Roadmap</a>
-            <a href="/technology/status/">Status</a>
-          </div>
-        </div>
-        <div class="node sun">
-          <div class="tag">Area</div>
-          <div class="h3">Studio</div>
-          <div class="muted">Product lines and experiments.</div>
-          <div class="linklist">
-            <a href="/studio/">Studio Home</a>
-            <a href="/studio/bots/">Bots</a>
-            <a href="/studio/tools/">Tools</a>
-          </div>
-        </div>
-        <div class="node cyan">
-          <div class="tag">Area</div>
-          <div class="h3">Vault</div>
-          <div class="muted">Open Source room houses streaming, tools, torrenting, and more.</div>
-          <div class="linklist">
-            <a href="/open-source/">Vault Gate</a>
-            <a href="/open-source/catalog/">Vault Rooms</a>
-          </div>
-        </div>
-        <div class="node lime">
-          <div class="tag">Area</div>
-          <div class="h3">Docs</div>
-          <div class="muted">Guides, specs, reference.</div>
-          <div class="linklist">
-            <a href="/docs/">Docs Home</a>
-            <a href="/docs/guides/">Guides</a>
-            <a href="/docs/reference/">Reference</a>
-          </div>
-        </div>
-        <div class="node cyan">
-          <div class="tag">Ops</div>
-          <div class="h3">Status & Plans</div>
-          <div class="muted">Status, plans, updates.</div>
-          <div class="linklist">
-            <a href="/technology/status/">Status</a>
-            <a href="/plans/">Plans</a>
-            <a href="/company/">Company</a>
-          </div>
-        </div>
-        <div class="node sun">
-          <div class="tag">Chopsticks</div>
-          <div class="h3">Bot + Agents</div>
-          <div class="muted">Chopsticks with deployable agents.</div>
-          <div class="linklist">
-            <a href="/chopsticks/">Chopsticks</a>
-            <a href="/chopsticks/agents/">Agents</a>
-            <a href="/embed/">Embed Tool</a>
-          </div>
-        </div>
-        <div class="node flare">
-          <div class="tag">People</div>
-          <div class="h3">Support</div>
-          <div class="muted">Contributions and support.</div>
-          <div class="linklist">
-            <a href="/contribute/">Contribute</a>
-            <a href="/support/">Support</a>
-            <a href="/docs/">Docs</a>
-          </div>
-        </div>
+    <section class="hero" data-reveal>
+      <div class="kicker">Atlas</div>
+      <div class="display">Navigate everything</div>
+      <div class="muted">Overview of the studio, the Vault, and active builds.</div>
+      <div class="btnrow">
+        <a class="btn" href="/projects/">Projects</a>
+        <a class="btn" href="/studio/">Studio</a>
+        <a class="btn" href="/open-source/">Vault</a>
       </div>
     </section>
 
     <section class="section" data-reveal>
-      <div class="kicker">Paths</div>
-      <div class="grid three" data-stagger>
-        <div class="card sun">
-          <h3>Build Path</h3>
-          <div class="muted">Developer tooling, infrastructure, docs.</div>
-          <div class="linklist">
-            <a href="/open-source/open-source/#category/developer">Developer</a>
-            <a href="/open-source/open-source/#category/infrastructure">Infrastructure</a>
-            <a href="/docs/">Docs</a>
-          </div>
-        </div>
-        <div class="card cyan">
-          <h3>Create Path</h3>
-          <div class="muted">Design, media, streaming.</div>
-          <div class="linklist">
-            <a href="/open-source/open-source/#category/design">Design</a>
-            <a href="/open-source/open-source/#category/media">Media</a>
-            <a href="/open-source/open-source/#category/streaming">Streaming</a>
-          </div>
-        </div>
-        <div class="card lime">
-          <h3>Secure Path</h3>
-          <div class="muted">Security and privacy.</div>
-          <div class="linklist">
-            <a href="/open-source/open-source/#category/security">Security</a>
-            <a href="/open-source/open-source/#category/privacy">Privacy</a>
-            <a href="/technology/status/">Status</a>
-          </div>
-        </div>
+      <div class="h3">Quick jump</div>
+      <div class="catalog-search">
+        <input class="input" data-atlas-search placeholder="Search the Atlas"/>
+      </div>
+      <div class="linklist">
+        <a href="/projects/">Projects</a>
+        <a href="/chopsticks/">Chopsticks</a>
+        <a href="/open-source/">Vault</a>
+        <a href="/embed/">Embed Builder</a>
+        <a href="/docs/">Docs</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Bots</div>
+      <div class="muted">Chopsticks and the Agent Pool.</div>
+      <div class="linklist">
+        <a href="/chopsticks/">Overview</a>
+        <a href="/chopsticks/agents/">Agent Pool</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Vault</div>
+      <div class="muted">Open source room and catalog.</div>
+      <div class="linklist">
+        <a href="/open-source/">Vault</a>
+        <a href="/open-source/open-source/">Open Source Room</a>
+        <a href="/open-source/catalog/">Catalog</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Embed Builder</div>
+      <div class="muted">Structured message builder.</div>
+      <div class="linklist">
+        <a href="/embed/">Open</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Studio</div>
+      <div class="muted">Where Wok Specialists builds and tests.</div>
+      <div class="btnrow">
+        <a class="btn" href="/studio/">Studio</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Community</div>
+      <div class="muted">Join the crew, raise issues, and help shape the roadmap.</div>
+      <div class="btnrow">
+        <a class="btn" href="/company/">Community</a>
+        <a class="btn contribute" href="/contribute/">Contribute</a>
+      </div>
+    </section>
+
+    <section class="section" data-reveal>
+      <div class="h3">Status</div>
+      <div class="muted">Track build motion and uptime.</div>
+      <div class="btnrow">
+        <a class="btn" href="/status/">Status</a>
       </div>
     </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Wok Specialists · Map</div>
     </footer>
   </main>
 

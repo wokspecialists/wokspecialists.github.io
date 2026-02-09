@@ -1,89 +1,51 @@
 <!doctype html>
-<html lang="en" data-theme="mono">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Vault Rooms · Wok Specialists</title>
+  <title>Open Source Catalog · Vault</title>
   <link rel="stylesheet" href="/assets/css/app.css"/>
 </head>
-<body class="site bg-noise vault-page">
+<body class="site bg-noise">
   <header class="nav">
     <div class="row">
-      <a class="brand" href="/"><span class="dot"></span><span>Wok Specialists</span></a>
+      <a class="brand" href="/home/"><span class="dot"></span><span>Wok Specialists</span><span class="brand-sub">Manual</span></a>
       <nav class="links">
         <a data-nav href="/home/">Home</a>
         <a data-nav href="/atlas/">Atlas</a>
-        <a data-nav href="/studio/">Studio</a>
-        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/projects/">Projects</a>
+        <a data-nav href="/open-source/">Vault</a>
         <a data-nav href="/docs/">Docs</a>
-        <a data-nav href="/technology/">Technology</a>
-        <a data-nav href="/plans/">Plans</a>
-        <a data-nav href="/company/">Company</a>
       </nav>
       <div class="nav-actions">
+        <a class="btn ghost cmd-link" href="/commands/">Command</a>
+        <span class="cmd-hint"><strong>/</strong> type</span>
         <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="path"><a href="/home/">Home</a><span>/</span><a href="/open-source/">Vault</a><span>/</span><span>Rooms</span></div>
+  <main class="wrap project-shell page" data-project-theme="vault">
+    <div class="path"><a href="/open-source/">Vault</a> / <a href="/open-source/catalog/">Open Source Catalog</a></div>
+
+    <section class="hero" data-reveal>
+      <div class="kicker">Open Source Catalog</div>
+      <div class="display">Room console</div>
+      <div class="muted">Pick a room, browse the stack, then expand into the full catalog. External links only.</div>
+      <div class="linklist">
+        <span>Room index</span>
+        <span>External links</span>
+        <span>Room stack</span>
+      </div>
+    </section>
 
     <section class="section" data-reveal>
-      <div class="vault-shell">
-        <div class="vault-hero-grid">
-          <div class="vault-hero-core">
-            <div class="kicker">Vault Rooms</div>
-            <div class="display">Pick a room</div>
-            <div class="muted">Room 01 is open now: Open Source.</div>
-            <div class="hero-actions">
-              <a class="btn primary" href="/open-source/open-source/">Open Source Catalog</a>
-              <a class="btn" href="/open-source/">Back to Gate</a>
-            </div>
-          </div>
-          <div class="vault-hero-tiles">
-            <a class="tile" href="/open-source/open-source/">
-              <div class="kicker">Room 01</div>
-              <div class="h3">Open Source Catalog</div>
-              <div class="muted">Streaming, tools, torrenting, media, and more.</div>
-            </a>
-            <div class="tile">
-              <div class="kicker">Next</div>
-              <div class="h3">More Rooms</div>
-              <div class="muted">In development.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="grid two" data-stagger>
-          <div class="card">
-            <div class="kicker">Vault Data</div>
-            <div class="linklist">
-              <a href="/data/open-source/catalog.json">Catalog JSON</a>
-              <a href="/data/open-source/categories.json">Categories</a>
-              <a href="/data/open-source/collections.json">Collections</a>
-              <a href="/data/open-source/README.md">Catalog Guide</a>
-            </div>
-          </div>
-          <div class="card">
-            <div class="kicker">Shortcuts</div>
-            <div class="linklist">
-              <a href="/open-source/developer/">Developer</a>
-              <a href="/open-source/design/">Design</a>
-              <a href="/open-source/security/">Security</a>
-              <a href="/open-source/reading/">Reading</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div data-catalog></div>
     </section>
 
     <footer>
       <div class="hr"></div>
-      <div>Wok Specialists. In development.</div>
+      <div>Vault · Open Source Catalog</div>
     </footer>
   </main>
 
