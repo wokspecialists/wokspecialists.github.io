@@ -420,6 +420,8 @@
     setupNodeMenus();
     initBattlefieldWater();
     initNodeFlow();
+    initNodeCycle();
+    initNodeDrift();
     renderNodeCounts();
   }
   buildAgentNodes();
@@ -485,21 +487,71 @@
   }
 
   function initNodeFlow(){
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    return;
+  }
+
+  function initNodeCycle(){
     const grids = document.querySelectorAll('.battlefield-grid[data-nodes-flow]');
     grids.forEach(grid=>{
-      if (grid.dataset.flowReady) return;
+      if (grid.dataset.cycleReady) return;
+      const nodes = Array.from(grid.querySelectorAll('.node-dot'));
+      if (!nodes.length) return;
+      const total = Number(grid.getAttribute('data-nodes-total') || '0');
+      const unavailableRaw = grid.getAttribute('data-nodes-unavailable') || '';
+      const unavailableCount = unavailableRaw.split(',').map(v=>v.trim()).filter(Boolean).length;
+      const specialMapRaw = grid.getAttribute('data-nodes-special-map') || '';
+      const specialCount = specialMapRaw ? specialMapRaw.split(',').map(v=>v.trim()).filter(Boolean).length : 0;
+      const greenCount = Math.max(0, total - unavailableCount - specialCount);
+      const redCount = Math.max(0, Math.min(unavailableCount, total));
+      const goldCount = Math.max(0, Math.min(specialCount, total));
+      const activeTotal = greenCount + redCount + goldCount;
+      if (!activeTotal) return;
+      let offset = 0;
+      const order = [
+        {count: greenCount, status: 'green'},
+        {count: redCount, status: 'red'},
+        {count: goldCount, status: 'gold'}
+      ];
+      function setNodeStatus(node, status){
+        node.classList.remove('green','red','gold','gray');
+        node.classList.add(status);
+        node.dataset.nodeStatus = status;
+      }
+      const tick = ()=>{
+        if (!document.body.contains(grid)) return;
+        nodes.forEach(node=>setNodeStatus(node, 'gray'));
+        let idx = 0;
+        order.forEach(group=>{
+          for (let i = 0; i < group.count; i += 1) {
+            const pos = (offset + idx) % nodes.length;
+            const node = nodes[pos];
+            if (node) setNodeStatus(node, group.status);
+            idx += 1;
+          }
+        });
+        offset = (offset + 1) % nodes.length;
+        setTimeout(tick, 1200);
+      };
+      tick();
+      grid.dataset.cycleReady = '1';
+    });
+  }
+
+  function initNodeDrift(){
+    const grids = document.querySelectorAll('.battlefield-grid[data-nodes-flow]');
+    grids.forEach(grid=>{
+      if (grid.dataset.driftReady) return;
       const nodes = Array.from(grid.querySelectorAll('.node-dot'));
       if (!nodes.length) return;
       const rect = grid.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
       const pad = grid._flowPad || 18;
-      const speed = 10;
+      const speed = 6;
       let offset = 0;
       let last = performance.now();
       nodes.forEach(node=>{
-        node.addEventListener('mouseenter', ()=>{ node.dataset.hold = '1'; });
-        node.addEventListener('mouseleave', ()=>{ node.dataset.hold = '0'; });
+        if (!node.dataset.baseX) node.dataset.baseX = node.dataset.x || '0';
+        if (!node.dataset.baseY) node.dataset.baseY = node.dataset.y || '0';
       });
       const tick = (now)=>{
         if (!document.body.contains(grid)) return;
@@ -509,22 +561,23 @@
           requestAnimationFrame(tick);
           return;
         }
+        const width = rect.width || 1;
         const height = rect.height || 1;
-        offset = (offset + speed * dt) % Math.max(1, height - pad * 2);
+        offset = (offset + speed * dt) % Math.max(1, width - pad * 2);
         nodes.forEach(node=>{
-          if (node.dataset.hold === '1') return;
           const baseX = Number(node.dataset.baseX || node.dataset.x || 0);
           const baseY = Number(node.dataset.baseY || node.dataset.y || 0);
-          const y = pad + ((baseY - pad + offset) % Math.max(1, height - pad * 2));
-          node.style.left = `${baseX}px`;
+          const x = pad + ((baseX - pad + offset) % Math.max(1, width - pad * 2));
+          const y = Math.min(height - pad, Math.max(pad, baseY));
+          node.style.left = `${x}px`;
           node.style.top = `${y}px`;
-          node.dataset.x = String(baseX);
+          node.dataset.x = String(x);
           node.dataset.y = String(y);
         });
         requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
-      grid.dataset.flowReady = '1';
+      grid.dataset.driftReady = '1';
     });
   }
 

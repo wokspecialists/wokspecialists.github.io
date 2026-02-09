@@ -1104,10 +1104,19 @@ main [style*="margin-bottom"]{margin-bottom:0 !important}
   cursor:default;
   --node-zoom:1;
   --node-size:11px;
+  --window-fade:18px;
   overflow:hidden;
   border-radius:20px;
   border:1px solid var(--line);
   background:var(--panel);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 var(--window-fade), #000 calc(100% - var(--window-fade)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--window-fade), #000 calc(100% - var(--window-fade)), transparent);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 var(--window-fade), #000 calc(100% - var(--window-fade)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--window-fade), #000 calc(100% - var(--window-fade)), transparent);
+  mask-composite:intersect;
 }
 .battlefield-grid.nodes-pool{
   background:var(--panel);
@@ -1188,6 +1197,7 @@ main [style*="margin-bottom"]{margin-bottom:0 !important}
   animation:none;
 }
 .node-dot.gray{opacity:.45}
+.node-dot.gray{filter:saturate(.6)}
 .node-dot.gold{width:var(--node-size, 11px);height:var(--node-size, 11px)}
 .node-dot.hovering{
   transform:translate(-50%,-50%) scale(2.6);
