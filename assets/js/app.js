@@ -350,6 +350,7 @@
       const raw = grid.getAttribute('data-nodes-seq') || '';
       const total = Number(grid.getAttribute('data-nodes-total') || '0');
       const future = Number(grid.getAttribute('data-nodes-future') || '0');
+      const fill = false;
       const unavailableRaw = grid.getAttribute('data-nodes-unavailable') || '';
       const specialId = grid.getAttribute('data-nodes-special') || '';
       const specialName = grid.getAttribute('data-nodes-special-name') || 'Custom Agent';
@@ -422,6 +423,8 @@
     initNodeFlow();
     initNodeCycle();
     initNodeDrift();
+    initBattlefieldArrangements();
+    initNodeSnake();
     renderNodeCounts();
   }
   buildAgentNodes();
@@ -452,7 +455,7 @@
       function draw(){
         t += 0.004;
         ctx.clearRect(0,0,w,h);
-        const grad = ctx.createLinearGradient(0, 0, 0, h);
+        const grad = ctx.createLinearGradient(0, 0, w, 0);
         grad.addColorStop(0,'rgba(18,32,52,0.6)');
         grad.addColorStop(0.5,'rgba(8,18,30,0.45)');
         grad.addColorStop(1,'rgba(4,10,18,0.55)');
@@ -460,11 +463,11 @@
         ctx.fillRect(0,0,w,h);
         const waveCount = 5;
         for (let i = 0; i < waveCount; i += 1) {
-          const yBase = (h / (waveCount + 1)) * (i + 1);
+          const xBase = (w / (waveCount + 1)) * (i + 1);
           ctx.beginPath();
-          for (let x = 0; x <= w; x += 12) {
+          for (let y = 0; y <= h; y += 12) {
             const amp = 6 + i * 1.6;
-            const y = yBase + Math.sin((x / w) * Math.PI * 2 + t * (1.1 + i * 0.15)) * amp;
+            const x = xBase + Math.sin((y / h) * Math.PI * 2 + t * (1.1 + i * 0.15)) * amp;
             ctx.lineTo(x, y);
           }
           ctx.strokeStyle = `rgba(90,214,255,${0.08 + i * 0.02})`;
@@ -473,8 +476,8 @@
         }
         const sparkCount = 60;
         for (let i = 0; i < sparkCount; i += 1) {
-          const x = (i * 37) % w;
-          const y = (i * 53 + t * 140) % h;
+          const x = (i * 53 + t * 140) % w;
+          const y = (i * 37) % h;
           ctx.fillStyle = `rgba(120,220,255,${0.08 + (i % 5) * 0.02})`;
           ctx.fillRect(x, y, 1.4, 1.4);
         }
@@ -491,7 +494,7 @@
   }
 
   function initNodeCycle(){
-    const grids = document.querySelectorAll('.battlefield-grid[data-nodes-flow]');
+    const grids = document.querySelectorAll('.battlefield-grid[data-nodes-cycle]');
     grids.forEach(grid=>{
       if (grid.dataset.cycleReady) return;
       const nodes = Array.from(grid.querySelectorAll('.node-dot'));
@@ -537,8 +540,97 @@
     });
   }
 
+  function initNodeSnake(){
+    const grids = document.querySelectorAll('.battlefield-grid[data-nodes-arrangement="snake"]');
+    grids.forEach(grid=>{
+      if (grid.dataset.snakeReady) return;
+      const nodes = Array.from(grid.querySelectorAll('.node-dot'));
+      if (!nodes.length) return;
+      const rect = grid.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      layoutBattlefield(grid);
+      const total = Number(grid.getAttribute('data-nodes-total') || '0');
+      const unavailableRaw = grid.getAttribute('data-nodes-unavailable') || '';
+      const unavailableCount = unavailableRaw.split(',').map(v=>v.trim()).filter(Boolean).length;
+      const specialMapRaw = grid.getAttribute('data-nodes-special-map') || '';
+      const specialCount = specialMapRaw ? specialMapRaw.split(',').map(v=>v.trim()).filter(Boolean).length : 0;
+      const greenCount = Math.max(0, total - unavailableCount - specialCount);
+      const redCount = Math.max(0, Math.min(unavailableCount, total));
+      const goldCount = Math.max(0, Math.min(specialCount, total));
+      const liveCount = Math.max(1, greenCount + redCount + goldCount);
+      const snakeLen = Math.max(14, Math.min(nodes.length, Math.round(liveCount * 0.9)));
+      const layoutMeta = grid._layout?.gridMeta || getBattlefieldGridMeta(nodes.length, rect.width, rect.height);
+      const cols = layoutMeta.cols;
+      const rows = layoutMeta.rows;
+      const maxIndex = nodes.length - 1;
+      const idxToRC = (idx)=>({r: Math.floor(idx / cols), c: idx % cols});
+      const neighbors = (idx)=>{
+        const {r, c} = idxToRC(idx);
+        const next = [];
+        if (r > 0) next.push(idx - cols);
+        if (r < rows - 1) next.push(idx + cols);
+        if (c > 0) next.push(idx - 1);
+        if (c < cols - 1) next.push(idx + 1);
+        return next.filter(i=>i >= 0 && i <= maxIndex);
+      };
+      let snake = [];
+      const seed = Math.max(0, Math.min(maxIndex, Math.floor(Math.random() * nodes.length)));
+      snake.push(seed);
+      while (snake.length < Math.min(snakeLen, nodes.length)) {
+        const head = snake[0];
+        const next = neighbors(head).filter(i=>!snake.includes(i));
+        if (!next.length) break;
+        snake.unshift(next[Math.floor(Math.random() * next.length)]);
+      }
+      function setStatus(node, status){
+        node.classList.remove('green','red','gold','gray');
+        node.classList.add(status);
+        node.dataset.nodeStatus = status;
+      }
+      const order = [
+        {count: greenCount, status: 'green'},
+        {count: redCount, status: 'red'},
+        {count: goldCount, status: 'gold'}
+      ];
+      function paintSnake(){
+        if (!document.body.contains(grid)) return;
+        const paused = grid.dataset.snakePaused === '1';
+        nodes.forEach(n=>setStatus(n, 'gray'));
+        if (!paused) {
+          const head = snake[0] ?? 0;
+          const neck = snake[1];
+          const tail = snake[snake.length - 1];
+          let options = neighbors(head).filter(i=>i !== neck && !snake.includes(i));
+          if (!options.length) {
+            options = neighbors(head).filter(i=>i !== neck && i === tail);
+          }
+          if (!options.length) options = neighbors(head).filter(i=>i !== neck);
+          if (!options.length) options = neighbors(head);
+          const next = options.length
+            ? options[Math.floor(Math.random() * options.length)]
+            : head;
+          snake.unshift(next);
+          if (snake.length > snakeLen) snake.pop();
+        }
+        let painted = 0;
+        order.forEach(group=>{
+          for (let i = 0; i < group.count; i += 1) {
+            if (painted >= snakeLen) return;
+            const idx = snake[painted];
+            const node = idx != null ? nodes[idx] : null;
+            if (node) setStatus(node, group.status);
+            painted += 1;
+          }
+        });
+        setTimeout(paintSnake, 240);
+      }
+      paintSnake();
+      grid.dataset.snakeReady = '1';
+    });
+  }
+
   function initNodeDrift(){
-    const grids = document.querySelectorAll('.battlefield-grid[data-nodes-flow]');
+    const grids = document.querySelectorAll('.battlefield-grid[data-nodes-drift]');
     grids.forEach(grid=>{
       if (grid.dataset.driftReady) return;
       const nodes = Array.from(grid.querySelectorAll('.node-dot'));
@@ -547,11 +639,20 @@
       if (!rect.width || !rect.height) return;
       const pad = grid._flowPad || 18;
       const speed = 6;
+      const dir = 1;
       let offset = 0;
       let last = performance.now();
-      nodes.forEach(node=>{
-        if (!node.dataset.baseX) node.dataset.baseX = node.dataset.x || '0';
-        if (!node.dataset.baseY) node.dataset.baseY = node.dataset.y || '0';
+      const fill = grid.hasAttribute('data-nodes-fill');
+      const size = Number(getComputedStyle(grid).getPropertyValue('--node-size').replace('px','')) || 10;
+      const spacing = Math.max(10, size * 1.6);
+      const virtualWidth = Math.max(rect.width * 2.2, spacing * nodes.length);
+      nodes.forEach((node, idx)=>{
+        if (!node.dataset.baseX) {
+          node.dataset.baseX = fill ? String(idx * spacing) : String(Math.random() * virtualWidth);
+        }
+        if (!node.dataset.baseY) {
+          node.dataset.baseY = String(Math.random() * rect.height);
+        }
       });
       const tick = (now)=>{
         if (!document.body.contains(grid)) return;
@@ -563,11 +664,13 @@
         }
         const width = rect.width || 1;
         const height = rect.height || 1;
-        offset = (offset + speed * dt) % Math.max(1, width - pad * 2);
+        offset = (offset + dir * speed * dt) % Math.max(1, virtualWidth);
         nodes.forEach(node=>{
           const baseX = Number(node.dataset.baseX || node.dataset.x || 0);
           const baseY = Number(node.dataset.baseY || node.dataset.y || 0);
-          const x = pad + ((baseX - pad + offset) % Math.max(1, width - pad * 2));
+          const x = fill
+            ? ((baseX + offset) % virtualWidth)
+            : ((baseX + offset) % virtualWidth) - (virtualWidth - width) / 2;
           const y = Math.min(height - pad, Math.max(pad, baseY));
           node.style.left = `${x}px`;
           node.style.top = `${y}px`;
@@ -629,6 +732,68 @@
       reorderBtn.addEventListener('click', setOrdered);
       layoutBattlefield(grid);
       field.dataset.orderReady = '1';
+    });
+  }
+
+  function initBattlefieldArrangements(){
+    const fields = document.querySelectorAll('.agent-battlefield');
+    fields.forEach(field=>{
+      if (field.dataset.arrangementsReady) return;
+      const grid = field.querySelector('.battlefield-grid');
+      if (!grid) return;
+      const list = (grid.getAttribute('data-nodes-arrangements') || '').split(',').map(v=>v.trim()).filter(Boolean);
+      if (!list.length) return;
+      const controls = document.createElement('div');
+      controls.className = 'battlefield-controls';
+      if (list.includes('snake')) {
+        const pauseBtn = document.createElement('button');
+        pauseBtn.className = 'battlefield-toggle ghost toggle';
+        pauseBtn.type = 'button';
+        pauseBtn.setAttribute('aria-label', 'Pause snake');
+        const setPaused = (paused)=>{
+          grid.dataset.snakePaused = paused ? '1' : '';
+          pauseBtn.classList.toggle('active', paused);
+          pauseBtn.setAttribute('aria-label', paused ? 'Play snake' : 'Pause snake');
+        };
+        setPaused(false);
+        pauseBtn.addEventListener('click', ()=>{
+          const paused = grid.dataset.snakePaused === '1';
+          setPaused(!paused);
+        });
+        controls.appendChild(pauseBtn);
+        const label = field.dataset.poolLabel || 'Agent Pool';
+        const host = field.dataset.poolHost || '';
+        const text = document.createElement('span');
+        text.className = 'battlefield-label';
+        text.textContent = host ? `${label} hosted by ${host}` : label;
+        controls.appendChild(text);
+      }
+      const showArrangementToggles = !(list.length === 1 && list[0] === 'snake');
+      list.forEach(key=>{
+        if (!showArrangementToggles) return;
+        const btn = document.createElement('button');
+        btn.className = 'battlefield-toggle ghost';
+        btn.type = 'button';
+        btn.textContent = key === 'row' ? 'Rows' : key === 'stagger' ? 'Stagger' : key === 'grid' ? 'Grid' : key;
+        btn.dataset.arrangement = key;
+        btn.addEventListener('click', ()=>{
+          grid.setAttribute('data-nodes-arrangement', key);
+          controls.querySelectorAll('.battlefield-toggle').forEach(b=>{
+            b.classList.toggle('active', b === btn);
+          });
+          layoutBattlefield(grid);
+          if (key === 'snake') {
+            grid.dataset.snakeReady = '';
+            initNodeSnake();
+          }
+        });
+        controls.appendChild(btn);
+      });
+      field.insertBefore(controls, field.firstChild);
+      const current = grid.getAttribute('data-nodes-arrangement') || list[0];
+      const active = Array.from(controls.querySelectorAll('.battlefield-toggle')).find(b=>b.dataset.arrangement === current) || controls.querySelector('.battlefield-toggle');
+      if (active) active.click();
+      field.dataset.arrangementsReady = '1';
     });
   }
 
@@ -1051,10 +1216,8 @@
     });
   }
 
-  function buildBattlefieldTargets(count, width, height, density = 1){
-    const targets = [];
-    if (!count || !width || !height) return targets;
-    const pad = Math.max(22, Math.min(width, height) * 0.06);
+  function getBattlefieldGridMeta(count, width, height){
+    const pad = Math.max(6, Math.min(width, height) * 0.03);
     const usableW = Math.max(1, width - pad * 2);
     const usableH = Math.max(1, height - pad * 2);
     const aspect = usableW / usableH;
@@ -1062,20 +1225,47 @@
     const rows = Math.max(2, Math.ceil(count / cols));
     const gapX = usableW / (cols + 1);
     const gapY = usableH / (rows + 1);
+    return {pad, usableW, usableH, cols, rows, gapX, gapY};
+  }
+
+  function buildBattlefieldTargets(count, width, height, density = 1){
+    const targets = [];
+    if (!count || !width || !height) return targets;
+    const meta = getBattlefieldGridMeta(count, width, height);
     const jitterX = 0;
     const jitterY = 0;
     for (let i = 0; i < count; i += 1) {
+      const r = Math.floor(i / meta.cols);
+      const c = i % meta.cols;
+      const x = meta.pad + meta.gapX * (c + 1) + (Math.random() * jitterX - jitterX / 2);
+      const y = meta.pad + meta.gapY * (r + 1) + (Math.random() * jitterY - jitterY / 2);
+      targets.push({x, y});
+    }
+    return targets;
+  }
+
+  function buildRowTargets(count, width, height, spacing, stagger = false){
+    const targets = [];
+    if (!count || !width || !height) return targets;
+    const pad = Math.max(6, spacing * 0.6);
+    const usableW = Math.max(1, width - pad * 2);
+    const usableH = Math.max(1, height - pad * 2);
+    const cols = Math.max(1, Math.floor(usableW / spacing));
+    const rows = Math.max(1, Math.ceil(count / cols));
+    const rowGap = Math.max(1, usableH / Math.max(1, rows));
+    for (let i = 0; i < count; i += 1) {
       const r = Math.floor(i / cols);
       const c = i % cols;
-      const x = pad + gapX * (c + 1) + (Math.random() * jitterX - jitterX / 2);
-      const y = pad + gapY * (r + 1) + (Math.random() * jitterY - jitterY / 2);
+      const offset = stagger && r % 2 ? spacing * 0.5 : 0;
+      const x = pad + c * spacing + offset;
+      const y = pad + r * rowGap + rowGap * 0.5;
       targets.push({x, y});
     }
     return targets;
   }
 
   function buildRandomTargets(count, width, height, density = 1){
-    const pad = Math.max(34, Math.min(width, height) * 0.1);
+    const pad = Math.max(10, Math.min(width, height) * 0.05);
     const points = [];
     const maxTries = 60;
     const minDist = Math.max(12, 22 / Math.max(0.7, density));
@@ -1114,18 +1304,29 @@
     const densityAttr = grid.getAttribute('data-nodes-density');
     const density = densityAttr === 'dense' ? 1.35 : densityAttr === 'loose' ? 0.8 : 1;
     const order = (grid.getAttribute('data-nodes-order') || 'random').toLowerCase();
+    const arrangement = (grid.getAttribute('data-nodes-arrangement') || 'row').toLowerCase();
+    const spacing = baseSize * 1.6;
 
+    const gridMeta = getBattlefieldGridMeta(count, rect.width, rect.height);
     let targets = [];
     const cached = grid._layout;
-    if (cached && cached.order === order && cached.count === nodes.length && Math.abs(cached.width - rect.width) < 1 && Math.abs(cached.height - rect.height) < 1) {
+    if (cached && cached.order === order && cached.arrangement === arrangement && cached.count === nodes.length && Math.abs(cached.width - rect.width) < 1 && Math.abs(cached.height - rect.height) < 1) {
       targets = cached.targets;
     } else {
-      targets = order === 'ordered'
-        ? buildBattlefieldTargets(nodes.length, rect.width, rect.height, density)
-        : buildRandomTargets(nodes.length, rect.width, rect.height, density);
+      if (arrangement === 'grid' || arrangement === 'snake') {
+        targets = buildBattlefieldTargets(nodes.length, rect.width, rect.height, density);
+      } else if (arrangement === 'stagger') {
+        targets = buildRowTargets(nodes.length, rect.width, rect.height, spacing, true);
+      } else if (arrangement === 'row') {
+        targets = buildRowTargets(nodes.length, rect.width, rect.height, spacing, false);
+      } else {
+        targets = order === 'ordered'
+          ? buildBattlefieldTargets(nodes.length, rect.width, rect.height, density)
+          : buildRandomTargets(nodes.length, rect.width, rect.height, density);
+      }
     }
 
-    const pad = 14;
+    const pad = 4;
     const preserveIndex = preserveNode ? nodes.indexOf(preserveNode) : -1;
     const preserve = preserveIndex >= 0 ? {
       index: preserveIndex,
@@ -1151,7 +1352,7 @@
         node.style.animationDelay = `${delay}s`;
       }
     });
-    grid._layout = {targets, order, density, count: nodes.length, width: rect.width, height: rect.height};
+    grid._layout = {targets, order, arrangement, density, count: nodes.length, width: rect.width, height: rect.height, gridMeta};
     grid._flowPad = pad;
     grid._flowHeight = rect.height;
   }
@@ -1266,22 +1467,21 @@
       const menu = document.createElement('div');
       menu.className = 'node-menu';
       menu.innerHTML = `
-        <button class="close" type="button" aria-label="Close">×</button>
-        <div class="node-menu-title">Agent</div>
-        <div class="node-menu-sub muted"></div>
-        <div class="node-menu-actions">
-          <button class="btn ghost node-menu-view" type="button"><i class="ti ti-user"></i>View Agent</button>
-          <a class="btn ghost node-menu-link" href="#"><i class="ti ti-external-link"></i>Invite Link</a>
-          <a class="btn ghost node-menu-contribute" href="/support/contact/"><i class="ti ti-plus"></i>Contribute</a>
+        <div class="node-menu-core">
+          <div class="node-menu-title">Agent</div>
+          <div class="node-menu-sub muted"></div>
         </div>
-        <div class="muted node-menu-meta">Open profile</div>
+        <div class="node-menu-actions">
+          <button class="node-menu-btn node-menu-view" type="button">View</button>
+          <a class="node-menu-btn node-menu-link" href="#">Invite</a>
+        </div>
+        <button class="close" type="button" aria-label="Close">×</button>
       `;
       menu.style.display = 'none';
       grid.appendChild(menu);
       let activeNode = null;
       const viewBtn = menu.querySelector('.node-menu-view');
       const inviteLink = menu.querySelector('.node-menu-link');
-      const contributeLink = menu.querySelector('.node-menu-contribute');
       function jumpToAgent(id){
         if (!id) return;
         const directory = document.querySelector('[data-agent-directory]');
@@ -1309,7 +1509,6 @@
         const sub = menu.querySelector('.node-menu-sub');
         menu.classList.remove('menu-green','menu-red','menu-gold','menu-gray');
         menu.classList.add(`menu-${node.dataset.nodeStatus || 'gray'}`);
-        const meta = menu.querySelector('.node-menu-meta');
         if (node.dataset.agentId) {
           const isCustom = node.dataset.nodeStatus === 'gold';
           if (isCustom) {
@@ -1320,7 +1519,6 @@
           } else {
             sub.textContent = `Active · Agent ${node.dataset.agentId}`;
           }
-          if (meta) meta.textContent = `${node.dataset.servers || '0'} servers · Open profile`;
           if (inviteLink) {
             inviteLink.href = link;
             inviteLink.style.pointerEvents = '';
@@ -1331,13 +1529,11 @@
             viewBtn.classList.remove('disabled');
             viewBtn.onclick = () => jumpToAgent(node.dataset.agentId);
           }
-          if (contributeLink) contributeLink.style.display = 'none';
         } else {
           const isCustom = node.dataset.nodeStatus === 'gold';
           if (isCustom) {
             const label = node.dataset.specialName || 'Custom Agent';
             sub.textContent = `${label} · Custom`;
-            if (meta) meta.textContent = 'Custom slot · View profile';
             if (inviteLink) {
               inviteLink.href = '/chopsticks/agents/#custom';
               inviteLink.style.pointerEvents = '';
@@ -1348,10 +1544,8 @@
               viewBtn.classList.remove('disabled');
               viewBtn.onclick = () => window.location.assign('/chopsticks/agents/#custom');
             }
-            if (contributeLink) contributeLink.style.display = 'none';
           } else {
             sub.textContent = 'Open agent slot';
-            if (meta) meta.textContent = 'Contact support to contribute';
             if (inviteLink) {
               inviteLink.href = '/support/contact/';
               inviteLink.style.pointerEvents = '';
@@ -1362,7 +1556,6 @@
               viewBtn.classList.add('disabled');
               viewBtn.onclick = null;
             }
-            if (contributeLink) contributeLink.style.display = '';
           }
         }
         menu.style.display = 'grid';
@@ -1374,7 +1567,6 @@
         menu.style.transform = `translate(${left}px, ${top}px)`;
       }
       let menuHover = false;
-      let nodeHover = false;
       let hideTimer = 0;
       const closeBtn = menu.querySelector('.close');
       if (closeBtn) {
@@ -1387,14 +1579,9 @@
         });
       }
       function hideMenu(){
-        if (menuHover || nodeHover) return;
         menu.style.display = 'none';
         if (activeNode) activeNode.dataset.hold = '0';
         activeNode = null;
-      }
-      function scheduleHide(delay = 680){
-        if (hideTimer) clearTimeout(hideTimer);
-        hideTimer = window.setTimeout(hideMenu, delay);
       }
       menu.addEventListener('mouseenter', ()=>{
         menuHover = true;
@@ -1403,29 +1590,25 @@
       });
       menu.addEventListener('mouseleave', ()=>{
         menuHover = false;
-        scheduleHide(520);
         if (grid.dataset.webReady) grid.dataset.webPaused = '0';
       });
-      grid.addEventListener('mouseleave', ()=>scheduleHide(620));
       const nodes = Array.from(grid.querySelectorAll('.node-dot'));
       nodes.forEach(node=>{
         node.addEventListener('mouseenter', ()=>{
-          nodeHover = true;
           node.classList.add('hovering');
-          if (hideTimer) clearTimeout(hideTimer);
-          if (!node.dataset.dragging) showMenu(node);
-          if (grid.dataset.webReady) grid.dataset.webPaused = '1';
         });
         node.addEventListener('mouseleave', ()=>{
-          nodeHover = false;
           node.classList.remove('hovering');
-          scheduleHide(620);
-          if (grid.dataset.webReady) grid.dataset.webPaused = '0';
         });
         node.addEventListener('click', (e)=>{
           e.preventDefault();
           e.stopPropagation();
           if (node.dataset.dragging) return;
+          if (activeNode === node && menu.style.display === 'grid') {
+            hideMenu();
+            if (grid.dataset.webReady) grid.dataset.webPaused = '0';
+            return;
+          }
           showMenu(node);
           menuHover = true;
           if (grid.dataset.webReady) grid.dataset.webPaused = '1';
@@ -1439,8 +1622,8 @@
         if (e.target.classList.contains('node-dot')) return;
         if (e.target.closest('.node-menu')) return;
         menuHover = false;
-        nodeHover = false;
         hideMenu();
+        if (grid.dataset.webReady) grid.dataset.webPaused = '0';
       });
       grid.dataset.nodeMenu = '1';
     });
@@ -2135,10 +2318,8 @@
           const hay = `${item.title || ''} ${item.name || ''} ${(item.tags || []).join(' ')} ${item.note || ''}`.toLowerCase();
           return hay.includes(query);
         });
-        items.forEach(item=>{
-          const category = room.id === 'all' ? roomMap.get(item.category) || room : room;
-          body.appendChild(makeCard(item, category));
-        });
+        const getCategory = (item)=>room.id === 'all' ? roomMap.get(item.category) || room : room;
+        items.forEach(item=>body.appendChild(makeCard(item, getCategory(item))));
         const close = ()=>overlay.remove();
         closeBtn.addEventListener('click', close);
         overlay.addEventListener('click', (e)=>{ if (e.target === overlay) close(); });
